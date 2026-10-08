@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════════════════
+   THEME DEFINITIONS — Light & Dark Mode
+   ══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --bg-primary: 250 249 246;          /* #FAF9F6 */
+  --bg-surface: 255 255 255;
+  --bg-surface-raised: 243 244 246;
+  --text-primary: 30 27 75;           /* #1E1B4B */
+  --text-secondary: 71 85 105;
+  --text-faint: 148 163 184;
+  --border: 226 232 240;
+  --border-strong: 203 213 225;
+  --accent: 79 70 229;                /* #4F46E5 */
+  --accent-hover: 67 56 202;          /* #4338CA */
+  --accent-soft: 238 242 255;
+  --success: 13 148 136;              /* #0D9488 */
+  --success-soft: 204 251 241;
+  --danger: 225 29 72;                /* #E11D48 */
+  --danger-soft: 255 228 230;
+  --warning: 202 138 4;               /* #CA8A04 */
+  --warning-soft: 254 249 195;
+
+  /* Aliases for codebase compatibility */
+  --canvas: var(--bg-primary);
+  --surface: var(--bg-surface);
+  --surface-raised: var(--bg-surface-raised);
+  --ink: var(--text-primary);
+  --ink-muted: var(--text-secondary);
+  --ink-faint: var(--text-faint);
+}
+
+.dark {
+  --bg-primary: 15 13 38;             /* Deepest midnight indigo */
+  --bg-surface: 30 27 75;             /* #1E1B4B */
+  --bg-surface-raised: 49 46 100;
+  --text-primary: 250 249 246;        /* #FAF9F6 */
+  --text-secondary: 165 180 252;
+  --text-faint: 129 140 248;
+  --border: 67 62 120;
+  --border-strong: 99 92 165;
+  --accent: 99 102 241;               /* #6366F1 */
+  --accent-hover: 79 70 229;          /* #4F46E5 */
+  --accent-soft: 49 46 129;
+  --success: 20 184 166;              /* #14B8A6 */
+  --success-soft: 19 78 74;
+  --danger: 244 63 94;                /* #F43F5E */
+  --danger-soft: 136 19 55;
+  --warning: 234 179 8;               /* #EAB308 */
+  --warning-soft: 113 63 18;
+
+  --canvas: var(--bg-primary);
+  --surface: var(--bg-surface);
+  --surface-raised: var(--bg-surface-raised);
+  --ink: var(--text-primary);
+  --ink-muted: var(--text-secondary);
+  --ink-faint: var(--text-faint);
+}
+
+/* ─── Global Base Styles ────────────────────────────────────────────── */
+* {
+  border-color: rgb(var(--border));
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: rgb(var(--bg-primary));
+  color: rgb(var(--text-primary));
+  transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1), color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.font-fira-code {
+  font-family: var(--font-fira-code), monospace;
+}
+
+/* Glassmorphism Cards & Navbars */
+.glass-card {
+  background: rgb(var(--bg-surface) / 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgb(var(--border));
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.08);
+}
+
+.glass-nav {
+  background: linear-gradient(135deg, rgb(var(--surface) / 0.85), rgb(var(--surface) / 0.65));
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border-bottom: 1px solid rgb(var(--border) / 0.7);
+  box-shadow: 0 10px 30px -24px rgb(0 0 0 / 0.5);
+}
+
+.glass-sidebar {
+  background: linear-gradient(160deg, rgb(var(--surface) / 0.88), rgb(var(--surface) / 0.68));
+  border-right-color: rgb(var(--border) / 0.75);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+  box-shadow: 12px 0 30px -28px rgb(0 0 0 / 0.5);
+}
+
+.auth-card {
+  background: linear-gradient(145deg, rgb(var(--surface) / 0.85), rgb(var(--surface) / 0.65));
+  border-color: rgb(var(--border) / 0.8);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+  box-shadow: 0 18px 45px -32px rgb(0 0 0 / 0.6);
+  transition: border-color 300ms ease, background 300ms ease, box-shadow 300ms ease, transform 300ms ease;
+}
+
+.auth-card:hover {
+  background: linear-gradient(145deg, rgb(var(--accent-soft) / 0.42), rgb(var(--surface) / 0.7));
+  border-color: rgb(var(--accent) / 0.72);
+  box-shadow: 0 20px 48px -24px rgb(var(--accent) / 0.4);
+  transform: translateY(-2px);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+textarea:-webkit-autofill:active,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus,
+select:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px rgb(var(--surface)) inset !important;
+  -webkit-text-fill-color: rgb(var(--ink)) !important;
+  background-color: rgb(var(--surface)) !important;
+  color: rgb(var(--ink)) !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgb(var(--accent) / 0.25);
+  color: rgb(var(--text-primary));
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-strong) / 0.4);
+  border-radius: 999px;
+}
+
+/* Print Styles */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm;
+  }
+
+  html, body {
+    height: auto !important;
+    overflow: visible !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "student_id": "ST104",
+  "risk": "HIGH",
+  "probability_unplaced": 0.82,
+  "reasons": [
+    "Low application-to-shortlist conversion (0 of 6)",
+    "Major target-role skill gaps (SQL, REST APIs, Docker)",
+    "Below-benchmark mock interview score (38)"
+  ],
+  "interventions": [
+    "3-week backend skills training",
+    "2 mock interviews",
+    "Assign a faculty mentor"
+  ],
+  "meta": {
+    "engine_version": "0.1.0-stub",
+    "stub": true
+  }
+}

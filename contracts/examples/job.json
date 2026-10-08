@@ -1,0 +1,22 @@
+{
+  "job_id": "JOB001",
+  "company": "Acme Tech",
+  "role": "Backend Developer",
+  "min_cgpa": 7.0,
+  "max_backlogs": 0,
+  "eligible_branches": [
+    "CSE",
+    "IT"
+  ],
+  "required_skills": [
+    "Python",
+    "SQL",
+    "REST APIs",
+    "Docker"
+  ],
+  "preferred_skills": [
+    "AWS"
+  ],
+  "experience_years": 0,
+  "ctc_lpa": 8.0
+}

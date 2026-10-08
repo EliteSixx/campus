@@ -1,0 +1,33 @@
+{
+  "job": {
+    "job_id": null,
+    "company": null,
+    "role": "Backend Developer",
+    "min_cgpa": 7.0,
+    "max_backlogs": null,
+    "eligible_branches": [
+      "CSE",
+      "IT"
+    ],
+    "required_skills": [
+      "Python",
+      "SQL",
+      "REST APIs",
+      "Docker"
+    ],
+    "preferred_skills": [
+      "AWS"
+    ],
+    "experience_years": null,
+    "ctc_lpa": null
+  },
+  "confidence": 0.93,
+  "warnings": [
+    "Maximum backlogs not specified",
+    "CTC not specified"
+  ],
+  "meta": {
+    "engine_version": "0.1.0-stub",
+    "stub": true
+  }
+}

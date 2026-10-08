@@ -1,0 +1,48 @@
+{
+  "student_id": "ST001",
+  "score": 82,
+  "level": "READY",
+  "strengths": [
+    "Strong Python and backend skills",
+    "Good academic performance (CGPA 8.2)"
+  ],
+  "gaps": [
+    "No cloud (AWS) experience",
+    "Mock interview not yet attempted"
+  ],
+  "recommendations": [
+    "Complete an AWS fundamentals course",
+    "Take a mock technical interview"
+  ],
+  "breakdown": [
+    {
+      "name": "academics",
+      "score": 82,
+      "weight": 0.25
+    },
+    {
+      "name": "technical_skills",
+      "score": 90,
+      "weight": 0.35
+    },
+    {
+      "name": "projects",
+      "score": 85,
+      "weight": 0.15
+    },
+    {
+      "name": "aptitude",
+      "score": 72,
+      "weight": 0.15
+    },
+    {
+      "name": "communication",
+      "score": 65,
+      "weight": 0.1
+    }
+  ],
+  "meta": {
+    "engine_version": "0.1.0-stub",
+    "stub": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "student_id": "ST104",
+  "branch": "CSE",
+  "cgpa": 6.1,
+  "backlogs": 2,
+  "graduation_year": 2027,
+  "skills": [
+    "Python",
+    "HTML"
+  ],
+  "certifications": [],
+  "projects": [],
+  "aptitude_score": 45,
+  "communication_score": 50,
+  "mock_interview_score": 38,
+  "is_synthetic": true
+}

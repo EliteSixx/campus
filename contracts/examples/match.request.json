@@ -1,0 +1,54 @@
+{
+  "student": {
+    "student_id": "ST001",
+    "branch": "CSE",
+    "cgpa": 8.2,
+    "backlogs": 0,
+    "graduation_year": 2027,
+    "skills": [
+      "Python",
+      "SQL",
+      "Git",
+      "Docker",
+      "REST APIs"
+    ],
+    "certifications": [],
+    "projects": [
+      {
+        "title": "Library API",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "SQL"
+        ],
+        "description": "REST backend for a college library system"
+      }
+    ],
+    "aptitude_score": 72,
+    "communication_score": 65,
+    "mock_interview_score": null,
+    "is_synthetic": true
+  },
+  "job": {
+    "job_id": "JOB001",
+    "company": "Acme Tech",
+    "role": "Backend Developer",
+    "min_cgpa": 7.0,
+    "max_backlogs": 0,
+    "eligible_branches": [
+      "CSE",
+      "IT"
+    ],
+    "required_skills": [
+      "Python",
+      "SQL",
+      "REST APIs",
+      "Docker"
+    ],
+    "preferred_skills": [
+      "AWS"
+    ],
+    "experience_years": 0,
+    "ctc_lpa": 8.0
+  }
+}

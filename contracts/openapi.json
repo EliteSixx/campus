@@ -1,0 +1,1472 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "CampusLink AI Service",
+    "description": "Readiness, skill-gap, JD parsing, matching and placement-risk APIs. Responses carry meta.stub = true while an endpoint still returns hardcoded data.",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/readiness": {
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "summary": "Readiness",
+        "operationId": "readiness_ai_readiness_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadinessRequest"
+              },
+              "examples": {
+                "demo": {
+                  "summary": "Demo scenario",
+                  "value": {
+                    "student": {
+                      "student_id": "ST001",
+                      "branch": "CSE",
+                      "cgpa": 8.2,
+                      "backlogs": 0,
+                      "graduation_year": 2027,
+                      "skills": [
+                        "Python",
+                        "SQL",
+                        "Git",
+                        "Docker",
+                        "REST APIs"
+                      ],
+                      "certifications": [],
+                      "projects": [
+                        {
+                          "title": "Library API",
+                          "tech": [
+                            "Python",
+                            "FastAPI",
+                            "SQL"
+                          ],
+                          "description": "REST backend for a college library system"
+                        }
+                      ],
+                      "aptitude_score": 72,
+                      "communication_score": 65,
+                      "is_synthetic": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadinessResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/skill-gap": {
+      "post": {
+        "tags": [
+          "Student"
+        ],
+        "summary": "Skill Gap",
+        "operationId": "skill_gap_ai_skill_gap_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SkillGapRequest"
+              },
+              "examples": {
+                "demo": {
+                  "summary": "Demo scenario",
+                  "value": {
+                    "student": {
+                      "student_id": "ST001",
+                      "branch": "CSE",
+                      "cgpa": 8.2,
+                      "backlogs": 0,
+                      "graduation_year": 2027,
+                      "skills": [
+                        "Python",
+                        "SQL",
+                        "Git",
+                        "Docker",
+                        "REST APIs"
+                      ],
+                      "certifications": [],
+                      "projects": [
+                        {
+                          "title": "Library API",
+                          "tech": [
+                            "Python",
+                            "FastAPI",
+                            "SQL"
+                          ],
+                          "description": "REST backend for a college library system"
+                        }
+                      ],
+                      "aptitude_score": 72,
+                      "communication_score": 65,
+                      "is_synthetic": true
+                    },
+                    "target": {
+                      "role": "Backend Developer",
+                      "required_skills": [
+                        "Python",
+                        "SQL",
+                        "REST APIs",
+                        "Docker",
+                        "AWS",
+                        "Redis"
+                      ],
+                      "preferred_skills": [
+                        "Kubernetes"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SkillGapResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/parse-job": {
+      "post": {
+        "tags": [
+          "Recruiter"
+        ],
+        "summary": "Parse Job",
+        "operationId": "parse_job_ai_parse_job_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParseJobRequest"
+              },
+              "examples": {
+                "demo": {
+                  "summary": "Demo scenario",
+                  "value": {
+                    "text": "Backend Developer. CSE/IT. CGPA 7+. Python, SQL, REST APIs and Docker required. AWS preferred."
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ParseJobResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/match": {
+      "post": {
+        "tags": [
+          "Recruiter"
+        ],
+        "summary": "Match",
+        "operationId": "match_ai_match_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MatchRequest"
+              },
+              "examples": {
+                "demo": {
+                  "summary": "Demo scenario",
+                  "value": {
+                    "student": {
+                      "student_id": "ST001",
+                      "branch": "CSE",
+                      "cgpa": 8.2,
+                      "backlogs": 0,
+                      "graduation_year": 2027,
+                      "skills": [
+                        "Python",
+                        "SQL",
+                        "Git",
+                        "Docker",
+                        "REST APIs"
+                      ],
+                      "certifications": [],
+                      "projects": [
+                        {
+                          "title": "Library API",
+                          "tech": [
+                            "Python",
+                            "FastAPI",
+                            "SQL"
+                          ],
+                          "description": "REST backend for a college library system"
+                        }
+                      ],
+                      "aptitude_score": 72,
+                      "communication_score": 65,
+                      "is_synthetic": true
+                    },
+                    "job": {
+                      "job_id": "JOB001",
+                      "company": "Acme Tech",
+                      "role": "Backend Developer",
+                      "min_cgpa": 7.0,
+                      "max_backlogs": 0,
+                      "eligible_branches": [
+                        "CSE",
+                        "IT"
+                      ],
+                      "required_skills": [
+                        "Python",
+                        "SQL",
+                        "REST APIs",
+                        "Docker"
+                      ],
+                      "preferred_skills": [
+                        "AWS"
+                      ],
+                      "experience_years": 0,
+                      "ctc_lpa": 8.0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MatchResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/rank": {
+      "post": {
+        "tags": [
+          "Recruiter"
+        ],
+        "summary": "Rank",
+        "operationId": "rank_ai_rank_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RankRequest"
+              },
+              "examples": {
+                "demo": {
+                  "summary": "Demo scenario",
+                  "value": {
+                    "job": {
+                      "job_id": "JOB001",
+                      "company": "Acme Tech",
+                      "role": "Backend Developer",
+                      "min_cgpa": 7.0,
+                      "max_backlogs": 0,
+                      "eligible_branches": [
+                        "CSE",
+                        "IT"
+                      ],
+                      "required_skills": [
+                        "Python",
+                        "SQL",
+                        "REST APIs",
+                        "Docker"
+                      ],
+                      "preferred_skills": [
+                        "AWS"
+                      ],
+                      "experience_years": 0,
+                      "ctc_lpa": 8.0
+                    },
+                    "students": [
+                      {
+                        "student_id": "ST001",
+                        "branch": "CSE",
+                        "cgpa": 8.2,
+                        "backlogs": 0,
+                        "graduation_year": 2027,
+                        "skills": [
+                          "Python",
+                          "SQL",
+                          "Git",
+                          "Docker",
+                          "REST APIs"
+                        ],
+                        "certifications": [],
+                        "projects": [
+                          {
+                            "title": "Library API",
+                            "tech": [
+                              "Python",
+                              "FastAPI",
+                              "SQL"
+                            ],
+                            "description": "REST backend for a college library system"
+                          }
+                        ],
+                        "aptitude_score": 72,
+                        "communication_score": 65,
+                        "is_synthetic": true
+                      },
+                      {
+                        "student_id": "ST104",
+                        "branch": "CSE",
+                        "cgpa": 6.1,
+                        "backlogs": 2,
+                        "graduation_year": 2027,
+                        "skills": [
+                          "Python",
+                          "HTML"
+                        ],
+                        "certifications": [],
+                        "projects": [],
+                        "aptitude_score": 45,
+                        "communication_score": 50,
+                        "mock_interview_score": 38,
+                        "is_synthetic": true
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RankResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ai/predict-placement": {
+      "post": {
+        "tags": [
+          "Placement Cell"
+        ],
+        "summary": "Predict Placement",
+        "operationId": "predict_placement_ai_predict_placement_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PredictPlacementRequest"
+              },
+              "examples": {
+                "demo": {
+                  "summary": "Demo scenario",
+                  "value": {
+                    "student": {
+                      "student_id": "ST104",
+                      "branch": "CSE",
+                      "cgpa": 6.1,
+                      "backlogs": 2,
+                      "graduation_year": 2027,
+                      "skills": [
+                        "Python",
+                        "HTML"
+                      ],
+                      "certifications": [],
+                      "projects": [],
+                      "aptitude_score": 45,
+                      "communication_score": 50,
+                      "mock_interview_score": 38,
+                      "is_synthetic": true
+                    },
+                    "activity": {
+                      "drives_applied": 6,
+                      "shortlisted": 0,
+                      "interviews_attended": 0,
+                      "rejections": 6
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PredictPlacementResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Branch": {
+        "type": "string",
+        "enum": [
+          "CSE",
+          "IT",
+          "ECE",
+          "EEE",
+          "ME",
+          "CE",
+          "OTHER"
+        ],
+        "title": "Branch"
+      },
+      "ErrorBody": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code",
+            "description": "Machine-readable, e.g. INVALID_INPUT."
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "field": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Field",
+            "description": "Dotted path to the bad field, e.g. student.cgpa."
+          }
+        },
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorBody"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorBody"
+          }
+        },
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse"
+      },
+      "Job": {
+        "properties": {
+          "job_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Id",
+            "description": "Assigned when the job is saved; null straight after parsing."
+          },
+          "company": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Company"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "min_cgpa": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Min Cgpa",
+            "default": 0
+          },
+          "max_backlogs": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Max Backlogs",
+            "description": "null = no limit stated."
+          },
+          "eligible_branches": {
+            "items": {
+              "$ref": "#/components/schemas/Branch"
+            },
+            "type": "array",
+            "title": "Eligible Branches",
+            "description": "Empty = all branches."
+          },
+          "required_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Required Skills"
+          },
+          "preferred_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Preferred Skills"
+          },
+          "experience_years": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Experience Years"
+          },
+          "ctc_lpa": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ctc Lpa",
+            "description": "Offered CTC in lakhs per annum."
+          }
+        },
+        "type": "object",
+        "required": [
+          "role"
+        ],
+        "title": "Job"
+      },
+      "MatchRequest": {
+        "properties": {
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          },
+          "job": {
+            "$ref": "#/components/schemas/Job"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student",
+          "job"
+        ],
+        "title": "MatchRequest"
+      },
+      "MatchResponse": {
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "title": "Student Id"
+          },
+          "job_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Id"
+          },
+          "match_score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Match Score"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "matched_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Skills"
+          },
+          "skill_gaps": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skill Gaps"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/Reason"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "breakdown": {
+            "items": {
+              "$ref": "#/components/schemas/ScoreComponent"
+            },
+            "type": "array",
+            "title": "Breakdown"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student_id",
+          "match_score",
+          "eligible",
+          "matched_skills",
+          "skill_gaps",
+          "reasons",
+          "breakdown",
+          "meta"
+        ],
+        "title": "MatchResponse"
+      },
+      "Meta": {
+        "properties": {
+          "engine_version": {
+            "type": "string",
+            "title": "Engine Version",
+            "description": "Version of the AI engine that produced this response."
+          },
+          "stub": {
+            "type": "boolean",
+            "title": "Stub",
+            "description": "True while the endpoint returns hardcoded stub data."
+          }
+        },
+        "type": "object",
+        "required": [
+          "engine_version",
+          "stub"
+        ],
+        "title": "Meta"
+      },
+      "MissingSkill": {
+        "properties": {
+          "skill": {
+            "type": "string",
+            "title": "Skill"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/Priority"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill",
+          "priority"
+        ],
+        "title": "MissingSkill"
+      },
+      "ParseJobRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 10,
+            "title": "Text",
+            "description": "Raw job description text typed or pasted by the recruiter."
+          }
+        },
+        "type": "object",
+        "required": [
+          "text"
+        ],
+        "title": "ParseJobRequest"
+      },
+      "ParseJobResponse": {
+        "properties": {
+          "job": {
+            "$ref": "#/components/schemas/Job"
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Warnings",
+            "description": "Fields the parser could not find or was unsure about."
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job",
+          "confidence",
+          "warnings",
+          "meta"
+        ],
+        "title": "ParseJobResponse"
+      },
+      "PlacementActivity": {
+        "properties": {
+          "drives_applied": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Drives Applied",
+            "default": 0
+          },
+          "shortlisted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Shortlisted",
+            "default": 0
+          },
+          "interviews_attended": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Interviews Attended",
+            "default": 0
+          },
+          "rejections": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Rejections",
+            "default": 0
+          }
+        },
+        "type": "object",
+        "title": "PlacementActivity"
+      },
+      "PredictPlacementRequest": {
+        "properties": {
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          },
+          "activity": {
+            "$ref": "#/components/schemas/PlacementActivity"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student"
+        ],
+        "title": "PredictPlacementRequest"
+      },
+      "PredictPlacementResponse": {
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "title": "Student Id"
+          },
+          "risk": {
+            "$ref": "#/components/schemas/RiskLevel"
+          },
+          "probability_unplaced": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Probability Unplaced"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "interventions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Interventions"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student_id",
+          "risk",
+          "probability_unplaced",
+          "reasons",
+          "interventions",
+          "meta"
+        ],
+        "title": "PredictPlacementResponse"
+      },
+      "Priority": {
+        "type": "string",
+        "enum": [
+          "HIGH",
+          "MEDIUM",
+          "LOW"
+        ],
+        "title": "Priority"
+      },
+      "Project": {
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "tech": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tech"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "title": "Project"
+      },
+      "RankRequest": {
+        "properties": {
+          "job": {
+            "$ref": "#/components/schemas/Job"
+          },
+          "students": {
+            "items": {
+              "$ref": "#/components/schemas/Student"
+            },
+            "type": "array",
+            "maxItems": 500,
+            "minItems": 1,
+            "title": "Students"
+          }
+        },
+        "type": "object",
+        "required": [
+          "job",
+          "students"
+        ],
+        "title": "RankRequest"
+      },
+      "RankResponse": {
+        "properties": {
+          "job_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Id"
+          },
+          "ranked": {
+            "items": {
+              "$ref": "#/components/schemas/RankedMatch"
+            },
+            "type": "array",
+            "title": "Ranked",
+            "description": "Eligible candidates first, then ineligible; each group by score, highest first."
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "ranked",
+          "meta"
+        ],
+        "title": "RankResponse"
+      },
+      "RankedMatch": {
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "title": "Student Id"
+          },
+          "job_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Job Id"
+          },
+          "match_score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Match Score"
+          },
+          "eligible": {
+            "type": "boolean",
+            "title": "Eligible"
+          },
+          "matched_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Skills"
+          },
+          "skill_gaps": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skill Gaps"
+          },
+          "reasons": {
+            "items": {
+              "$ref": "#/components/schemas/Reason"
+            },
+            "type": "array",
+            "title": "Reasons"
+          },
+          "breakdown": {
+            "items": {
+              "$ref": "#/components/schemas/ScoreComponent"
+            },
+            "type": "array",
+            "title": "Breakdown"
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1.0,
+            "title": "Rank"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student_id",
+          "match_score",
+          "eligible",
+          "matched_skills",
+          "skill_gaps",
+          "reasons",
+          "breakdown",
+          "rank"
+        ],
+        "title": "RankedMatch"
+      },
+      "ReadinessLevel": {
+        "type": "string",
+        "enum": [
+          "NOT_READY",
+          "DEVELOPING",
+          "READY",
+          "HIGHLY_EMPLOYABLE"
+        ],
+        "title": "ReadinessLevel"
+      },
+      "ReadinessRequest": {
+        "properties": {
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student"
+        ],
+        "title": "ReadinessRequest"
+      },
+      "ReadinessResponse": {
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "title": "Student Id"
+          },
+          "score": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "level": {
+            "$ref": "#/components/schemas/ReadinessLevel"
+          },
+          "strengths": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Strengths"
+          },
+          "gaps": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Gaps"
+          },
+          "recommendations": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Recommendations"
+          },
+          "breakdown": {
+            "items": {
+              "$ref": "#/components/schemas/ScoreComponent"
+            },
+            "type": "array",
+            "title": "Breakdown",
+            "description": "Weighted components. If a score is null, its weight is redistributed over the rest."
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student_id",
+          "score",
+          "level",
+          "strengths",
+          "gaps",
+          "recommendations",
+          "breakdown",
+          "meta"
+        ],
+        "title": "ReadinessResponse"
+      },
+      "Reason": {
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ReasonType"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text"
+          }
+        },
+        "type": "object",
+        "required": [
+          "type",
+          "text"
+        ],
+        "title": "Reason"
+      },
+      "ReasonType": {
+        "type": "string",
+        "enum": [
+          "PASS",
+          "WARN",
+          "FAIL"
+        ],
+        "title": "ReasonType"
+      },
+      "RiskLevel": {
+        "type": "string",
+        "enum": [
+          "LOW",
+          "MEDIUM",
+          "HIGH"
+        ],
+        "title": "RiskLevel"
+      },
+      "ScoreComponent": {
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "score": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Score"
+          },
+          "weight": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Weight",
+            "description": "Weights in one breakdown sum to 1."
+          }
+        },
+        "type": "object",
+        "required": [
+          "name",
+          "score",
+          "weight"
+        ],
+        "title": "ScoreComponent",
+        "description": "One weighted part of a score, for explainability (charts, 'why this score')."
+      },
+      "SkillGapRequest": {
+        "properties": {
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          },
+          "target": {
+            "$ref": "#/components/schemas/TargetRole"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student",
+          "target"
+        ],
+        "title": "SkillGapRequest"
+      },
+      "SkillGapResponse": {
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "title": "Student Id"
+          },
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "matched_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Matched Skills"
+          },
+          "missing_skills": {
+            "items": {
+              "$ref": "#/components/schemas/MissingSkill"
+            },
+            "type": "array",
+            "title": "Missing Skills"
+          },
+          "coverage_pct": {
+            "type": "integer",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Coverage Pct",
+            "description": "Share of required skills the student has."
+          },
+          "meta": {
+            "$ref": "#/components/schemas/Meta"
+          }
+        },
+        "type": "object",
+        "required": [
+          "student_id",
+          "role",
+          "matched_skills",
+          "missing_skills",
+          "coverage_pct",
+          "meta"
+        ],
+        "title": "SkillGapResponse"
+      },
+      "Student": {
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Student Id",
+            "description": "e.g. ST001"
+          },
+          "branch": {
+            "$ref": "#/components/schemas/Branch"
+          },
+          "cgpa": {
+            "type": "number",
+            "maximum": 10.0,
+            "minimum": 0.0,
+            "title": "Cgpa"
+          },
+          "backlogs": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Backlogs",
+            "description": "Active backlogs.",
+            "default": 0
+          },
+          "graduation_year": {
+            "type": "integer",
+            "maximum": 2040.0,
+            "minimum": 2020.0,
+            "title": "Graduation Year"
+          },
+          "skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Skills"
+          },
+          "certifications": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Certifications"
+          },
+          "projects": {
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            },
+            "type": "array",
+            "title": "Projects"
+          },
+          "aptitude_score": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Aptitude Score",
+            "description": "null = not taken."
+          },
+          "communication_score": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Communication Score",
+            "description": "null = not taken."
+          },
+          "mock_interview_score": {
+            "anyOf": [
+              {
+                "type": "number",
+                "maximum": 100.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Mock Interview Score",
+            "description": "null = not taken."
+          },
+          "is_synthetic": {
+            "type": "boolean",
+            "title": "Is Synthetic",
+            "description": "True for generated records, False for real student input.",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "student_id",
+          "branch",
+          "cgpa",
+          "graduation_year"
+        ],
+        "title": "Student"
+      },
+      "TargetRole": {
+        "properties": {
+          "role": {
+            "type": "string",
+            "title": "Role"
+          },
+          "required_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Required Skills"
+          },
+          "preferred_skills": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Preferred Skills"
+          }
+        },
+        "type": "object",
+        "required": [
+          "role",
+          "required_skills"
+        ],
+        "title": "TargetRole"
+      }
+    }
+  }
+}

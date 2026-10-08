@@ -1,0 +1,29 @@
+{
+  "student_id": "ST001",
+  "role": "Backend Developer",
+  "matched_skills": [
+    "Python",
+    "SQL",
+    "REST APIs",
+    "Docker"
+  ],
+  "missing_skills": [
+    {
+      "skill": "AWS",
+      "priority": "HIGH"
+    },
+    {
+      "skill": "Redis",
+      "priority": "MEDIUM"
+    },
+    {
+      "skill": "Kubernetes",
+      "priority": "LOW"
+    }
+  ],
+  "coverage_pct": 67,
+  "meta": {
+    "engine_version": "0.1.0-stub",
+    "stub": true
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "student": {
+    "student_id": "ST001",
+    "branch": "CSE",
+    "cgpa": 8.2,
+    "backlogs": 0,
+    "graduation_year": 2027,
+    "skills": [
+      "Python",
+      "SQL",
+      "Git",
+      "Docker",
+      "REST APIs"
+    ],
+    "certifications": [],
+    "projects": [
+      {
+        "title": "Library API",
+        "tech": [
+          "Python",
+          "FastAPI",
+          "SQL"
+        ],
+        "description": "REST backend for a college library system"
+      }
+    ],
+    "aptitude_score": 72,
+    "communication_score": 65,
+    "mock_interview_score": null,
+    "is_synthetic": true
+  },
+  "target": {
+    "role": "Backend Developer",
+    "required_skills": [
+      "Python",
+      "SQL",
+      "REST APIs",
+      "Docker",
+      "AWS",
+      "Redis"
+    ],
+    "preferred_skills": [
+      "Kubernetes"
+    ]
+  }
+}
