@@ -82,19 +82,19 @@ TARGET_ROLE = {
 # ---------------------------------------------------------------------------
 READINESS_RESPONSE = {
     "student_id": "ST001",
-    "score": 82,
+    "score": 81,
     "level": "READY",
-    "strengths": ["Strong Python and backend skills", "Good academic performance (CGPA 8.2)"],
-    "gaps": ["No cloud (AWS) experience", "Mock interview not yet attempted"],
-    "recommendations": ["Complete an AWS fundamentals course", "Take a mock technical interview"],
+    "strengths": ["Strong academic performance (82/100)", "Strong technical skills (82/100)"],
+    "gaps": ["Mock interview not yet attempted"],
+    "recommendations": ["Take a mock interview to identify interview strengths and areas to improve."],
     "breakdown": [
-        {"name": "academics", "score": 82, "weight": 0.25},
-        {"name": "technical_skills", "score": 90, "weight": 0.35},
-        {"name": "projects", "score": 85, "weight": 0.15},
-        {"name": "aptitude", "score": 72, "weight": 0.15},
-        {"name": "communication", "score": 65, "weight": 0.10},
+        {"name": "academics", "score": 82, "weight": 0.2777777777777778},
+        {"name": "technical_skills", "score": 82, "weight": 0.3888888888888889},
+        {"name": "projects", "score": 45, "weight": 0.16666666666666669},
+        {"name": "aptitude", "score": 72, "weight": 0.16666666666666669},
+        {"name": "communication", "score": 65, "weight": 0.11111111111111112},
     ],
-    "meta": META,
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 SKILL_GAP_RESPONSE = {
