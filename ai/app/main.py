@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app import examples as ex
+from app.services.readiness_service import compute_readiness
 from app.schemas import (
     ErrorResponse,
     MatchRequest,
@@ -32,7 +33,7 @@ app = FastAPI(
     title="CampusLink AI Service",
     version="0.1.0",
     description="Readiness, skill-gap, JD parsing, matching and placement-risk APIs. "
-    "Responses carry meta.stub = true while an endpoint still returns hardcoded data.",
+    "Responses carry meta.stub = true for endpoints that still return hardcoded data.",
 )
 
 origins = os.getenv("CAMPUSLINK_CORS_ORIGINS", "http://localhost:3000").split(",")
@@ -65,7 +66,7 @@ def health():
 
 @app.post("/ai/readiness", response_model=ReadinessResponse, responses=ERRORS, tags=["Student"])
 def readiness(req: ReadinessRequest = example_body("readiness.request")):
-    return {**ex.READINESS_RESPONSE, "student_id": req.student.student_id}
+    return compute_readiness(req.student)
 
 
 @app.post("/ai/skill-gap", response_model=SkillGapResponse, responses=ERRORS, tags=["Student"])

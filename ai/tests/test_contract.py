@@ -26,7 +26,7 @@ def test_health():
 def test_example_request_returns_valid_stub_response(path, name):
     r = client.post(path, json=ex.EXAMPLES[f"{name}.request"])
     assert r.status_code == 200, r.text
-    assert r.json()["meta"]["stub"] is True
+    assert r.json()["meta"]["stub"] is (path != "/ai/readiness")
 
 
 def test_ids_are_echoed():

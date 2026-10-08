@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CampusLink AI Service",
-    "description": "Readiness, skill-gap, JD parsing, matching and placement-risk APIs. Responses carry meta.stub = true while an endpoint still returns hardcoded data.",
+    "description": "Readiness, skill-gap, JD parsing, matching and placement-risk APIs. Responses carry meta.stub = true for endpoints that still return hardcoded data.",
     "version": "0.1.0"
   },
   "paths": {
