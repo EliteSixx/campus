@@ -45,10 +45,8 @@ export default function ObjectivesSettingsPage() {
               <h3 className="text-sm font-bold text-ink">
                 {role === "student"
                   ? "Target Career Goal"
-                  : role === "alumni"
-                  ? "Mentorship & Referral Objectives"
                   : role === "faculty"
-                  ? "Academic & Research Focus"
+                  ? "Mentor Focus"
                   : role === "institution"
                   ? "Institutional Objective"
                   : "Hiring Focus & Talent Pipeline"}

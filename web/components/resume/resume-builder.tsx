@@ -146,10 +146,9 @@ export function StudentResumeBuilder() {
   // Read-only viewer for Faculty, Industry, Recruiter
   if (role !== "student") {
     const roleTitleMap: Record<string, string> = {
-      faculty: "Faculty Department Mentor",
+      faculty: "Mentor",
       industry: "Verified Industry Partner",
       institution: "Institutional Admin",
-      alumni: "Verified Alumni Mentor",
     };
     return (
       <CandidateResumeViewer

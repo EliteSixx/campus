@@ -20,9 +20,9 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "The Plug — Closed-Loop Alumni & Skill Intelligence Platform",
+  title: "CampusLink — Campus Placement Intelligence Platform",
   description:
-    "A next-gen closed-loop skill intelligence and alumni network platform connecting students, faculty, alumni, institutions, and industry.",
+    "CampusLink connects students, mentors, placement cells, and recruiters through placement readiness and skill intelligence.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

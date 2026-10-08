@@ -7,7 +7,6 @@ import {
   Radar,
   Target,
   GraduationCap,
-  Users2,
   Building2,
   Landmark,
   BookOpen,
@@ -51,7 +50,7 @@ const howItWorksSteps = [
     icon: Target,
     coords: "X:710 · Y:340",
     description:
-      "Every detected deficit initiates a measured, targeted program with alumni mentorship and industry challenges — not an unverified generic catalog.",
+      "Every detected deficit initiates measured mentor guidance and recruiter challenges — not an unverified generic catalog.",
   },
 ];
 
@@ -70,21 +69,8 @@ const stakeholders = [
     ],
   },
   {
-    id: "alumni",
-    num: "02",
-    role: "ALUMNI",
-    color: "#c084fc", // violet
-    icon: Users2,
-    tagline: "The active bridge between academic learning and industry careers.",
-    points: [
-      "Verified candidate referral pipeline",
-      "1-on-1 mentorship session dispatch",
-      "Direct student proof review & validation",
-    ],
-  },
-  {
     id: "industry",
-    num: "03",
+    num: "02",
     role: "INDUSTRY",
     color: "#818cf8", // indigo
     icon: Building2,
@@ -97,7 +83,7 @@ const stakeholders = [
   },
   {
     id: "institutions",
-    num: "04",
+    num: "03",
     role: "INSTITUTIONS",
     color: "#34d399", // emerald
     icon: Landmark,
@@ -110,8 +96,8 @@ const stakeholders = [
   },
   {
     id: "faculty",
-    num: "05",
-    role: "FACULTY",
+    num: "04",
+    role: "MENTOR",
     color: "#fbbf24", // amber
     icon: BookOpen,
     tagline: "Identify competency shortfalls before students reach hiring drives.",
@@ -363,7 +349,7 @@ export function IntegratedProductSections() {
             Ready to See Your Own Skill Gaps?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-400 font-light max-w-lg mx-auto leading-relaxed">
-            Explore live student, alumni, industry, institution, or faculty dashboards in prototype mode.
+            Explore the student, recruiter, placement cell, and Mentor experiences in prototype mode.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">

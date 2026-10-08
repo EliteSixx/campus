@@ -16,7 +16,6 @@ import {
   Landmark,
   Layers,
   BookOpen,
-  Users2,
   ShieldCheck,
   X,
   Upload,
@@ -46,12 +45,6 @@ type FormState = {
   studentDepartment: string;
   academicYear: string;
   graduationYear: string;
-  // Alumni
-  alumniCollege: string;
-  alumniDepartment: string;
-  alumniGradYear: string;
-  alumniJobTitle: string;
-  alumniEmployer: string;
   professionalDomain: string;
   // Industry
   companyName: string;
@@ -107,11 +100,6 @@ const initialForm: FormState = {
   academicYear: "3rd Year",
   graduationYear: "2026",
 
-  alumniCollege: "cupgs-odisha",
-  alumniDepartment: "Computer Science",
-  alumniGradYear: "2024",
-  alumniJobTitle: "",
-  alumniEmployer: "",
   professionalDomain: "Software Engineering",
 
   companyName: "",
@@ -155,10 +143,9 @@ const roleOptions: Array<{
   icon: typeof GraduationCap;
 }> = [
   { value: "student", label: "Student", subtitle: "Building verified skills", icon: GraduationCap },
-  { value: "alumni", label: "Alumni", subtitle: "Mentorship & referrals", icon: Users2 },
-  { value: "industry", label: "Industry", subtitle: "Hiring & live demand", icon: Building2 },
-  { value: "institution", label: "Institution", subtitle: "Cohort diagnostics", icon: Landmark },
-  { value: "faculty", label: "Faculty", subtitle: "Curriculum intervention", icon: BookOpen },
+  { value: "industry", label: "Recruiter", subtitle: "Hiring & live demand", icon: Building2 },
+  { value: "institution", label: "Placement Cell", subtitle: "Cohort diagnostics", icon: Landmark },
+  { value: "faculty", label: "Mentor", subtitle: "Student placement guidance", icon: BookOpen },
 ];
 
 const stepMeta = [
@@ -244,11 +231,6 @@ export default function RegisterPage() {
       if (formData.role === "student") {
         if (!formData.studentInstitution.trim()) {
           setError("Please specify your institution.");
-          return false;
-        }
-      } else if (formData.role === "alumni") {
-        if (!formData.alumniCollege.trim()) {
-          setError("Please select your college / institution.");
           return false;
         }
       } else if (formData.role === "industry") {
@@ -350,11 +332,6 @@ export default function RegisterPage() {
       if (targetRole === "student") {
         yearOrTitle = `${formData.academicYear} · Class of ${formData.graduationYear}`;
         department = formData.studentDepartment || "Computer Science";
-      } else if (targetRole === "alumni") {
-        yearOrTitle = formData.alumniJobTitle
-          ? `${formData.alumniJobTitle}${formData.alumniEmployer ? ` @ ${formData.alumniEmployer}` : ""}`
-          : `Alumni (${formData.alumniGradYear})`;
-        department = formData.alumniDepartment || "Computer Science";
       } else if (targetRole === "industry") {
         yearOrTitle = formData.roleDesignation || "Talent Acquisition Lead";
         department = formData.companyName || "Industry Partner";
@@ -362,7 +339,7 @@ export default function RegisterPage() {
         yearOrTitle = "Institutional Administrator";
         department = formData.institutionName || "CUPGS Odisha";
       } else if (targetRole === "faculty") {
-        yearOrTitle = formData.highestQualification ? `${formData.highestQualification} · Faculty` : "Faculty Member";
+        yearOrTitle = formData.highestQualification ? `${formData.highestQualification} · Mentor` : "Mentor";
         department = formData.facultyDepartment || "Computer Science";
       }
 
@@ -687,60 +664,6 @@ export default function RegisterPage() {
                         </div>
                       )}
 
-                      {formData.role === "alumni" && (
-                        <div className="space-y-3">
-                          <div>
-                            <label className="mb-1 block text-xs font-medium text-ink-muted">College / Alma Mater *</label>
-                            <Select name="alumniCollege" value={formData.alumniCollege} onChange={handleInputChange} required>
-                              <option value="cupgs-odisha">CUPGS Odisha</option>
-                              <option value="nit-rourkela">NIT Rourkela</option>
-                              <option value="iit-bhubaneswar">IIT Bhubaneswar</option>
-                              <option value="kiit-university">KIIT University</option>
-                              <option value="vssut-burla">VSSUT Burla</option>
-                            </Select>
-                          </div>
-                          <div className="grid grid-cols-2 gap-3">
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-ink-muted">Department</label>
-                              <Input
-                                name="alumniDepartment"
-                                value={formData.alumniDepartment}
-                                onChange={handleInputChange}
-                                placeholder="Computer Science"
-                              />
-                            </div>
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-ink-muted">Graduation Year</label>
-                              <Select name="alumniGradYear" value={formData.alumniGradYear} onChange={handleInputChange}>
-                                {Array.from({ length: 15 }, (_, i) => 2026 - i).map((y) => (
-                                  <option key={y} value={String(y)}>{y}</option>
-                                ))}
-                              </Select>
-                            </div>
-                          </div>
-                          <div className="grid grid-cols-2 gap-3">
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-ink-muted">Current Job Title</label>
-                              <Input
-                                name="alumniJobTitle"
-                                value={formData.alumniJobTitle}
-                                onChange={handleInputChange}
-                                placeholder="e.g. Senior Software Engineer"
-                              />
-                            </div>
-                            <div>
-                              <label className="mb-1 block text-xs font-medium text-ink-muted">Current Employer</label>
-                              <Input
-                                name="alumniEmployer"
-                                value={formData.alumniEmployer}
-                                onChange={handleInputChange}
-                                placeholder="e.g. AsterCloud Labs"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      )}
-
                       {formData.role === "industry" && (
                         <div className="space-y-3">
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -903,7 +826,7 @@ export default function RegisterPage() {
                     </div>
 
                     {/* Resume / CV File Upload Section */}
-                    {(formData.role === "student" || formData.role === "alumni" || formData.role === "faculty") && (
+                    {(formData.role === "student" || formData.role === "faculty") && (
                       <div className="rounded-xl border border-dashed border-border bg-surface-raised/50 p-4 text-center">
                         <Upload className="h-6 w-6 text-accent mx-auto mb-1.5" />
                         <p className="text-xs font-bold text-ink">
@@ -960,41 +883,6 @@ export default function RegisterPage() {
                               value={formData.linkedInProfile}
                               onChange={handleInputChange}
                               placeholder="https://linkedin.com/in/username"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Alumni Specific Dossier */}
-                    {formData.role === "alumni" && (
-                      <div className="space-y-3">
-                        <div>
-                          <label className="mb-1 block text-xs font-semibold text-ink-muted">Core Competencies & Tech Stack</label>
-                          <Input
-                            name="techStack"
-                            value={formData.techStack}
-                            onChange={handleInputChange}
-                            placeholder="e.g. Kubernetes, Go, Distributed Systems"
-                          />
-                        </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div>
-                            <label className="mb-1 block text-xs font-semibold text-ink-muted">LinkedIn Profile</label>
-                            <Input
-                              name="linkedInProfile"
-                              value={formData.linkedInProfile}
-                              onChange={handleInputChange}
-                              placeholder="https://linkedin.com/in/username"
-                            />
-                          </div>
-                          <div>
-                            <label className="mb-1 block text-xs font-semibold text-ink-muted">Portfolio / Personal Site</label>
-                            <Input
-                              name="portfolioLink"
-                              value={formData.portfolioLink}
-                              onChange={handleInputChange}
-                              placeholder="https://portfolio.dev"
                             />
                           </div>
                         </div>
@@ -1060,7 +948,7 @@ export default function RegisterPage() {
                       </div>
                     )}
 
-                    {/* Faculty Specific Dossier */}
+                    {/* Mentor Specific Dossier */}
                     {formData.role === "faculty" && (
                       <div className="space-y-3">
                         <div>

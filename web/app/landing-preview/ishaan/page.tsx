@@ -39,7 +39,7 @@ export default function LandingPage() {
             Bridge the Gap Between Skills and Opportunity.
           </h1>
           <p className="mt-4 text-base leading-relaxed text-ink-muted md:text-lg">
-            The Plug connects students, institutions, faculty, alumni, and industry through real-time skill intelligence.
+            CampusLink connects students, placement cells, mentors, and recruiters through skill intelligence.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href="/dashboard/student">
