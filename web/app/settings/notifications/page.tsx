@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { DashboardShell } from "@/components/shared/dashboard-shell";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Bell, MessageSquare, CalendarDays, HelpCircle, Trophy } from "lucide-react";
+import { Bell, MessageSquare, CalendarDays } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function Switch({ checked, onChange }: { checked: boolean, onChange: (c: boolean) => void }) {
@@ -33,8 +33,6 @@ export default function NotificationSettingsPage() {
   const [prefs, setPrefs] = useState({
     mentorship: true,
     sessions: true,
-    guidance: false,
-    badges: true,
   });
 
   return (
@@ -85,37 +83,6 @@ export default function NotificationSettingsPage() {
               <Switch checked={prefs.sessions} onChange={(c) => setPrefs({ ...prefs, sessions: c })} />
             </div>
 
-            {/* Setting 3 */}
-            <div className="flex items-center justify-between p-4 hover:bg-surface-raised transition-colors rounded-xl">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-success-soft text-success border border-success/20">
-                  <HelpCircle className="h-4.5 w-4.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-ink">Guidance Hub Replies</h4>
-                  <p className="text-[11px] text-ink-muted font-medium mt-0.5">
-                    When alumni reply to your questions in the guidance hub.
-                  </p>
-                </div>
-              </div>
-              <Switch checked={prefs.guidance} onChange={(c) => setPrefs({ ...prefs, guidance: c })} />
-            </div>
-
-            {/* Setting 4 */}
-            <div className="flex items-center justify-between p-4 hover:bg-surface-raised transition-colors rounded-xl">
-              <div className="flex items-center gap-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent border border-accent/20">
-                  <Trophy className="h-4.5 w-4.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-ink">Badge Unlocks & Impact</h4>
-                  <p className="text-[11px] text-ink-muted font-medium mt-0.5">
-                    Notifications about your leaderboard rank and new badges.
-                  </p>
-                </div>
-              </div>
-              <Switch checked={prefs.badges} onChange={(c) => setPrefs({ ...prefs, badges: c })} />
-            </div>
           </div>
         </CardContent>
       </Card>

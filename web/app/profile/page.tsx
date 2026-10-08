@@ -49,7 +49,7 @@ export default function ProfilePage() {
                 </Badge>
                 {role === "student" && (
                   <Badge tone="success" className="text-[10px]">
-                    <ShieldCheck className="h-3 w-3 mr-0.5" /> Alumni Verified
+                    <ShieldCheck className="h-3 w-3 mr-0.5" /> Profile Verified
                   </Badge>
                 )}
               </div>

@@ -51,9 +51,9 @@ const ANNOTATIONS: ComponentAnnotation[] = [
     scrollTrigger: 0.36,
   },
   {
-    id: "alumni",
+    id: "faculty",
     num: "03",
-    role: "ALUMNI",
+    role: "MENTOR",
     part: "PINCH / NECK",
     quote: "The bridge between learning and industry.",
     color: "#c084fc", // violet
@@ -65,32 +65,18 @@ const ANNOTATIONS: ComponentAnnotation[] = [
     scrollTrigger: 0.50,
   },
   {
-    id: "faculty",
-    num: "04",
-    role: "FACULTY",
-    part: "CAP / BASE",
-    quote: "The mentors shaping capability.",
-    color: "#fbbf24", // amber
-    glowColor: "rgba(251,191,36,0.45)",
-    targetX: 535,
-    targetY: 650,
-    elbowX: 300,
-    side: "left",
-    scrollTrigger: 0.64,
-  },
-  {
     id: "institutions",
-    num: "05",
-    role: "INSTITUTIONS",
-    part: "BASE: PINS / CONTACTS",
-    quote: "The foundation connecting it all.",
+    num: "04",
+    role: "PLACEMENT CELL",
+    part: "CAP / BASE",
+    quote: "The foundation for campus placement.",
     color: "#34d399", // emerald
     glowColor: "rgba(52,211,153,0.45)",
     targetX: 635,
-    targetY: 750,
+    targetY: 650,
     elbowX: 900,
     side: "right",
-    scrollTrigger: 0.78,
+    scrollTrigger: 0.64,
   },
 ];
 
@@ -164,9 +150,8 @@ export function EditorialBulbLanding() {
   // 4. PROGRESSIVE COMPONENT ILLUMINATION (Stays illuminated once revealed)
   const actIndustry = Math.min(1.0, Math.max(0.12, (p - 0.18) / 0.10));
   const actStudents = Math.min(1.0, Math.max(0.0, (p - 0.32) / 0.10));
-  const actAlumni = Math.min(1.0, Math.max(0.0, (p - 0.46) / 0.10));
-  const actFaculty = Math.min(1.0, Math.max(0.0, (p - 0.60) / 0.10));
-  const actInstitutions = Math.min(1.0, Math.max(0.0, (p - 0.74) / 0.10));
+  const actMentor = Math.min(1.0, Math.max(0.0, (p - 0.46) / 0.10));
+  const actInstitutions = Math.min(1.0, Math.max(0.0, (p - 0.60) / 0.10));
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-[#010206] text-white select-none font-sans">
@@ -287,7 +272,7 @@ export function EditorialBulbLanding() {
 
             {/* Supporting text */}
             <p className="text-base sm:text-lg md:text-xl text-slate-300/80 font-light max-w-2xl mx-auto leading-relaxed mb-8 sm:mb-10">
-              Bridging students, institutions, alumni, faculty and industry through one intelligent ecosystem.
+              Bridging students, placement cells, mentors, and recruiters through one intelligent ecosystem.
             </p>
 
             {/* "SCROLL TO BEGIN" Metaphor Prompt */}
@@ -746,16 +731,16 @@ export function EditorialBulbLanding() {
               </g>
 
               {/* ============================================================= */}
-              {/* 3. ALUMNI -> PINCH / NECK (Glass Stem with Window)            */}
+              {/* 3. MENTOR -> PINCH / NECK (Glass Stem with Window)            */}
               {/* ============================================================= */}
-              <g id="component-alumni">
+              <g id="component-mentor">
                 <path
                   d="M 570 470 L 570 545 C 570 580, 540 600, 540 630 L 660 630 C 660 600, 630 580, 630 545 L 630 470 Z"
-                  fill={actAlumni > 0.25 ? "rgba(192, 132, 252, 0.08)" : "none"}
-                  stroke={actAlumni > 0.2 ? "#c084fc" : "rgba(255, 255, 255, 0.25)"}
-                  strokeWidth={actAlumni > 0.3 ? 2.2 : 1.4}
-                  strokeOpacity={0.35 + actAlumni * 0.65}
-                  filter={actAlumni > 0.35 ? "url(#bulbSoftGlow2)" : undefined}
+                  fill={actMentor > 0.25 ? "rgba(251, 191, 36, 0.08)" : "none"}
+                  stroke={actMentor > 0.2 ? "#fbbf24" : "rgba(255, 255, 255, 0.25)"}
+                  strokeWidth={actMentor > 0.3 ? 2.2 : 1.4}
+                  strokeOpacity={0.35 + actMentor * 0.65}
+                  filter={actMentor > 0.35 ? "url(#bulbSoftGlow2)" : undefined}
                 />
                 <rect
                   x="582"
@@ -764,32 +749,32 @@ export function EditorialBulbLanding() {
                   height="24"
                   rx="3"
                   fill="#060c20"
-                  stroke={actAlumni > 0.2 ? "#c084fc" : "rgba(255, 255, 255, 0.25)"}
+                  stroke={actMentor > 0.2 ? "#fbbf24" : "rgba(255, 255, 255, 0.25)"}
                   strokeWidth="1.4"
-                  strokeOpacity={0.4 + actAlumni * 0.6}
+                  strokeOpacity={0.4 + actMentor * 0.6}
                 />
               </g>
 
               {/* ============================================================= */}
-              {/* 4. FACULTY -> CAP / BASE (Threaded Collar)                    */}
+              {/* 4. PLACEMENT CELL -> CAP / BASE (Threaded Collar)             */}
               {/* ============================================================= */}
-              <g id="component-faculty">
+              <g id="component-placement-cell">
                 <path
                   d="M 535 630 L 535 705 C 535 722, 665 722, 665 705 L 665 630 Z"
                   fill="#0a0f24"
-                  stroke={actFaculty > 0.2 ? "#fbbf24" : "rgba(255, 255, 255, 0.25)"}
-                  strokeWidth={actFaculty > 0.3 ? 2.2 : 1.5}
-                  strokeOpacity={0.35 + actFaculty * 0.65}
-                  filter={actFaculty > 0.35 ? "url(#bulbSoftGlow2)" : undefined}
+                  stroke={actInstitutions > 0.2 ? "#34d399" : "rgba(255, 255, 255, 0.25)"}
+                  strokeWidth={actInstitutions > 0.3 ? 2.2 : 1.5}
+                  strokeOpacity={0.35 + actInstitutions * 0.65}
+                  filter={actInstitutions > 0.35 ? "url(#bulbSoftGlow2)" : undefined}
                 />
                 {[648, 668, 688, 705].map((y, i) => (
                   <path
                     key={`thread-${i}`}
                     d={`M 535 ${y} Q 600 ${y + 10} 665 ${y}`}
                     fill="none"
-                    stroke={actFaculty > 0.2 ? "#fde68a" : "rgba(255, 255, 255, 0.2)"}
-                    strokeWidth={actFaculty > 0.3 ? 1.8 : 1.2}
-                    strokeOpacity={0.3 + actFaculty * 0.7}
+                    stroke={actInstitutions > 0.2 ? "#a7f3d0" : "rgba(255, 255, 255, 0.2)"}
+                    strokeWidth={actInstitutions > 0.3 ? 1.8 : 1.2}
+                    strokeOpacity={0.3 + actInstitutions * 0.7}
                   />
                 ))}
               </g>
@@ -977,7 +962,7 @@ export function EditorialBulbLanding() {
 
             {/* Supporting description */}
             <p className="text-sm sm:text-base text-slate-300 max-w-lg mx-auto font-light leading-relaxed">
-              Connecting students, institutions, faculty, alumni and industry through skills,
+              Connecting students, placement cells, mentors and recruiters through skills,
               opportunities and collaboration.
             </p>
 

@@ -1,48 +1,16 @@
-import { DashboardShell } from "@/components/shared/dashboard-shell";
-import { getFacultyDashboardData } from "@/lib/api/faculty-dashboard";
-import { FacultyDashboardClient } from "@/components/faculty/dashboard/FacultyDashboardClient";
-import { CurriculumSnapshot } from "@/components/faculty/dashboard/CurriculumSnapshot";
-import { SkillGapsAndRecommendation } from "@/components/faculty/dashboard/SkillGapsAndRecommendation";
-
-// The faculty home screen. All data is collected on the server in one call;
-// rows 1–5 depend on this browser's storage and the clock, so they render in a
-// client component, while rows 6–7 are static and stay server-rendered.
-//
-// No clock is read here — "today" is decided in the browser.
-
-export default async function FacultyDashboardPage() {
-  const data = await getFacultyDashboardData();
-
+export default function MentorDashboardPage() {
   return (
-    <DashboardShell title="Faculty Dashboard">
-      {/* Only the fields rows 1–5 use are sent to the browser. */}
-      <FacultyDashboardClient
-        data={{
-          faculty: data.faculty,
-          stats: data.stats,
-          timetable: data.timetable,
-          assignments: data.assignments,
-          plannerProgress: data.plannerProgress,
-          materialsCoverage: data.materialsCoverage,
-          recentAnnouncements: data.recentAnnouncements,
-          draftAnnouncementsCount: data.draftAnnouncementsCount,
-          conversations: data.conversations,
-          attentionStudents: data.attentionStudents,
-        }}
-      />
-
-      <CurriculumSnapshot
-        subjects={data.subjectAlignment}
-        topMissingSkills={data.topMissingSkills}
-        totalPostings={data.totalPostings}
-        topicsWithoutDemand={data.stats.topicsWithoutDemandCount}
-      />
-
-      <SkillGapsAndRecommendation
-        gaps={data.studentSkillGaps}
-        cohortSize={data.stats.cohortStudentsCount}
-        recommendation={data.recommendation}
-      />
-    </DashboardShell>
+    <main className="flex min-h-screen items-center justify-center bg-canvas px-6 py-12">
+      <section className="w-full max-w-2xl rounded-2xl border border-border bg-surface p-8 text-center shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+          CampusLink Mentor
+        </p>
+        <h1 className="mt-3 text-2xl font-bold text-ink">Mentor workspace</h1>
+        <p className="mt-3 text-sm leading-6 text-ink-muted">
+          A focused workspace for supporting students through placement readiness.
+          Mentor tools will be built here.
+        </p>
+      </section>
+    </main>
   );
 }

@@ -4,7 +4,7 @@ import { useState, type ReactNode } from "react";
 
 // A tab strip for the long faculty pages, so the summary at the top stays
 // visible while the detail below is split into panels. Styling matches the
-// filter tabs on app/alumni/mentorship/page.tsx.
+// filter tabs for section-based Mentor views.
 //
 // Panels are passed in as a map keyed by tab id. The server components that
 // use this render every panel's JSX, but only the active one is mounted here.

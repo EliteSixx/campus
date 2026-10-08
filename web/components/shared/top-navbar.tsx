@@ -102,8 +102,7 @@ export function TopNavbar({
     }
     const roleFallback: Record<string, string> = {
       student: "ST",
-      alumni: "AL",
-      faculty: "FC",
+      faculty: "MN",
       institution: "IN",
       industry: "ID",
     };

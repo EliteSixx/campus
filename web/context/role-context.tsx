@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { UserProfileProvider } from "./user-profile-context";
 
-export type Role = "student" | "industry" | "institution" | "faculty" | "alumni";
+export type Role = "student" | "industry" | "institution" | "faculty";
 
 interface RoleContextValue {
   role: Role;
@@ -17,7 +17,9 @@ export function RoleProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const stored = window.localStorage.getItem("skillsync-role") as Role | null;
-    if (stored) setRoleState(stored);
+    const validRoles: Role[] = ["student", "industry", "institution", "faculty"];
+    if (stored && validRoles.includes(stored)) setRoleState(stored);
+    else if (stored) window.localStorage.setItem("skillsync-role", "student");
   }, []);
 
   const setRole = (r: Role) => {

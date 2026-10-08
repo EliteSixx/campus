@@ -10,26 +10,13 @@ import {
   Target,
   Briefcase,
   ClipboardList,
-  GraduationCap,
   Sparkles,
-  MessageSquare,
-  Share2,
   Layers,
   X,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
   FileText,
-  Users,
-  CalendarDays,
-  HelpCircle,
-  BookOpen,
-  ShieldCheck,
-  HeartHandshake,
-  Trophy,
-  GitBranch,
-  Network,
-  Award,
   Link2,
   Bell,
   PlusSquare,
@@ -278,86 +265,6 @@ export function Sidebar({
   // Collapsible groups
   const groups: NavGroup[] = [];
 
-  if (role === "alumni") {
-    groups.push({
-      label: "Alumni Console",
-      icon: HeartHandshake,
-      storageKey: "sidebar-alumni-console",
-      items: [
-        {
-          label: "Mentorship Inbox",
-          href: "/alumni/mentorship",
-          icon: MessageSquare,
-        },
-        { label: "My Mentees", href: "/alumni/mentees", icon: Users },
-        { label: "Sessions", href: "/alumni/sessions", icon: CalendarDays },
-        { label: "Guidance Hub", href: "/alumni/guidance", icon: HelpCircle },
-        { label: "Resources", href: "/alumni/resources", icon: BookOpen },
-        { label: "Referrals", href: "/alumni/referrals", icon: Share2 },
-        {
-          label: "Student Proofs",
-          href: "/alumni/proofs",
-          icon: ShieldCheck,
-        },
-      ],
-    });
-    groups.push({
-      label: "Growth Tools",
-      icon: Trophy,
-      storageKey: "sidebar-growth-tools",
-      badge: "New",
-      items: [
-        {
-          label: "Impact & Leaderboard",
-          href: "/alumni/impact",
-          icon: Trophy,
-        },
-        {
-          label: "Referral Pipeline",
-          href: "/alumni/referrals-pipeline",
-          icon: GitBranch,
-        },
-        {
-          label: "Network Graph",
-          href: "/alumni/network-graph",
-          icon: Network,
-        },
-        { label: "Badge Wall", href: "/alumni/badges", icon: Award },
-      ],
-    });
-  }
-
-  if (role === "student") {
-    groups.push({
-      label: "My College Alumni",
-      icon: GraduationCap,
-      storageKey: "sidebar-student-alumni",
-      items: [
-        {
-          label: "Alumni Directory",
-          href: "/alumni",
-          icon: GraduationCap,
-        },
-        {
-          label: "Mentorship",
-          href: "/alumni/mentorship",
-          icon: MessageSquare,
-        },
-        {
-          label: "Alumni Referrals",
-          href: "/alumni/referrals",
-          icon: Share2,
-        },
-        {
-          label: "Guidance Hub",
-          href: "/alumni/guidance",
-          icon: HelpCircle,
-        },
-        { label: "Resources", href: "/alumni/resources", icon: BookOpen },
-      ],
-    });
-  }
-
   // Common Settings Group
   groups.push({
     label: "Settings",
@@ -429,7 +336,7 @@ export function Sidebar({
                 <Sparkles className="h-3 w-3 text-accent" />
               </span>
               <span className="text-[10px] text-ink-muted uppercase tracking-widest font-bold">
-                Alumni Intelligence
+                Placement Intelligence
               </span>
             </div>
           </Link>

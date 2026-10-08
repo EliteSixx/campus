@@ -7,10 +7,9 @@ import { useRouter } from "next/navigation";
 
 const roles: { value: Role; label: string }[] = [
   { value: "student", label: "Student" },
-  { value: "alumni", label: "Alumni" },
-  { value: "industry", label: "Industry" },
-  { value: "institution", label: "Institution" },
-  { value: "faculty", label: "Faculty" },
+  { value: "industry", label: "Recruiter" },
+  { value: "institution", label: "Placement Cell" },
+  { value: "faculty", label: "Mentor" },
 ];
 
 export function RoleSwitcher({ compact = false }: { compact?: boolean }) {
