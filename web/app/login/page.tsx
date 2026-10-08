@@ -89,11 +89,11 @@ export default function LoginPage() {
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-white">
               <Layers className="h-4 w-4" />
             </div>
-            <span className="text-base font-semibold tracking-tight text-ink">The Plug</span>
+            <span className="text-base font-semibold tracking-tight text-ink">CampusLink</span>
           </Link>
 
           <div className="auth-card rounded-2xl border p-6 shadow-card">
-            <h1 className="text-lg font-semibold text-ink">Sign in to The Plug</h1>
+            <h1 className="text-lg font-semibold text-ink">Sign in to CampusLink</h1>
             <p className="mt-1 text-xs text-ink-muted">Enter your credentials or authorize with Google.</p>
 
             <div className="mt-4">
@@ -193,7 +193,7 @@ export default function LoginPage() {
             ) : (
               <div className="mt-4 space-y-4">
                 <p className="text-xs text-ink-muted">
-                  Choose a demo Google profile to sign in to The Plug:
+                  Choose a demo Google profile to sign in to CampusLink:
                 </p>
                 <div className="space-y-2">
                   <button

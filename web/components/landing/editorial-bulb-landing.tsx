@@ -25,7 +25,7 @@ const ANNOTATIONS: ComponentAnnotation[] = [
   {
     id: "industry",
     num: "01",
-    role: "INDUSTRY",
+    role: "RECRUITER",
     part: "BULB / GLASS",
     quote: "The force that creates opportunity.",
     color: "#818cf8", // indigo
@@ -173,11 +173,11 @@ export function EditorialBulbLanding() {
         {/* TOP PERSISTENT TECHNICAL HEADER (Authoritative Nav)           */}
         {/* ============================================================= */}
         <header className="fixed top-0 inset-x-0 z-40 px-4 sm:px-8 py-3.5 sm:py-4 flex items-center justify-between pointer-events-auto backdrop-blur-md bg-[#010206]/75 border-b border-white/5 transition-all">
-          {/* Top-left: "THE PLUG" */}
+          {/* Top-left: "CAMPUSLINK" */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <span className="h-1.5 w-1.5 rounded-full bg-indigo-400/90 shadow-[0_0_8px_#818cf8] animate-pulse" />
             <span className="font-mono text-xs sm:text-sm font-bold tracking-[0.25em] text-white/90 uppercase">
-              THE PLUG
+              CAMPUSLINK
             </span>
           </Link>
 

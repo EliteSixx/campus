@@ -17,7 +17,7 @@ export function LandingNav() {
           <div className="flex h-6 w-6 items-center justify-center rounded-md bg-accent text-white">
             <Layers className="h-3.5 w-3.5" />
           </div>
-          <span className="text-sm font-semibold tracking-tight text-ink">The Plug</span>
+          <span className="text-sm font-semibold tracking-tight text-ink">CampusLink</span>
         </Link>
         <nav className="hidden items-center gap-6 font-fira-code text-sm text-ink-muted md:flex">
           <a href="#how-it-works" className="transition-colors hover:text-ink">How it works</a>

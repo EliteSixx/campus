@@ -190,7 +190,7 @@ export default function LandingPage() {
 
       <footer className="border-t border-border py-8">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 text-xs text-ink-faint sm:flex-row md:px-6">
-          <span>The Plug ΓÇö Smart India Hackathon MVP</span>
+          <span>CampusLink Smart India Hackathon MVP</span>
           <span>Built with mock data ┬╖ FastAPI-ready API layer</span>
         </div>
       </footer>

@@ -71,7 +71,7 @@ const stakeholders = [
   {
     id: "industry",
     num: "02",
-    role: "INDUSTRY",
+    role: "RECRUITER",
     color: "#818cf8", // indigo
     icon: Building2,
     tagline: "Recruit talent by proven capability, not keyword-stuffed resumes.",
@@ -84,7 +84,7 @@ const stakeholders = [
   {
     id: "institutions",
     num: "03",
-    role: "INSTITUTIONS",
+    role: "PLACEMENT CELL",
     color: "#34d399", // emerald
     icon: Landmark,
     tagline: "Quantify cohort strengths and pinpoint structural curriculum weaknesses.",
@@ -238,7 +238,7 @@ export function IntegratedProductSections() {
       </div>
 
       {/* ========================================================================= */}
-      {/* SECTION 02: STAKEHOLDERS (5 CANONICAL THE PLUG ROLES)                    */}
+      {/* SECTION 02: STAKEHOLDERS (CAMPUSLINK ROLES)                              */}
       {/* ========================================================================= */}
       <div id="stakeholders" className="relative mx-auto max-w-6xl px-4 pt-20 pb-20 sm:px-6 lg:px-8">
         <Reveal className="mb-14">
@@ -376,7 +376,7 @@ export function IntegratedProductSections() {
         <div className="mx-auto flex max-w-6xl flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-slate-500">
           <div className="flex items-center gap-2">
             <Layers className="h-3.5 w-3.5 text-indigo-400" />
-            <span className="text-slate-400">THE PLUG</span>
+            <span className="text-slate-400">CAMPUSLINK</span>
             <span>{"//"} CLOSED-LOOP SKILL INTELLIGENCE ENGINE</span>
           </div>
           <div className="flex items-center gap-4 text-slate-500">

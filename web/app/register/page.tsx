@@ -370,7 +370,7 @@ export default function RegisterPage() {
             <Layers className="h-4 w-4" />
           </div>
           <div className="flex flex-col">
-            <span className="text-sm font-bold tracking-tight text-ink">The Plug</span>
+            <span className="text-sm font-bold tracking-tight text-ink">CampusLink</span>
             <span className="text-[9px] text-ink-muted uppercase tracking-wider font-bold">Onboarding</span>
           </div>
         </Link>
@@ -1150,7 +1150,7 @@ export default function RegisterPage() {
 
       {/* Footer */}
       <footer className="border-t border-border py-4 px-4 text-center text-xs text-ink-muted">
-        <span>The Plug · Smart India Hackathon MVP · Canonical 5-Role Registration</span>
+        <span>CampusLink · Smart India Hackathon MVP · Role Registration</span>
       </footer>
     </div>
   );

@@ -21,7 +21,7 @@ export default function StudentsPage() {
       <InstitutionBreadcrumb />
 
       <div className="mb-6">
-        <h2 className="text-xl font-bold text-ink">Institution Student Directory</h2>
+        <h2 className="text-xl font-bold text-ink">Placement Cell Student Directory</h2>
         <p className="mt-0.5 text-sm text-ink-muted">
           All {students.length} students across departments — search by name or registration ID, filter, sort, and export.
         </p>
