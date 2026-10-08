@@ -332,7 +332,7 @@ export function Sidebar({
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-bold tracking-tight text-ink flex items-center gap-1">
-                The Plug
+                CampusLink
                 <Sparkles className="h-3 w-3 text-accent" />
               </span>
               <span className="text-[10px] text-ink-muted uppercase tracking-widest font-bold">
@@ -385,7 +385,7 @@ export function Sidebar({
             <div className="rounded-xl bg-surface-raised p-3 text-xs border border-border">
               <div className="flex items-center gap-1.5 font-bold text-ink">
                 <Layers className="h-3.5 w-3.5 text-accent" />
-                The Plug Platform
+                CampusLink Platform
               </div>
               <p className="mt-1 text-[11px] text-ink-muted leading-snug font-medium">
                 Academia × Industry verified intelligence & collaboration.

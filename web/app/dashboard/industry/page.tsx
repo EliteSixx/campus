@@ -14,7 +14,7 @@ export default async function IndustryDashboardPage() {
   const students = await getAllStudents();
 
   return (
-    <DashboardShell title="Industry Dashboard">
+    <DashboardShell title="Recruiter Dashboard">
       <JobPostedBanner />
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-ink">Recruiter overview</h2>

@@ -17,9 +17,8 @@ const firaCode = Fira_Code({
 });
 
 export const metadata: Metadata = {
-  title: "CampusLink: Campus Placement Intelligence Platform",
-  description:
-    "CampusLink connects students, mentors, placement cells, and recruiters through placement readiness and skill intelligence.",
+  title: "CampusLink: AI-powered campus-to-corporate placement platform",
+  description: "CampusLink: AI-powered campus-to-corporate placement platform",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

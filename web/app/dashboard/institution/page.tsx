@@ -23,11 +23,11 @@ export default async function InstitutionDashboardPage() {
   const findTrend = (metric: string) => overview.trends.find((t) => t.metric === metric);
 
   return (
-    <DashboardShell title="Institution Dashboard">
+    <DashboardShell title="Placement Cell Dashboard">
       {/* Header */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-xl font-bold text-ink">Institution Command Center</h2>
+          <h2 className="text-xl font-bold text-ink">Placement Cell Command Center</h2>
           <p className="mt-0.5 text-sm text-ink-muted">
             Comprehensive intelligence across departments, skills, placements, and industry partnerships.
           </p>

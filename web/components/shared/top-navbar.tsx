@@ -130,7 +130,7 @@ export function TopNavbar({
           </div>
           <div className="hidden sm:flex flex-col">
             <span className="text-sm font-bold tracking-tight text-ink flex items-center gap-1 leading-tight">
-              The Plug
+              CampusLink
               <Sparkles className="h-3 w-3 text-accent" />
             </span>
             <span className="text-[9px] text-ink-muted uppercase tracking-wider font-bold">

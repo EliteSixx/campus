@@ -8,7 +8,7 @@ export function SiteFooter() {
           <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-indigo-400/35 bg-indigo-500/10 text-indigo-200 shadow-[0_0_18px_rgba(99,102,241,0.25)]">
             <Copyright className="h-2.75 w-2.75" />
           </span>
-          <span>2026 The Plug</span>
+          <span>2026 CampusLink</span>
         </div>
 
         <div className="flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-950/40 px-2.5 py-1.5 shadow-[0_0_18px_rgba(79,70,229,0.18)]">
@@ -17,7 +17,7 @@ export function SiteFooter() {
             className="h-4 w-4 text-indigo-200"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            aria-label="The Plug symbol"
+            aria-label="CampusLink symbol"
           >
             <rect x="7" y="11" width="6" height="4" rx="1.2" fill="currentColor" opacity="0.9" />
             <rect x="7" y="17" width="6" height="4" rx="1.2" fill="currentColor" opacity="0.9" />
@@ -31,7 +31,7 @@ export function SiteFooter() {
             <path d="M8 18.5H4.5M8 13.5H4.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
           </svg>
           <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-indigo-100 sm:text-[11px]">
-            The Plug
+            CampusLink
           </span>
         </div>
       </div>

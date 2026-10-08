@@ -52,7 +52,7 @@ export default function ObjectivesSettingsPage() {
                   : "Hiring Focus & Talent Pipeline"}
               </h3>
               <p className="text-xs text-ink-muted font-medium">
-                What The Plug is optimizing your account telemetry toward.
+                What CampusLink is optimizing your account telemetry toward.
               </p>
               
               <div className="pt-4 flex items-center gap-3">
