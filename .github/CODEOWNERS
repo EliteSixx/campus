@@ -1,54 +1,47 @@
-﻿# Replace placeholders with the mapped GitHub usernames:
-# @RUDY_GH     = @rudythetechy
-# @SAMIR_GH    = @sammy1607
-# @ISHAAN_GH   = @ishaanshukla0317-prog
-# @SINU_GH     = @subhamsinu
-# @SHIVA_GH    = @Shiba-UI 
-# @BRAJESH_GH  = @brajeshpanigrahi7-byte
 
 # Shared files are Rudy-only.
-/web/app/layout.tsx          @RUDY_GH
-/web/app/globals.css         @RUDY_GH
-/web/app/login/**            @RUDY_GH
-/web/app/register/**         @RUDY_GH
-/web/context/**              @RUDY_GH
-/web/components/shared/**    @RUDY_GH
-/web/components/ui/**        @RUDY_GH
-/web/lib/**                  @RUDY_GH
-/web/package.json            @RUDY_GH
+/web/app/layout.tsx          @rudythetechy
+/web/app/globals.css         @rudythetechy
+/web/app/login/**            @rudythetechy
+/web/app/register/**         @rudythetechy
+/web/context/**              @rudythetechy
+/web/components/shared/**    @rudythetechy
+/web/components/ui/**        @rudythetechy
+/web/lib/**                  @rudythetechy
+/web/package.json            @rudythetechy
 
 # AI service and generated API contracts.
-/ai/**                       @RUDY_GH
-/contracts/**                @RUDY_GH
+/ai/**                       @rudythetechy
+/contracts/**                @rudythetechy
 
 # Student.
-/web/app/dashboard/student/** @SAMIR_GH
-/web/app/applications/**      @SAMIR_GH
-/web/app/career-intelligence/** @SAMIR_GH
-/web/app/opportunities/**     @SAMIR_GH
-/web/app/profile/**           @SAMIR_GH
-/web/app/skill-analysis/**    @SAMIR_GH
-/web/features/samir/**        @SAMIR_GH
-/web/components/resume/**     @SAMIR_GH
+/web/app/dashboard/student/** @sammy1607 @rudythetechy
+/web/app/applications/**      @sammy1607 @rudythetechy
+/web/app/career-intelligence/** @sammy1607 @rudythetechy
+/web/app/opportunities/**     @sammy1607 @rudythetechy
+/web/app/profile/**           @sammy1607 @rudythetechy
+/web/app/skill-analysis/**    @sammy1607 @rudythetechy
+/web/features/samir/**        @sammy1607 @rudythetechy
+/web/components/resume/**     @sammy1607 @rudythetechy
 
 # Recruiter (formerly Industry).
-/web/app/dashboard/industry/** @ISHAAN_GH
+/web/app/dashboard/industry/** @ishaanshukla0317-prog @rudythetechy
 
 # Placement Cell (formerly Institution).
-/web/app/dashboard/institution/** @SINU_GH
-/web/components/institution/** @SINU_GH
-/web/data/institution/**      @SINU_GH
-/web/lib/api/institution.ts   @SINU_GH
+/web/app/dashboard/institution/** @subhamsinu @rudythetechy
+/web/components/institution/** @subhamsinu @rudythetechy
+/web/data/institution/**      @subhamsinu @rudythetechy
+/web/lib/api/institution.ts   @subhamsinu @rudythetechy
 
 # Mentor (formerly Faculty).
-/web/app/dashboard/faculty/** @SHIVA_GH
-/web/app/faculty/**           @SHIVA_GH
-/web/components/faculty/**    @SHIVA_GH
-/web/data/faculty-*.ts        @SHIVA_GH
-/web/lib/api/faculty-*.ts     @SHIVA_GH
-/web/lib/api/lecture-planner*.ts @SHIVA_GH
-/web/lib/api/timetable.ts     @SHIVA_GH
+/web/app/dashboard/faculty/** @Shiba-UI @rudythetechy
+/web/app/faculty/**           @Shiba-UI @rudythetechy
+/web/components/faculty/**    @Shiba-UI @rudythetechy
+/web/data/faculty-*.ts        @Shiba-UI @rudythetechy
+/web/lib/api/faculty-*.ts     @Shiba-UI @rudythetechy
+/web/lib/api/lecture-planner*.ts @Shiba-UI @rudythetechy
+/web/lib/api/timetable.ts     @Shiba-UI @rudythetechy
 
 # Offers, documents, joining and notifications (new feature area).
-/web/features/offers/**       @BRAJESH_GH
+/web/features/offers/**       @brajeshpanigrahi7-byte @rudythetechy
 
