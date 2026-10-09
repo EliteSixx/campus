@@ -22,4 +22,10 @@ export const demoJobs: DemoJob[] = [
     max_backlogs: 2, eligible_branches: ["CE"], required_skills: ["AutoCAD", "Structural Analysis", "Excel"],
     preferred_skills: ["Revit", "BIM"], experience_years: 0, ctc_lpa: 5.8,
   },
+  {
+    job_id: "JOB005", company: "PixelForge", role: "Frontend Developer", min_cgpa: 7.0,
+    max_backlogs: 0, eligible_branches: ["CSE", "IT", "ECE", "EEE", "ME", "CE"],
+    required_skills: ["JavaScript", "React", "Git"],
+    preferred_skills: ["Accessibility", "Responsive Design"], experience_years: 0, ctc_lpa: 7.0,
+  },
 ];
