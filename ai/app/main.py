@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app import examples as ex
+from app.services.jd_service import parse_job as parse_job_text
 from app.services.readiness_service import compute_readiness
 from app.schemas import (
     ErrorResponse,
@@ -76,7 +77,7 @@ def skill_gap(req: SkillGapRequest = example_body("skill-gap.request")):
 
 @app.post("/ai/parse-job", response_model=ParseJobResponse, responses=ERRORS, tags=["Recruiter"])
 def parse_job(req: ParseJobRequest = example_body("parse-job.request")):
-    return ex.PARSE_JOB_RESPONSE
+    return parse_job_text(req.text)
 
 
 @app.post("/ai/match", response_model=MatchResponse, responses=ERRORS, tags=["Recruiter"])

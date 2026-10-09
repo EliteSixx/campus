@@ -9,7 +9,12 @@ from app.schemas import ReadinessLevel, Student
 
 _SKILLS_PATH = Path(__file__).resolve().parents[1] / "data" / "skills.json"
 with _SKILLS_PATH.open(encoding="utf-8") as skills_file:
-    SKILLS: dict[str, dict[str, Any]] = json.load(skills_file)
+    _SKILL_ENTRIES: list[dict[str, Any]] = json.load(skills_file)
+
+SKILLS: dict[str, dict[str, Any]] = {}
+for _entry in _SKILL_ENTRIES:
+    for _name in [_entry["name"], *_entry.get("aliases", [])]:
+        SKILLS[_name.strip().casefold()] = _entry
 
 _BASE_WEIGHTS = {
     "academics": 0.25,

@@ -112,9 +112,14 @@ SKILL_GAP_RESPONSE = {
 
 PARSE_JOB_RESPONSE = {
     "job": PARSED_JOB,
-    "confidence": 0.93,
-    "warnings": ["Maximum backlogs not specified", "CTC not specified"],
-    "meta": META,
+    "confidence": 0.56,
+    "warnings": [
+        "Company not specified",
+        "Maximum backlogs not specified",
+        "Experience requirement not specified",
+        "CTC not specified",
+    ],
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 MATCH_RESULT_ST001 = {
