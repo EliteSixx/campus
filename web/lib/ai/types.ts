@@ -123,15 +123,110 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/ai/analytics/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Analytics Summary */
+        get: operations["analytics_summary_ai_analytics_summary_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AnalyticsFunnel */
+        AnalyticsFunnel: {
+            /** Applied */
+            applied: number;
+            /** Shortlisted */
+            shortlisted: number;
+            /** Interviewed */
+            interviewed: number;
+            /** Offered */
+            offered: number;
+            /** Accepted */
+            accepted: number;
+        };
+        /** AnalyticsSummary */
+        AnalyticsSummary: {
+            totals: components["schemas"]["AnalyticsTotals"];
+            /** Branch Conversion */
+            branch_conversion: components["schemas"]["BranchConversion"][];
+            /** Skill Conversion */
+            skill_conversion: components["schemas"]["SkillConversion"][];
+            package_trends: components["schemas"]["PackageTrends"];
+            /** Recruiter Pipeline */
+            recruiter_pipeline: components["schemas"]["RecruiterPipeline"][];
+            funnel: components["schemas"]["AnalyticsFunnel"];
+            at_risk?: components["schemas"]["AtRiskCounts"] | null;
+            /** Data Source */
+            data_source: string;
+        };
+        /** AnalyticsTotals */
+        AnalyticsTotals: {
+            /** Students */
+            students: number;
+            /** Placement Ready */
+            placement_ready: number;
+            /**
+             * Jobs With Applications
+             * @description Distinct jobs that received at least one application.
+             */
+            jobs_with_applications: number;
+            /** Applications */
+            applications: number;
+            /** Shortlisted */
+            shortlisted: number;
+            /** Interviewed */
+            interviewed: number;
+            /** Offers Made */
+            offers_made: number;
+            /** Offers Accepted */
+            offers_accepted: number;
+            /**
+             * Offers Not Accepted
+             * @description Offers recorded as not accepted; the synthetic data has no pending state.
+             */
+            offers_not_accepted: number;
+            /** Placed */
+            placed: number;
+            /** Unplaced */
+            unplaced: number;
+        };
+        /** AtRiskCounts */
+        AtRiskCounts: {
+            /** Low */
+            low: number;
+            /** Medium */
+            medium: number;
+            /** High */
+            high: number;
+        };
         /**
          * Branch
          * @enum {string}
          */
         Branch: "CSE" | "IT" | "ECE" | "EEE" | "ME" | "CE" | "OTHER";
+        /** BranchConversion */
+        BranchConversion: {
+            branch: components["schemas"]["Branch"];
+            /** Students */
+            students: number;
+            /** Placed */
+            placed: number;
+            /** Conversion Pct */
+            conversion_pct: number;
+        };
         /** ErrorBody */
         ErrorBody: {
             /**
@@ -232,6 +327,40 @@ export interface components {
             /** Skill */
             skill: string;
             priority: components["schemas"]["Priority"];
+        };
+        /** PackageBranchTrend */
+        PackageBranchTrend: {
+            branch: components["schemas"]["Branch"];
+            /** Average Ctc Lpa */
+            average_ctc_lpa: number;
+            /** Highest Ctc Lpa */
+            highest_ctc_lpa: number;
+        };
+        /** PackageCompanyTrend */
+        PackageCompanyTrend: {
+            /** Company */
+            company: string;
+            /** Average Ctc Lpa */
+            average_ctc_lpa: number;
+            /** Offers */
+            offers: number;
+        };
+        /** PackageOverallTrend */
+        PackageOverallTrend: {
+            /** Average Ctc Lpa */
+            average_ctc_lpa: number;
+            /** Median Ctc Lpa */
+            median_ctc_lpa: number;
+            /** Highest Ctc Lpa */
+            highest_ctc_lpa: number;
+        };
+        /** PackageTrends */
+        PackageTrends: {
+            overall: components["schemas"]["PackageOverallTrend"];
+            /** Per Branch */
+            per_branch: components["schemas"]["PackageBranchTrend"][];
+            /** Per Company */
+            per_company: components["schemas"]["PackageCompanyTrend"][];
         };
         /** ParseJobRequest */
         ParseJobRequest: {
@@ -386,6 +515,27 @@ export interface components {
          * @enum {string}
          */
         ReasonType: "PASS" | "WARN" | "FAIL";
+        /** RecruiterPipeline */
+        RecruiterPipeline: {
+            /** Company */
+            company: string;
+            /** Jobs */
+            jobs: number;
+            /** Applications */
+            applications: number;
+            /** Shortlisted */
+            shortlisted: number;
+            /** Interviewed */
+            interviewed: number;
+            /** Offers */
+            offers: number;
+            /** Accepted */
+            accepted: number;
+            /** Repeat Hiring */
+            repeat_hiring: boolean;
+            /** Conversion Pct */
+            conversion_pct: number;
+        };
         /**
          * RiskLevel
          * @enum {string}
@@ -405,6 +555,19 @@ export interface components {
              * @description Weights in one breakdown sum to 1.
              */
             weight: number;
+        };
+        /** SkillConversion */
+        SkillConversion: {
+            /** Skill */
+            skill: string;
+            /** Students With Skill */
+            students_with_skill: number;
+            /** Placed With Skill */
+            placed_with_skill: number;
+            /** Conversion Pct */
+            conversion_pct: number;
+            /** Demand In Jobs */
+            demand_in_jobs: number;
         };
         /** SkillGapRequest */
         SkillGapRequest: {
@@ -701,6 +864,35 @@ export interface operations {
             };
             /** @description Invalid input */
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ErrorResponse"];
+                };
+            };
+        };
+    };
+    analytics_summary_ai_analytics_summary_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AnalyticsSummary"];
+                };
+            };
+            /** @description Synthetic analytics data unavailable */
+            503: {
                 headers: {
                     [name: string]: unknown;
                 };
