@@ -1,4 +1,5 @@
 import copy
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -26,9 +27,11 @@ def test_health():
 def test_example_request_returns_valid_stub_response(path, name):
     r = client.post(path, json=ex.EXAMPLES[f"{name}.request"])
     assert r.status_code == 200, r.text
-    assert r.json()["meta"]["stub"] is (
-        path not in {"/ai/readiness", "/ai/parse-job", "/ai/skill-gap", "/ai/match", "/ai/rank"}
-    )
+    if path == "/ai/predict-placement":
+        expected_stub = not (Path(__file__).resolve().parents[1] / "app" / "models" / "risk_model.joblib").exists()
+    else:
+        expected_stub = False
+    assert r.json()["meta"]["stub"] is expected_stub
 
 
 def test_ids_are_echoed():
