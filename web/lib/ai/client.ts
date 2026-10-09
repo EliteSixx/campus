@@ -12,6 +12,7 @@ export type RankRequest = components["schemas"]["RankRequest"];
 export type RankResponse = components["schemas"]["RankResponse"];
 export type PredictPlacementRequest = components["schemas"]["PredictPlacementRequest"];
 export type PredictPlacementResponse = components["schemas"]["PredictPlacementResponse"];
+export type AnalyticsSummary = components["schemas"]["AnalyticsSummary"];
 
 export class AiError extends Error {
   readonly code: string;
@@ -87,6 +88,42 @@ async function post<Request, Response>(path: string, request: Request): Promise<
   );
 }
 
+async function get<Response>(path: string): Promise<Response> {
+  let response: globalThis.Response;
+
+  try {
+    response = await fetch(`${baseUrl}${path}`, { method: "GET" });
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unable to reach the AI service";
+    throw new AiError("NETWORK_ERROR", message, null, null);
+  }
+
+  if (response.ok) return (await response.json()) as Response;
+
+  let body: unknown;
+  try {
+    body = await response.json();
+  } catch {
+    body = null;
+  }
+
+  if (isErrorResponse(body)) {
+    throw new AiError(
+      body.error.code,
+      body.error.message,
+      body.error.field ?? null,
+      response.status,
+    );
+  }
+
+  throw new AiError(
+    "HTTP_ERROR",
+    response.statusText || `AI service request failed with status ${response.status}`,
+    null,
+    response.status,
+  );
+}
+
 export const readiness = (request: ReadinessRequest) =>
   post<ReadinessRequest, ReadinessResponse>("/ai/readiness", request);
 
@@ -103,3 +140,5 @@ export const rank = (request: RankRequest) => post<RankRequest, RankResponse>("/
 
 export const predictPlacement = (request: PredictPlacementRequest) =>
   post<PredictPlacementRequest, PredictPlacementResponse>("/ai/predict-placement", request);
+
+export const analyticsSummary = () => get<AnalyticsSummary>("/ai/analytics/summary");

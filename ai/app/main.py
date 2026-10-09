@@ -8,12 +8,14 @@ from fastapi.responses import JSONResponse
 
 from app import examples as ex
 from app.services.jd_service import parse_job as parse_job_text
+from app.services.analytics_service import AnalyticsDataUnavailable, compute_analytics_summary
 from app.services.matching_service import match as match_job
 from app.services.matching_service import rank as rank_students
 from app.services.readiness_service import compute_readiness
 from app.services.risk_service import predict_placement as compute_placement_risk
 from app.services.skill_service import skill_gap as compute_skill_gap
 from app.schemas import (
+    AnalyticsSummary,
     ErrorResponse,
     MatchRequest,
     MatchResponse,
@@ -105,3 +107,26 @@ def rank(req: RankRequest = example_body("rank.request")):
 )
 def predict_placement(req: PredictPlacementRequest = example_body("predict-placement.request")):
     return compute_placement_risk(req.student, req.activity)
+
+
+@app.get(
+    "/ai/analytics/summary",
+    response_model=AnalyticsSummary,
+    response_model_exclude_none=True,
+    responses={503: {"model": ErrorResponse, "description": "Synthetic analytics data unavailable"}},
+    tags=["Placement Cell"],
+)
+def analytics_summary():
+    try:
+        return compute_analytics_summary()
+    except AnalyticsDataUnavailable as exc:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "error": {
+                    "code": "ANALYTICS_DATA_UNAVAILABLE",
+                    "message": str(exc),
+                    "field": None,
+                }
+            },
+        )

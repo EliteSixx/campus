@@ -245,3 +245,96 @@ class PredictPlacementResponse(BaseModel):
     reasons: list[str]
     interventions: list[str]
     meta: Meta
+
+
+# ---------------------------------------------------------------------------
+# GET /ai/analytics/summary
+# ---------------------------------------------------------------------------
+class AnalyticsTotals(BaseModel):
+    students: int = Field(ge=0)
+    placement_ready: int = Field(ge=0)
+    jobs_with_applications: int = Field(ge=0, description="Distinct jobs that received at least one application.")
+    applications: int = Field(ge=0)
+    shortlisted: int = Field(ge=0)
+    interviewed: int = Field(ge=0)
+    offers_made: int = Field(ge=0)
+    offers_accepted: int = Field(ge=0)
+    offers_not_accepted: int = Field(ge=0, description="Offers recorded as not accepted; the synthetic data has no pending state.")
+    placed: int = Field(ge=0)
+    unplaced: int = Field(ge=0)
+
+
+class BranchConversion(BaseModel):
+    branch: Branch
+    students: int = Field(ge=0)
+    placed: int = Field(ge=0)
+    conversion_pct: float = Field(ge=0, le=100)
+
+
+class SkillConversion(BaseModel):
+    skill: str
+    students_with_skill: int = Field(ge=0)
+    placed_with_skill: int = Field(ge=0)
+    conversion_pct: float = Field(ge=0, le=100)
+    demand_in_jobs: int = Field(ge=0)
+
+
+class PackageOverallTrend(BaseModel):
+    average_ctc_lpa: float = Field(ge=0)
+    median_ctc_lpa: float = Field(ge=0)
+    highest_ctc_lpa: float = Field(ge=0)
+
+
+class PackageBranchTrend(BaseModel):
+    branch: Branch
+    average_ctc_lpa: float = Field(ge=0)
+    highest_ctc_lpa: float = Field(ge=0)
+
+
+class PackageCompanyTrend(BaseModel):
+    company: str
+    average_ctc_lpa: float = Field(ge=0)
+    offers: int = Field(ge=0)
+
+
+class PackageTrends(BaseModel):
+    overall: PackageOverallTrend
+    per_branch: list[PackageBranchTrend]
+    per_company: list[PackageCompanyTrend]
+
+
+class RecruiterPipeline(BaseModel):
+    company: str
+    jobs: int = Field(ge=0)
+    applications: int = Field(ge=0)
+    shortlisted: int = Field(ge=0)
+    interviewed: int = Field(ge=0)
+    offers: int = Field(ge=0)
+    accepted: int = Field(ge=0)
+    repeat_hiring: bool
+    conversion_pct: float = Field(ge=0, le=100)
+
+
+class AnalyticsFunnel(BaseModel):
+    applied: int = Field(ge=0)
+    shortlisted: int = Field(ge=0)
+    interviewed: int = Field(ge=0)
+    offered: int = Field(ge=0)
+    accepted: int = Field(ge=0)
+
+
+class AtRiskCounts(BaseModel):
+    low: int = Field(ge=0)
+    medium: int = Field(ge=0)
+    high: int = Field(ge=0)
+
+
+class AnalyticsSummary(BaseModel):
+    totals: AnalyticsTotals
+    branch_conversion: list[BranchConversion]
+    skill_conversion: list[SkillConversion]
+    package_trends: PackageTrends
+    recruiter_pipeline: list[RecruiterPipeline]
+    funnel: AnalyticsFunnel
+    at_risk: Optional[AtRiskCounts] = None
+    data_source: str
