@@ -107,61 +107,75 @@ SKILL_GAP_RESPONSE = {
         {"skill": "Kubernetes", "priority": "LOW"},
     ],
     "coverage_pct": 67,
-    "meta": META,
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 PARSE_JOB_RESPONSE = {
     "job": PARSED_JOB,
-    "confidence": 0.93,
-    "warnings": ["Maximum backlogs not specified", "CTC not specified"],
-    "meta": META,
+    "confidence": 0.56,
+    "warnings": [
+        "Company not specified",
+        "Maximum backlogs not specified",
+        "Experience requirement not specified",
+        "CTC not specified",
+    ],
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 MATCH_RESULT_ST001 = {
     "student_id": "ST001",
     "job_id": "JOB001",
-    "match_score": 91,
+    "match_score": 86,
     "eligible": True,
     "matched_skills": ["Python", "SQL", "REST APIs", "Docker"],
     "skill_gaps": ["AWS"],
     "reasons": [
         {"type": "PASS", "text": "CGPA 8.2 meets the minimum of 7.0"},
-        {"type": "PASS", "text": "No active backlogs"},
+        {"type": "PASS", "text": "0 active backlogs meet the maximum of 0"},
         {"type": "PASS", "text": "CSE is an eligible branch"},
         {"type": "PASS", "text": "Matches 4 of 4 required skills"},
-        {"type": "PASS", "text": "Relevant backend project: Library API"},
         {"type": "WARN", "text": "Missing preferred skill: AWS"},
+        {"type": "PASS", "text": "Project technology overlaps 75% with required skills"},
+        {"type": "PASS", "text": "Placement readiness score is 74"},
+        {"type": "PASS", "text": "Assessment average from 2 completed assessments is 68.5"},
     ],
     "breakdown": [
-        {"name": "skills", "score": 96, "weight": 0.5},
-        {"name": "projects", "score": 92, "weight": 0.2},
-        {"name": "readiness", "score": 82, "weight": 0.2},
-        {"name": "assessments", "score": 85, "weight": 0.1},
+        {"name": "skills", "score": 98.0, "weight": 0.5},
+        {"name": "projects", "score": 75.0, "weight": 0.2},
+        {"name": "readiness", "score": 74.0, "weight": 0.2},
+        {"name": "assessments", "score": 68.5, "weight": 0.1},
     ],
 }
 
 MATCH_RESULT_ST104 = {
     "student_id": "ST104",
     "job_id": "JOB001",
-    "match_score": 27,
+    "match_score": 22,
     "eligible": False,
     "matched_skills": ["Python"],
     "skill_gaps": ["SQL", "REST APIs", "Docker", "AWS"],
     "reasons": [
         {"type": "FAIL", "text": "CGPA 6.1 is below the minimum of 7.0"},
-        {"type": "FAIL", "text": "2 active backlogs; maximum allowed is 0"},
+        {"type": "FAIL", "text": "2 active backlogs exceed the maximum of 0"},
         {"type": "PASS", "text": "CSE is an eligible branch"},
-        {"type": "FAIL", "text": "Matches 1 of 4 required skills"},
+        {"type": "WARN", "text": "Matches 1 of 4 required skills"},
+        {"type": "WARN", "text": "Missing required skill: SQL"},
+        {"type": "WARN", "text": "Missing required skill: REST APIs"},
+        {"type": "WARN", "text": "Missing required skill: Docker"},
+        {"type": "WARN", "text": "Missing preferred skill: AWS"},
+        {"type": "WARN", "text": "No project technology overlaps the required skills"},
+        {"type": "WARN", "text": "Placement readiness score is 30"},
+        {"type": "WARN", "text": "Assessment average from 3 completed assessments is 44.3"},
     ],
     "breakdown": [
-        {"name": "skills", "score": 25, "weight": 0.5},
-        {"name": "projects", "score": 0, "weight": 0.2},
-        {"name": "readiness", "score": 48, "weight": 0.2},
-        {"name": "assessments", "score": 44, "weight": 0.1},
+        {"name": "skills", "score": 23.0, "weight": 0.5},
+        {"name": "projects", "score": 0.0, "weight": 0.2},
+        {"name": "readiness", "score": 30.0, "weight": 0.2},
+        {"name": "assessments", "score": 44.333333333333336, "weight": 0.1},
     ],
 }
 
-MATCH_RESPONSE = {**MATCH_RESULT_ST001, "meta": META}
+MATCH_RESPONSE = {**MATCH_RESULT_ST001, "meta": {"engine_version": "0.2.0", "stub": False}}
 
 RANK_RESPONSE = {
     "job_id": "JOB001",
@@ -169,24 +183,24 @@ RANK_RESPONSE = {
         {"rank": 1, **MATCH_RESULT_ST001},
         {"rank": 2, **MATCH_RESULT_ST104},
     ],
-    "meta": META,
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 PREDICT_PLACEMENT_RESPONSE = {
     "student_id": "ST104",
     "risk": "HIGH",
-    "probability_unplaced": 0.82,
+    "probability_unplaced": 0.9722,
     "reasons": [
-        "Low application-to-shortlist conversion (0 of 6)",
-        "Major target-role skill gaps (SQL, REST APIs, Docker)",
-        "Below-benchmark mock interview score (38)",
+        "Attended 0 interviews after applying to 6 drives.",
+        "Readiness score is 30, below the placed-student mean of 76.2.",
+        "Communication score is 50, below the placed-student mean of 73.5.",
     ],
     "interventions": [
-        "3-week backend skills training",
-        "2 mock interviews",
-        "Assign a faculty mentor",
+        "Schedule interview practice and attend every confirmed interview.",
+        "Create a weekly plan covering core skills, projects, and interview preparation.",
+        "Practice structured answers and request feedback from a communication mentor.",
     ],
-    "meta": META,
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 ERROR_EXAMPLE = {

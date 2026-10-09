@@ -1,0 +1,61 @@
+job_id,company,role,min_cgpa,max_backlogs,eligible_branches,required_skills,preferred_skills,ctc_lpa
+JOB001,Ionix,Haskell Engineer,6.1,0,"[""CSE""]","[""Haskell"", ""Kubernetes"", ""Apache Kafka""]","[""Computer Networks"", ""Prompt Engineering"", ""HTML""]",7.6
+JOB002,BluePeak,Jenkins Developer,7.7,0,"[""IT""]","[""Jenkins"", ""Prisma"", ""REST APIs"", ""Git"", ""System Design""]","[""MongoDB"", ""Amazon RDS"", ""Kotlin""]",15.0
+JOB003,Aster Systems,IoT Analyst,7.5,2,"[""ECE""]","[""IoT"", ""Arduino"", ""Oracle Database""]","[""Apache Kafka"", ""SolidWorks"", ""Supabase""]",10.6
+JOB004,BluePeak,IoT Engineer,6.3,2,"[""EEE""]","[""IoT"", ""User Experience Design"", ""Electrical Design"", ""Generative AI"", ""MATLAB"", ""WebSockets""]","[""AutoCAD"", ""Elasticsearch"", ""Excel""]",13.5
+JOB005,Cedar Labs,Verilog Developer,7.4,0,"[""ME""]","[""Verilog"", ""Redis"", ""Thermodynamics""]","[""Nginx"", ""JavaScript"", ""Apache Spark""]",8.1
+JOB006,Cedar Labs,AutoCAD Analyst,7.8,0,"[""CE""]","[""AutoCAD"", ""Excel"", ""STAAD.Pro"", ""Communication""]","[""Data Visualization"", ""Ruby"", ""Cloudflare""]",11.7
+JOB007,Dawn Technologies,JavaScript Engineer,7.1,0,"[""CSE""]","[""JavaScript"", ""C++"", ""Docker"", ""Jira""]","[""Playwright"", ""Haskell"", ""Bash""]",13.1
+JOB008,Granite Digital,Git Developer,6.1,2,"[""IT""]","[""Git"", ""CSS"", ""Apache Maven""]","[""Data Structures"", ""Workday"", ""Firebase""]",16.5
+JOB009,Cedar Labs,Verilog Analyst,6.8,1,"[""ECE"", ""EEE""]","[""Verilog"", ""PowerShell"", ""Arduino"", ""Scrum"", ""Java"", ""Figma Design""]","[""SQL"", ""Salesforce"", ""Hugging Face""]",4.0
+JOB010,Dawn Technologies,PLC Engineer,6.1,0,"[""EEE""]","[""PLC"", ""Python"", ""Arduino"", ""Power Systems"", ""C""]","[""Google Analytics"", ""OpenAI API"", ""Grafana""]",3.5
+JOB011,Ionix,Python Developer,7.9,1,"[""ME""]","[""Python"", ""GitLab CI/CD"", ""SolidWorks"", ""CI/CD"", ""MySQL""]","[""Prompt Engineering"", ""Oracle Database"", ""Data Mining""]",6.4
+JOB012,Eastwind,STAAD.Pro Analyst,6.9,0,"[""CE""]","[""STAAD.Pro"", ""dbt"", ""Civil 3D"", ""HTML"", ""BIM""]","[""Scikit-learn"", ""Node.js"", ""Machine Learning""]",7.4
+JOB013,Juniper Group,Scikit-learn Engineer,6.0,0,"[""CSE""]","[""Scikit-learn"", ""REST APIs"", ""SQL"", ""Java"", ""Data Structures""]","[""Microservices"", ""Figma"", ""Selenium""]",4.9
+JOB014,Juniper Group,Operating Systems Developer,7.8,2,"[""IT"", ""ECE""]","[""Operating Systems"", ""MongoDB"", ""Java""]","[""Cloudflare"", ""Data Analysis"", ""Go""]",10.2
+JOB015,FinchWorks,Data Mining Analyst,6.8,2,"[""ECE"", ""EEE""]","[""Data Mining"", ""Deep Learning"", ""IoT"", ""Verilog""]","[""Webpack"", ""MATLAB Simulink"", ""Helm""]",5.9
+JOB016,Eastwind,Arduino Engineer,7.6,2,"[""EEE""]","[""Arduino"", ""Scala"", ""Elasticsearch"", ""Python"", ""Amazon RDS""]","[""Gin"", ""Algorithms"", ""gRPC""]",16.6
+JOB017,Eastwind,SolidWorks Developer,6.9,1,"[""ME""]","[""SolidWorks"", ""ANSYS"", ""AutoCAD""]","[""Ansible"", ""Power BI"", ""Statistics""]",16.8
+JOB018,Ionix,AutoCAD Analyst,6.2,2,"[""CE""]","[""AutoCAD"", ""Jenkins"", ""Project Management""]","[""WebSockets"", ""Snowflake"", ""Git""]",9.9
+JOB019,Dawn Technologies,SQL Engineer,7.3,0,"[""CSE""]","[""SQL"", ""Ansible"", ""React""]","[""Haskell"", ""Databricks"", ""Snowflake""]",14.3
+JOB020,Aster Systems,Git Developer,6.7,1,"[""IT""]","[""Git"", ""Amazon ECS"", ""Java"", ""JavaScript"", ""Apache HTTP Server""]","[""GraphQL"", ""Nginx"", ""Angular""]",11.5
+JOB021,FinchWorks,MLOps Analyst,6.9,0,"[""ECE""]","[""MLOps"", ""VLSI"", ""Vue.js""]","[""Terraform"", ""Unit Testing"", ""Data Mining""]",4.4
+JOB022,BluePeak,NestJS Engineer,7.3,1,"[""EEE""]","[""NestJS"", ""Electrical Design"", ""ASP.NET Core"", ""MATLAB"", ""IoT""]","[""WebSockets"", ""TensorFlow"", ""Git""]",17.8
+JOB023,BluePeak,AutoCAD Developer,6.5,0,"[""ME""]","[""AutoCAD"", ""ANSYS"", ""Haskell""]","[""Data Visualization"", ""jQuery"", ""Databricks""]",8.3
+JOB024,Dawn Technologies,Penetration Testing Analyst,7.6,0,"[""CE"", ""CSE""]","[""Penetration Testing"", ""Product Management"", ""Revit""]","[""Statistics"", ""Assembly"", ""Internet of Things""]",8.4
+JOB025,BluePeak,Python Engineer,7.2,0,"[""CSE""]","[""Python"", ""Data Structures"", ""Helm"", ""DynamoDB"", ""Amazon ECS""]","[""Hugging Face"", ""Google Analytics"", ""Scala""]",8.3
+JOB026,Harbor Tech,Git Developer,7.6,2,"[""IT""]","[""Git"", ""Python"", ""Pandas"", ""TensorFlow"", ""JavaScript""]","[""Hadoop"", ""GraphQL"", ""Object-Oriented Programming""]",12.8
+JOB027,Harbor Tech,Terraform Analyst,6.4,1,"[""ECE"", ""EEE""]","[""Terraform"", ""Pytest"", ""VLSI"", ""Cybersecurity"", ""Amazon EKS""]","[""GitHub Actions"", ""Elasticsearch"", ""Elixir""]",10.6
+JOB028,Harbor Tech,Solidity Engineer,6.8,0,"[""EEE""]","[""Solidity"", ""PLC"", ""IoT"", ""MATLAB"", ""GitHub Actions"", ""Google BigQuery""]","[""Apache Spark"", ""TypeScript""]",11.9
+JOB029,Cedar Labs,Manufacturing Developer,7.7,2,"[""ME""]","[""Manufacturing"", ""Thermodynamics"", ""Pytest"", ""JWT"", ""AutoCAD""]","[""PowerShell"", ""Raspberry Pi"", ""Django""]",9.9
+JOB030,Granite Digital,Data Mining Analyst,7.5,0,"[""CE""]","[""Data Mining"", ""Structural Analysis"", ""Surveying"", ""Netlify""]","[""MATLAB Simulink"", ""Amazon S3"", ""Go""]",4.4
+JOB031,Eastwind,React Engineer,6.9,0,"[""CSE""]","[""React"", ""REST APIs"", ""Data Structures"", ""Git""]","[""Snowflake"", ""Statistics"", ""GitLab CI/CD""]",4.9
+JOB032,Dawn Technologies,Python Developer,7.1,0,"[""IT""]","[""Python"", ""Perl"", ""Google Cloud Platform""]","[""Operating Systems"", ""Webpack"", ""Django""]",11.4
+JOB033,Cedar Labs,Linux Analyst,6.6,2,"[""ECE"", ""EEE""]","[""Linux"", ""Python"", ""Computer Vision""]","[""Verilog"", ""Vue.js"", ""React""]",6.2
+JOB034,Ionix,Python Engineer,6.2,2,"[""EEE"", ""ME""]","[""Python"", ""SQLite"", ""CSS"", ""MATLAB"", ""Power Systems"", ""Haskell""]","[""SQL Server"", ""VHDL"", ""Machine Learning""]",14.6
+JOB035,Eastwind,Project Management Developer,7.2,2,"[""ME""]","[""Project Management"", ""Thermodynamics"", ""Manufacturing"", ""MATLAB""]","[""Laravel"", ""Amazon ECS"", ""Jenkins""]",13.5
+JOB036,FinchWorks,SolidWorks Analyst,7.4,0,"[""CE""]","[""SolidWorks"", ""STAAD.Pro"", ""Structural Analysis"", ""Deep Learning"", ""Project Management"", ""Dart""]","[""TCP/IP"", ""Tableau"", ""Assembly""]",6.0
+JOB037,Harbor Tech,C++ Engineer,6.6,0,"[""CSE""]","[""C++"", ""AWS"", ""GitHub Actions"", ""Amazon RDS"", ""MySQL""]","[""C"", ""Bash"", ""Object-Oriented Programming""]",9.5
+JOB038,Ionix,ETL Developer,7.0,0,"[""IT""]","[""ETL"", ""SQL"", ""Verilog"", ""Internet of Things""]","[""Penetration Testing"", ""Linux"", ""Julia""]",12.7
+JOB039,Dawn Technologies,Amazon Redshift Analyst,7.2,0,"[""ECE"", ""EEE""]","[""Amazon Redshift"", ""Agile"", ""MATLAB"", ""Linux""]","[""Terraform"", ""Scrum"", ""Statistics""]",9.6
+JOB040,Granite Digital,PLC Engineer,7.0,0,"[""EEE""]","[""PLC"", ""Embedded Systems"", ""Prisma"", ""Python"", ""Next.js"", ""Jest""]","[""PowerShell"", ""Neo4j"", ""REST APIs""]",11.9
+JOB041,Granite Digital,Prompt Engineering Developer,6.3,2,"[""ME""]","[""Prompt Engineering"", ""Workday"", ""SolidWorks"", ""Express.js"", ""Manufacturing""]","[""React"", ""User Interface Design"", ""MySQL""]",8.3
+JOB042,Dawn Technologies,Civil 3D Analyst,7.2,1,"[""CE""]","[""Civil 3D"", ""User Experience Design"", ""Azure"", ""Selenium""]","[""SQL"", ""Workday"", ""GitLab CI/CD""]",13.7
+JOB043,Dawn Technologies,Scikit-learn Engineer,7.0,1,"[""CSE""]","[""Scikit-learn"", ""Ansible"", ""Git"", ""Docker"", ""User Experience Design"", ""GitHub Actions""]","[""Networking"", ""Prisma"", ""MATLAB Simulink""]",4.7
+JOB044,Ionix,Amazon EKS Developer,7.9,0,"[""IT""]","[""Amazon EKS"", ""Git"", ""Linux"", ""Data Analysis""]","[""Neo4j"", ""Jenkins"", ""Kubernetes""]",8.0
+JOB045,Cedar Labs,VLSI Analyst,6.2,2,"[""ECE"", ""EEE""]","[""VLSI"", ""Product Management"", ""Elixir""]","[""Docker Compose"", ""Playwright"", ""Docker""]",6.0
+JOB046,Dawn Technologies,Python Engineer,7.0,0,"[""EEE""]","[""Python"", ""Electrical Design"", ""Databricks"", ""C"", ""PLC"", ""OAuth""]","[""Object-Oriented Programming"", ""HTML"", ""RabbitMQ""]",9.8
+JOB047,Dawn Technologies,AutoCAD Developer,6.3,1,"[""ME""]","[""AutoCAD"", ""C"", ""Embedded Systems"", ""MATLAB"", ""JWT"", ""Generative AI""]","[""SQLite"", ""Arduino"", ""Communication""]",13.3
+JOB048,Cedar Labs,Ruby on Rails Analyst,7.1,0,"[""CE""]","[""Ruby on Rails"", ""Microsoft Office"", ""AWS"", ""Keras"", ""Excel""]","[""Generative AI"", ""Redis"", ""Pytest""]",13.2
+JOB049,Granite Digital,Data Structures Engineer,7.8,0,"[""CSE""]","[""Data Structures"", ""Java"", ""Computer-Aided Design"", ""Python"", ""Apache Airflow""]","[""Helm"", ""Large Language Models"", ""Cybersecurity""]",6.3
+JOB050,Granite Digital,Gin Developer,7.7,2,"[""IT""]","[""Gin"", ""Generative AI"", ""Elixir"", ""SQL"", ""TypeScript"", ""Computer Vision""]","[""Redis"", ""Elasticsearch""]",8.3
+JOB051,Eastwind,Scikit-learn Analyst,7.2,2,"[""ECE""]","[""Scikit-learn"", ""Verilog"", ""Arduino""]","[""Embedded Systems"", ""OAuth"", ""PowerShell""]",9.0
+JOB052,Granite Digital,FastAPI Engineer,8.0,1,"[""EEE""]","[""FastAPI"", ""PLC"", ""User Experience Design""]","[""Playwright"", ""TypeScript"", ""SQL Server""]",7.3
+JOB053,Cedar Labs,MATLAB Developer,6.2,0,"[""ME""]","[""MATLAB"", ""AutoCAD"", ""Excel"", ""Tailwind CSS""]","[""Cassandra"", ""Azure"", ""Verilog""]",15.8
+JOB054,Dawn Technologies,Vite Analyst,7.9,1,"[""CE""]","[""Vite"", ""Assembly"", ""HTML"", ""Civil 3D"", ""STAAD.Pro""]","[""Git"", ""Large Language Models"", ""Cypress""]",11.1
+JOB055,Harbor Tech,Docker Engineer,7.2,0,"[""CSE""]","[""Docker"", ""PostgreSQL"", ""Kubernetes""]","[""Cloudflare"", ""Amazon S3"", ""Large Language Models""]",13.9
+JOB056,FinchWorks,Linux Developer,6.5,0,"[""IT"", ""ECE""]","[""Linux"", ""CI/CD"", ""Gradle"", ""AWS Lambda"", ""JavaScript"", ""React""]","[""HTML"", ""Webpack"", ""Apache Spark""]",11.3
+JOB057,Ionix,VHDL Analyst,7.0,2,"[""ECE""]","[""VHDL"", ""Swift"", ""Linux"", ""MATLAB"", ""Arduino"", ""Microsoft Office""]","[""LangChain"", ""Amazon RDS"", ""Flask""]",3.6
+JOB058,Eastwind,Computer Networks Engineer,6.9,0,"[""EEE""]","[""Computer Networks"", ""MATLAB"", ""Amazon EC2"", ""Application Security""]","[""Verilog"", ""ASP.NET Core"", ""Ruby on Rails""]",10.1
+JOB059,FinchWorks,Project Management Developer,8.0,0,"[""ME""]","[""Project Management"", ""User Interface Design"", ""CATIA"", ""Docker"", ""Python""]","[""Express.js"", ""Git"", ""Cloudflare""]",17.0
+JOB060,Harbor Tech,HTML Analyst,6.7,0,"[""CE""]","[""HTML"", ""STAAD.Pro"", ""AutoCAD"", ""Supabase"", ""Excel"", ""BIM""]","[""Amazon EC2"", ""Vercel"", ""Python""]",13.0
