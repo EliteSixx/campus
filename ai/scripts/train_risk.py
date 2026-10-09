@@ -92,6 +92,7 @@ def main():
     scales = {name: float(max(np.nanstd(np.asarray(X[:, i], dtype=float)), 1.0)) for i, name in enumerate(FEATURE_NAMES)}
     means_unplaced = np.nanmean(X[y == 1].astype(float), axis=0)
     means_placed = np.nanmean(X[y == 0].astype(float), axis=0)
+    placed_means = {name: float(means_placed[i]) for i, name in enumerate(FEATURE_NAMES)}
     if selected_name == "logistic_regression":
         estimator = selected.named_steps["logisticregression"]
         importances = np.abs(estimator.coef_[0])
@@ -103,7 +104,8 @@ def main():
     bundle = {"pipeline": selected, "feature_names": FEATURE_NAMES,
               "feature_importances": dict(zip(FEATURE_NAMES, map(float, importances))),
               "unplaced_directions": dict(zip(FEATURE_NAMES, map(float, directions))),
-              "feature_medians": medians, "feature_scales": scales}
+              "feature_medians": medians, "placed_feature_means": placed_means,
+              "feature_scales": scales}
     joblib.dump(bundle, model_dir / "risk_model.joblib")
     (model_dir / "risk_metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
     readme = ROOT / "data" / "README.md"

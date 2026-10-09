@@ -34,3 +34,14 @@ def test_response_matches_schema():
     parsed = PredictPlacementResponse.model_validate(response.json())
     assert parsed.student_id == "ST104"
     assert parsed.risk in {"LOW", "MEDIUM", "HIGH"}
+
+
+def test_reasons_are_specific_and_numeric():
+    from app import examples as ex
+
+    response = client.post("/ai/predict-placement", json=ex.EXAMPLES["predict-placement.request"])
+    assert response.status_code == 200
+    reasons = response.json()["reasons"]
+    assert reasons
+    assert all("may" not in reason.casefold() for reason in reasons)
+    assert all(any(character.isdigit() for character in reason) for reason in reasons)

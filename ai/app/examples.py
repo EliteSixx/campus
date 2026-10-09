@@ -189,18 +189,18 @@ RANK_RESPONSE = {
 PREDICT_PLACEMENT_RESPONSE = {
     "student_id": "ST104",
     "risk": "HIGH",
-    "probability_unplaced": 0.82,
+    "probability_unplaced": 0.9722,
     "reasons": [
-        "Low application-to-shortlist conversion (0 of 6)",
-        "Major target-role skill gaps (SQL, REST APIs, Docker)",
-        "Below-benchmark mock interview score (38)",
+        "Attended 0 interviews after applying to 6 drives.",
+        "Readiness score is 30, below the placed-student mean of 76.2.",
+        "Communication score is 50, below the placed-student mean of 73.5.",
     ],
     "interventions": [
-        "3-week backend skills training",
-        "2 mock interviews",
-        "Assign a faculty mentor",
+        "Schedule interview practice and attend every confirmed interview.",
+        "Create a weekly plan covering core skills, projects, and interview preparation.",
+        "Practice structured answers and request feedback from a communication mentor.",
     ],
-    "meta": META,
+    "meta": {"engine_version": "0.2.0", "stub": False},
 }
 
 ERROR_EXAMPLE = {

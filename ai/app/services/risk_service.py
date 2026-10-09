@@ -79,6 +79,37 @@ _LABELS = {"cgpa": "CGPA", "backlogs": "Active backlogs", "readiness_score": "Re
            "rejections": "Rejections", "drives_applied": "Applications", "skill_coverage": "Skill coverage"}
 
 
+def _number(value: float) -> str:
+    return str(int(round(value))) if abs(value - round(value)) < 0.05 else f"{value:.1f}"
+
+
+def _reason(name: str, value: float | None, values: dict[str, float | None], activity: PlacementActivity,
+            bundle: dict[str, Any]) -> str:
+    medians = bundle.get("feature_medians", {})
+    placed_means = bundle.get("placed_feature_means", {})
+    if name == "readiness_score":
+        return f"Readiness score is {_number(float(value))}, below the placed-student mean of {_number(float(placed_means.get(name, medians.get(name, 0))))}."
+    if name == "cgpa":
+        return f"CGPA is {_number(float(value))}, below the placed-student mean of {_number(float(placed_means.get(name, medians.get(name, 0))))}."
+    if name == "interviews_attended":
+        return f"Attended {_number(float(value))} interviews after applying to {activity.drives_applied} drives."
+    if name == "shortlist_rate":
+        return f"{activity.shortlisted} of {activity.drives_applied} applications shortlisted."
+    if name == "backlogs":
+        return f"{_number(float(value))} active backlogs (training median: {_number(float(medians.get(name, 0)))})."
+    if name == "rejections":
+        return f"{_number(float(value))} applications rejected at initial screening (training median: {_number(float(medians.get(name, 0)))})."
+    if name == "drives_applied":
+        return f"Applied to {_number(float(value))} drives (training median: {_number(float(medians.get(name, 0)))})."
+    if name == "mock_interview_score" and value is None:
+        return f"Mock interview score is not recorded; placed-student mean is {_number(float(placed_means.get(name, 0)))}."
+    label = _LABELS.get(name, name)
+    comparison = placed_means.get(name, medians.get(name, 0))
+    if value is None:
+        return f"{label} score is not recorded; placed-student mean is {_number(float(comparison))}."
+    return f"{label} score is {_number(float(value))}, below the placed-student mean of {_number(float(comparison))}."
+
+
 def predict_placement(student: Student, activity: PlacementActivity) -> dict[str, Any]:
     bundle = _load_model()
     if not bundle:
@@ -105,10 +136,12 @@ def predict_placement(student: Student, activity: PlacementActivity) -> dict[str
         if contribution > 0:
             candidates.append((contribution, name))
     candidates.sort(reverse=True)
-    reasons = [f"{_LABELS.get(name, name)} may increase placement risk." for _, name in candidates[:3]]
+    reasons = [_reason(name, values.get(name), values, activity, bundle) for _, name in candidates[:3]]
     interventions = [_INTERVENTIONS[name] for _, name in candidates[:3]]
     if not reasons:
-        reasons = ["Current profile and placement activity indicate elevated placement risk."]
+        readiness_value = _number(float(values["readiness_score"] or 0))
+        readiness_mean = _number(float(bundle.get("placed_feature_means", {}).get("readiness_score", 0)))
+        reasons = [f"Readiness score is {readiness_value}, compared with a placed-student mean of {readiness_mean}."]
         interventions = ["Meet with the placement cell for a profile review and targeted placement plan."]
     return {"student_id": student.student_id, "risk": risk, "probability_unplaced": round(probability, 4),
             "reasons": reasons, "interventions": interventions,
