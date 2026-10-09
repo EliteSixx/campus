@@ -1,9 +1,4 @@
-"""CampusLink AI service: stub API.
-
-Every endpoint returns a hardcoded but correctly shaped response (see examples.py),
-so frontend teams can build against it today. Real logic replaces the return
-statements later; the request/response models in schemas.py do not change.
-"""
+"""CampusLink AI service API, with contracts defined in ``schemas.py``."""
 import os
 
 from fastapi import Body, FastAPI
@@ -13,7 +8,10 @@ from fastapi.responses import JSONResponse
 
 from app import examples as ex
 from app.services.jd_service import parse_job as parse_job_text
+from app.services.matching_service import match as match_job
+from app.services.matching_service import rank as rank_students
 from app.services.readiness_service import compute_readiness
+from app.services.skill_service import skill_gap as compute_skill_gap
 from app.schemas import (
     ErrorResponse,
     MatchRequest,
@@ -72,7 +70,7 @@ def readiness(req: ReadinessRequest = example_body("readiness.request")):
 
 @app.post("/ai/skill-gap", response_model=SkillGapResponse, responses=ERRORS, tags=["Student"])
 def skill_gap(req: SkillGapRequest = example_body("skill-gap.request")):
-    return {**ex.SKILL_GAP_RESPONSE, "student_id": req.student.student_id, "role": req.target.role}
+    return compute_skill_gap(req.student, req.target).model_dump(mode="json")
 
 
 @app.post("/ai/parse-job", response_model=ParseJobResponse, responses=ERRORS, tags=["Recruiter"])
@@ -82,12 +80,20 @@ def parse_job(req: ParseJobRequest = example_body("parse-job.request")):
 
 @app.post("/ai/match", response_model=MatchResponse, responses=ERRORS, tags=["Recruiter"])
 def match(req: MatchRequest = example_body("match.request")):
-    return {**ex.MATCH_RESPONSE, "student_id": req.student.student_id, "job_id": req.job.job_id}
+    result = match_job(req.student, req.job)
+    return {
+        **result.model_dump(mode="json"),
+        "meta": {"engine_version": "0.2.0", "stub": False},
+    }
 
 
 @app.post("/ai/rank", response_model=RankResponse, responses=ERRORS, tags=["Recruiter"])
 def rank(req: RankRequest = example_body("rank.request")):
-    return {**ex.RANK_RESPONSE, "job_id": req.job.job_id}
+    return {
+        "job_id": req.job.job_id,
+        "ranked": [item.model_dump(mode="json") for item in rank_students(req.job, req.students)],
+        "meta": {"engine_version": "0.2.0", "stub": False},
+    }
 
 
 @app.post(
