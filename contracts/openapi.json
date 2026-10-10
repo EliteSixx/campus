@@ -18,7 +18,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
               }
             }
           }
@@ -849,6 +851,51 @@
           "error"
         ],
         "title": "ErrorResponse"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "engine_version": {
+            "type": "string",
+            "title": "Engine Version"
+          },
+          "stub": {
+            "type": "boolean",
+            "title": "Stub"
+          },
+          "risk_model_loaded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Model Loaded"
+          },
+          "embedding_model_loaded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Embedding Model Loaded"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "engine_version",
+          "stub"
+        ],
+        "title": "HealthResponse"
       },
       "Job": {
         "properties": {

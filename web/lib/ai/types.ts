@@ -246,6 +246,19 @@ export interface components {
         ErrorResponse: {
             error: components["schemas"]["ErrorBody"];
         };
+        /** HealthResponse */
+        HealthResponse: {
+            /** Status */
+            status: string;
+            /** Engine Version */
+            engine_version: string;
+            /** Stub */
+            stub: boolean;
+            /** Risk Model Loaded */
+            risk_model_loaded?: boolean | null;
+            /** Embedding Model Loaded */
+            embedding_model_loaded?: boolean | null;
+        };
         /** Job */
         Job: {
             /**
@@ -670,7 +683,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": unknown;
+                    "application/json": components["schemas"]["HealthResponse"];
                 };
             };
         };

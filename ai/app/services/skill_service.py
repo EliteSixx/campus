@@ -1,6 +1,7 @@
 """Skill normalization and optional semantic matching for role requirements."""
 
 import json
+import logging
 import re
 from pathlib import Path
 from threading import Event, Lock, Thread
@@ -28,10 +29,10 @@ for _entry in SKILL_CATALOG:
 
 MODEL_NAME = "all-MiniLM-L6-v2"
 SIMILARITY_THRESHOLD = 0.75
+LOGGER = logging.getLogger(__name__)
 _MODEL: Any = None
 _MODEL_LOAD_STARTED = False
 _MODEL_LOAD_FAILED = False
-_MODEL_WAIT_USED = False
 _MODEL_READY = Event()
 _MODEL_LOCK = Lock()
 _CACHE_LOCK = Lock()
@@ -45,10 +46,34 @@ def normalize_skill(skill: str) -> str:
     return _ALIAS_TO_CANONICAL.get(_key(clean), clean)
 
 
+def load_model():
+    """Load once during app startup, waiting for an already-running lazy load."""
+    global _MODEL_LOAD_STARTED
+    should_load = False
+    with _MODEL_LOCK:
+        if _MODEL is not None or _MODEL_LOAD_FAILED:
+            return _MODEL
+        if not _MODEL_LOAD_STARTED:
+            _MODEL_LOAD_STARTED = True
+            should_load = True
+
+    if should_load:
+        _load_model()
+    else:
+        _MODEL_READY.wait()
+    with _MODEL_LOCK:
+        return _MODEL
+
+
+def model_loaded() -> bool:
+    with _MODEL_LOCK:
+        return _MODEL is not None
+
+
 def _get_model():
-    """Start one lazy load and bound the initial wait before alias-only fallback."""
-    global _MODEL_LOAD_STARTED, _MODEL_WAIT_USED
-    wait_for_first_result = False
+    """Return the loaded encoder, waiting for an in-progress load to finish."""
+    global _MODEL_LOAD_STARTED
+    should_start = False
     with _MODEL_LOCK:
         if _MODEL is not None:
             return _MODEL
@@ -56,14 +81,13 @@ def _get_model():
             return None
         if not _MODEL_LOAD_STARTED:
             _MODEL_LOAD_STARTED = True
-            Thread(target=_load_model, name="campuslink-skill-model", daemon=True).start()
-        if not _MODEL_WAIT_USED:
-            _MODEL_WAIT_USED = True
-            wait_for_first_result = True
+            should_start = True
 
-    if wait_for_first_result:
-        _MODEL_READY.wait(timeout=0.2)
-    return _MODEL
+    if should_start:
+        Thread(target=_load_model, name="campuslink-skill-model", daemon=True).start()
+    _MODEL_READY.wait()
+    with _MODEL_LOCK:
+        return _MODEL
 
 
 def _load_model() -> None:
@@ -74,9 +98,10 @@ def _load_model() -> None:
         model = SentenceTransformer(MODEL_NAME)
         with _MODEL_LOCK:
             _MODEL = model
-    except Exception:
+    except Exception as exc:
         with _MODEL_LOCK:
             _MODEL_LOAD_FAILED = True
+        LOGGER.warning("Sentence-transformers model %s failed to load; using alias-only matching: %s", MODEL_NAME, exc)
     finally:
         _MODEL_READY.set()
 
