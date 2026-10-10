@@ -8,10 +8,12 @@ import { DriveDetailModal } from "@/components/institution/drive-detail-modal";
 import { SearchFilterBar } from "@/components/institution/search-filter-bar";
 import { getPlacementDrives } from "@/lib/api/institution";
 import type { CampusPlacementDrive, DriveStatus, DriveTier } from "@/data/institution/types";
-import { Briefcase, Award, Users, CheckCircle2, Calendar, Filter, Sparkles } from "lucide-react";
+import { Briefcase, Award, Users, CheckCircle2, Calendar, Filter, Sparkles, CalendarDays } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { SchedulerView } from "@/components/institution/scheduler/scheduler-view";
 
 export default function PlacementDrivesPage() {
+  const [activeTab, setActiveTab] = useState<"directory" | "scheduler">("scheduler");
   const [drives, setDrives] = useState<CampusPlacementDrive[]>([]);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -63,8 +65,42 @@ export default function PlacementDrivesPage() {
             Track active interview rounds, application-to-shortlist velocity, and corporate recruitment pipelines.
           </p>
         </div>
+
+        {/* View Switcher */}
+        <div className="flex items-center rounded-lg border border-border bg-surface p-1 text-xs">
+          <button
+            onClick={() => setActiveTab("scheduler")}
+            className={cn(
+              "flex items-center gap-1.5 rounded-md px-3 py-1.5 font-semibold transition-colors",
+              activeTab === "scheduler"
+                ? "bg-accent text-white shadow-xs"
+                : "text-ink-muted hover:text-ink",
+            )}
+          >
+            <CalendarDays className="h-3.5 w-3.5" />
+            Conflict Scheduler
+          </button>
+          <button
+            onClick={() => setActiveTab("directory")}
+            className={cn(
+              "flex items-center gap-1.5 rounded-md px-3 py-1.5 font-semibold transition-colors",
+              activeTab === "directory"
+                ? "bg-accent text-white shadow-xs"
+                : "text-ink-muted hover:text-ink",
+            )}
+          >
+            <Briefcase className="h-3.5 w-3.5" />
+            Drives Directory
+          </button>
+        </div>
       </div>
 
+      {activeTab === "scheduler" ? (
+        <div className="rounded-2xl border border-border bg-surface p-5 shadow-xs">
+          <SchedulerView />
+        </div>
+      ) : (
+        <>
       {/* Aggregate Metric Highlights */}
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         <div className="rounded-xl border border-border bg-surface p-3.5 text-center">
@@ -183,6 +219,8 @@ export default function PlacementDrivesPage() {
 
       {/* Detail Slide-out Drawer */}
       <DriveDetailModal drive={selectedDrive} onClose={() => setSelectedDrive(null)} />
+        </>
+      )}
     </DashboardShell>
   );
 }
