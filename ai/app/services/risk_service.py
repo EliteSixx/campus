@@ -1,5 +1,7 @@
 """Model-backed placement risk prediction with a safe stub fallback."""
+import logging
 from pathlib import Path
+from threading import Lock
 from typing import Any
 
 import joblib
@@ -10,11 +12,14 @@ from app.schemas import PlacementActivity, Student
 from app.services.readiness_service import compute_readiness
 
 MODEL_PATH = Path(__file__).resolve().parents[1] / "models" / "risk_model.joblib"
+LOGGER = logging.getLogger(__name__)
 FEATURE_NAMES = ["readiness_score", "academics_score", "technical_skills_score", "projects_score", "cgpa",
                  "backlogs", "skill_coverage", "aptitude_score", "communication_score", "drives_applied",
                  "shortlist_rate", "interviews_attended", "rejections", "mock_interview_score"]
 _MODEL: dict[str, Any] | None = None
 _MODEL_CHECKED = False
+_MODEL_ERROR: Exception | None = None
+_MODEL_LOCK = Lock()
 
 
 def features_for_student(student: Student, activity: PlacementActivity | dict[str, Any]) -> dict[str, float | None]:
@@ -41,16 +46,39 @@ def features_for_student(student: Student, activity: PlacementActivity | dict[st
     }
 
 
-def _load_model() -> dict[str, Any] | None:
-    global _MODEL, _MODEL_CHECKED
-    if not _MODEL_CHECKED:
+def load_model() -> dict[str, Any] | None:
+    """Load the artifact once; a present but invalid artifact is a startup error."""
+    global _MODEL, _MODEL_CHECKED, _MODEL_ERROR
+    with _MODEL_LOCK:
+        if _MODEL_CHECKED:
+            if _MODEL_ERROR is not None:
+                raise RuntimeError(f"Risk model failed to load from {MODEL_PATH}") from _MODEL_ERROR
+            return _MODEL
+
+        if not MODEL_PATH.exists():
+            _MODEL_CHECKED = True
+            return None
+
+        try:
+            _MODEL = joblib.load(MODEL_PATH)
+        except Exception as exc:
+            _MODEL_ERROR = exc
+            _MODEL_CHECKED = True
+            LOGGER.warning("Risk model file exists but failed to load from %s: %s", MODEL_PATH, exc, exc_info=True)
+            raise RuntimeError(f"Risk model file exists but failed to load from {MODEL_PATH}") from exc
+
         _MODEL_CHECKED = True
-        if MODEL_PATH.exists():
-            try:
-                _MODEL = joblib.load(MODEL_PATH)
-            except Exception:
-                _MODEL = None
-    return _MODEL
+        return _MODEL
+
+
+def _load_model() -> dict[str, Any] | None:
+    """Thread-safe compatibility wrapper used by prediction and analytics."""
+    return load_model()
+
+
+def model_loaded() -> bool:
+    with _MODEL_LOCK:
+        return _MODEL is not None
 
 
 def _fallback(student_id: str) -> dict[str, Any]:

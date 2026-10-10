@@ -20,7 +20,14 @@ ENDPOINTS = {
 
 
 def test_health():
-    assert client.get("/health").json()["status"] == "ok"
+    response = client.get("/health")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["status"] == "ok"
+    assert body["engine_version"] == "0.2.0"
+    assert body["stub"] is False
+    assert isinstance(body["risk_model_loaded"], bool)
+    assert isinstance(body["embedding_model_loaded"], bool)
 
 
 @pytest.mark.parametrize("path,name", ENDPOINTS.items())

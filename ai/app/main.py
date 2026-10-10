@@ -1,5 +1,6 @@
 """CampusLink AI service API, with contracts defined in ``schemas.py``."""
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import Body, FastAPI
 from fastapi.exceptions import RequestValidationError
@@ -14,9 +15,11 @@ from app.services.matching_service import rank as rank_students
 from app.services.readiness_service import compute_readiness
 from app.services.risk_service import predict_placement as compute_placement_risk
 from app.services.skill_service import skill_gap as compute_skill_gap
+from app.services import risk_service, skill_service
 from app.schemas import (
     AnalyticsSummary,
     ErrorResponse,
+    HealthResponse,
     MatchRequest,
     MatchResponse,
     ParseJobRequest,
@@ -31,9 +34,17 @@ from app.schemas import (
     SkillGapResponse,
 )
 
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    risk_service.load_model()
+    skill_service.load_model()
+    yield
+
+
 app = FastAPI(
     title="CampusLink AI Service",
     version="0.1.0",
+    lifespan=lifespan,
     description="Readiness, skill-gap, JD parsing, matching and placement-risk APIs. "
     "Responses carry meta.stub = true for endpoints that still return hardcoded data.",
 )
@@ -61,9 +72,15 @@ async def validation_error_handler(request, exc: RequestValidationError):
     )
 
 
-@app.get("/health", tags=["System"])
+@app.get("/health", response_model=HealthResponse, tags=["System"])
 def health():
-    return {"status": "ok", "engine_version": ex.META["engine_version"], "stub": ex.META["stub"]}
+    return {
+        "status": "ok",
+        "engine_version": "0.2.0",
+        "stub": False,
+        "risk_model_loaded": risk_service.model_loaded(),
+        "embedding_model_loaded": skill_service.model_loaded(),
+    }
 
 
 @app.post("/ai/readiness", response_model=ReadinessResponse, responses=ERRORS, tags=["Student"])

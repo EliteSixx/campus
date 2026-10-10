@@ -60,6 +60,14 @@ class Meta(BaseModel):
     stub: bool = Field(description="True while the endpoint returns hardcoded stub data.")
 
 
+class HealthResponse(BaseModel):
+    status: str
+    engine_version: str
+    stub: bool
+    risk_model_loaded: Optional[bool] = None
+    embedding_model_loaded: Optional[bool] = None
+
+
 class ScoreComponent(BaseModel):
     """One weighted part of a score, for explainability (charts, 'why this score')."""
 
