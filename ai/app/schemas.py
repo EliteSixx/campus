@@ -205,6 +205,8 @@ class MatchResult(BaseModel):
     skill_gaps: list[str]
     reasons: list[Reason]
     breakdown: list[ScoreComponent]
+    fit_level: Optional[ReadinessLevel] = None
+    summary: Optional[str] = None
 
 
 class MatchRequest(BaseModel):
