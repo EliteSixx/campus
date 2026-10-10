@@ -190,7 +190,18 @@ export function AtRiskStudents() {
               <EmptyState icon={Users2} title="No students match this filter" />
             ) : (
               <div className="overflow-x-auto scrollbar-thin">
-                <table className="w-full min-w-[760px] text-left text-sm">
+                {/* Fixed layout: the four short columns keep a set width and the two
+                    text columns share what is left, so the table always fits its card
+                    at laptop widths. The min-width only applies on phone-sized screens. */}
+                <table className="w-full min-w-[36rem] table-fixed text-left text-sm">
+                  <colgroup>
+                    <col className="w-[4.5rem]" />
+                    <col className="w-[6.5rem]" />
+                    <col className="w-[5.5rem]" />
+                    <col className="w-[5.5rem]" />
+                    <col />
+                    <col />
+                  </colgroup>
                   <thead>
                     <tr className="border-b border-border text-[11px] uppercase tracking-wide text-ink-muted">
                       <th className="py-2 pr-3 font-semibold">Student</th>
@@ -327,8 +338,10 @@ function PredictionCells({ prediction }: { prediction: PredictionState }) {
 function Preview({ items }: { items: string[] }) {
   if (items.length === 0) return <span className="text-ink-muted">None returned</span>;
   return (
-    <div className="max-w-[16rem]">
-      <p className="line-clamp-2">{items[0]}</p>
+    <div className="break-words">
+      <p className="line-clamp-3" title={items[0]}>
+        {items[0]}
+      </p>
       {items.length > 1 && <p className="mt-0.5 text-[11px] text-ink-muted">+{items.length - 1} more</p>}
     </div>
   );
