@@ -5,6 +5,8 @@ import { DepartmentTable } from "@/components/institution/department-table";
 import { GapAnalysisBar } from "@/components/institution/gap-analysis-bar";
 import { PipelineFunnel } from "@/components/institution/pipeline-funnel";
 import { ExecutiveInsights } from "@/components/institution/executive-insights";
+import { PlacementCommandCenter } from "@/components/institution/placement-command-center";
+import { SchedulerView } from "@/components/institution/scheduler/scheduler-view";
 import { InterventionSimulator } from "./intervention-simulator";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -88,6 +90,16 @@ export default async function InstitutionDashboardPage() {
 
       {/* Executive Intelligence & Outlier Callouts Banner */}
       <ExecutiveInsights />
+
+      {/* Placement Command Center: 7 Live Operational Metrics */}
+      <div className="mb-6">
+        <PlacementCommandCenter />
+      </div>
+
+      {/* Conflict-Aware Placement Drive Scheduler Section */}
+      <div className="mb-8 rounded-2xl border border-border bg-surface p-5 shadow-xs">
+        <SchedulerView />
+      </div>
 
       {/* KPI Row — each card links to its detail page */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">
