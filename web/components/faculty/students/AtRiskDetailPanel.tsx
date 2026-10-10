@@ -1,9 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { AlertTriangle, Lightbulb, MousePointerClick } from "lucide-react";
+import { useRef, type ReactNode } from "react";
+import { AlertTriangle, Flag, Lightbulb, MousePointerClick } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { EmptyState, LoadingState } from "@/components/shared/state";
 import { StudentNotesCard } from "./StudentNotesCard";
 import { AiErrorMessage } from "./AiErrorMessage";
@@ -14,11 +15,25 @@ import {
   formatProbability,
   studentLabel,
   type AtRiskRow,
+  type PredictionState,
 } from "./at-risk-data";
+import { escalationEligibility } from "./escalations";
+import type { ShownEscalation } from "./useEscalations";
 
-// Full reasons, interventions and mentor notes for one student.
+// Full reasons, interventions, escalation and mentor notes for one student.
 
-export function AtRiskDetailPanel({ row }: { row: AtRiskRow | null }) {
+export function AtRiskDetailPanel({
+  row,
+  escalation,
+  escalationsLoaded,
+  onEscalate,
+}: {
+  row: AtRiskRow | null;
+  // This student's open escalation, or else their most recently resolved one.
+  escalation: ShownEscalation | null;
+  escalationsLoaded: boolean;
+  onEscalate: () => void;
+}) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   if (!row) {
@@ -28,7 +43,7 @@ export function AtRiskDetailPanel({ row }: { row: AtRiskRow | null }) {
           <EmptyState
             icon={MousePointerClick}
             title="Select a student"
-            description="Pick a row to see the full reasons, interventions and your notes."
+            description="Pick a row to see the full reasons, interventions, escalation and your notes."
           />
         </CardContent>
       </Card>
@@ -125,6 +140,13 @@ export function AtRiskDetailPanel({ row }: { row: AtRiskRow | null }) {
               />
             </>
           )}
+
+          <EscalationSection
+            prediction={prediction}
+            escalation={escalation}
+            loaded={escalationsLoaded}
+            onEscalate={onEscalate}
+          />
         </CardContent>
       </Card>
 
@@ -134,6 +156,82 @@ export function AtRiskDetailPanel({ row }: { row: AtRiskRow | null }) {
         studentName={student.student_id}
         textareaRef={textareaRef}
       />
+    </div>
+  );
+}
+
+// Sits right under the recommended interventions. An open escalation replaces
+// the action; a resolved one is shown above it, since the student can be
+// escalated again.
+function EscalationSection({
+  prediction,
+  escalation,
+  loaded,
+  onEscalate,
+}: {
+  prediction: PredictionState;
+  escalation: ShownEscalation | null;
+  loaded: boolean;
+  onEscalate: () => void;
+}) {
+  const eligibility = escalationEligibility(prediction);
+  const open = escalation?.status === "OPEN";
+
+  return (
+    <section>
+      <h4 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-ink-muted">
+        <Flag className="h-3.5 w-3.5" aria-hidden="true" />
+        Escalation
+      </h4>
+      {!loaded ? (
+        <div className="mt-2 h-12 animate-pulse rounded-lg bg-surface-raised" aria-hidden="true" />
+      ) : (
+        <div className="mt-2 space-y-2">
+          {escalation && (
+            <dl className="space-y-1.5 rounded-lg border border-border bg-surface-raised/40 px-3 py-2 text-sm">
+              <EscalationFact label="Assigned mentor">{escalation.mentorName}</EscalationFact>
+              <EscalationFact label="Status">
+                <Badge tone={open ? "accent" : "success"}>{escalation.status}</Badge>
+              </EscalationFact>
+              <EscalationFact label="Escalated">
+                <span className="tabular">{escalation.createdWhen}</span>
+              </EscalationFact>
+              {!open && (
+                <>
+                  <EscalationFact label="Resolved">
+                    <span className="tabular">{escalation.resolvedWhen}</span>
+                  </EscalationFact>
+                  <EscalationFact label="Note">
+                    <span className="whitespace-pre-line break-words">
+                      {escalation.resolutionNote}
+                    </span>
+                  </EscalationFact>
+                </>
+              )}
+            </dl>
+          )}
+          {!open &&
+            (eligibility.eligible ? (
+              <Button type="button" size="sm" onClick={onEscalate}>
+                <Flag className="h-3.5 w-3.5" aria-hidden="true" />
+                Escalate to mentor
+              </Button>
+            ) : (
+              <p className="text-xs text-ink-muted">
+                Escalation unavailable. {eligibility.reason}.
+              </p>
+            ))}
+        </div>
+      )}
+    </section>
+  );
+}
+
+function EscalationFact({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="flex items-start justify-between gap-3">
+      <dt className="shrink-0 text-xs text-ink-muted">{label}</dt>
+      <dd className="min-w-0 text-right font-semibold text-ink">{children}</dd>
     </div>
   );
 }
