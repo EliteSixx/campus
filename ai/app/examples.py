@@ -145,6 +145,8 @@ MATCH_RESULT_ST001 = {
         {"name": "readiness", "score": 74.0, "weight": 0.2},
         {"name": "assessments", "score": 68.5, "weight": 0.1},
     ],
+    "fit_level": "HIGHLY_EMPLOYABLE",
+    "summary": "Highly employable: CGPA 8.2 meets the 7.0 minimum and 4 of 4 required skills match, and 0 active backlogs meet the maximum of 0, and CSE is an eligible branch, but the largest gap is the preferred skill AWS.",
 }
 
 MATCH_RESULT_ST104 = {
@@ -173,6 +175,8 @@ MATCH_RESULT_ST104 = {
         {"name": "readiness", "score": 30.0, "weight": 0.2},
         {"name": "assessments", "score": 44.333333333333336, "weight": 0.1},
     ],
+    "fit_level": "NOT_READY",
+    "summary": "Not ready: CGPA 6.1 is below the 7.0 minimum; 2 active backlogs exceed the maximum of 0; 1 of 4 required skills matched.",
 }
 
 MATCH_RESPONSE = {**MATCH_RESULT_ST001, "meta": {"engine_version": "0.2.0", "stub": False}}

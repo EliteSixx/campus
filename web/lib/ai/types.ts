@@ -320,6 +320,9 @@ export interface components {
             reasons: components["schemas"]["Reason"][];
             /** Breakdown */
             breakdown: components["schemas"]["ScoreComponent"][];
+            fit_level?: components["schemas"]["ReadinessLevel"] | null;
+            /** Summary */
+            summary?: string | null;
             meta: components["schemas"]["Meta"];
         };
         /** Meta */
@@ -485,6 +488,9 @@ export interface components {
             reasons: components["schemas"]["Reason"][];
             /** Breakdown */
             breakdown: components["schemas"]["ScoreComponent"][];
+            fit_level?: components["schemas"]["ReadinessLevel"] | null;
+            /** Summary */
+            summary?: string | null;
             /** Rank */
             rank: number;
         };
