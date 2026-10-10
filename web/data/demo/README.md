@@ -30,3 +30,21 @@ Engine version **0.2.0**. Scores below come from running the AI service locally 
 | JOB005 - PixelForge, Frontend Developer | ST007 (84), ST002 (38) | ST005 - "CGPA 6.9 is below the minimum of 7.0"; ST009 - "CGPA 6.5 is below the minimum of 7.0"; ST104 - "CGPA 6.1 is below the minimum of 7.0" |
 
 The official [BPUT academic calendar page](https://www.bput.ac.in/academic-calendar.html) lists the Odd Semester 2026 to 27 calendar. The exact assessment and examination dates above are the dates supplied for this demo's scheduling window.
+
+## Expected risk
+
+Engine version **0.2.0**. These risk levels and probabilities come from running the AI service locally on **2026-10-10** with each student's profile and placement activity.
+
+| Student | Risk | Probability unplaced |
+| --- | --- | ---: |
+| ST001 | LOW | 0.2156 |
+| ST002 | LOW | 0.1989 |
+| ST003 | MEDIUM | 0.5765 |
+| ST004 | LOW | 0.1989 |
+| ST005 | HIGH | 0.9771 |
+| ST006 | LOW | 0.1867 |
+| ST007 | MEDIUM | 0.4562 |
+| ST008 | LOW | 0.2071 |
+| ST009 | HIGH | 0.9787 |
+| ST010 | MEDIUM | 0.4345 |
+| ST104 | HIGH | 0.9722 |
