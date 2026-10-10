@@ -1,7 +1,7 @@
 import type { AiError, PredictPlacementResponse, ReadinessResponse } from "@/lib/ai/client";
 import type { components } from "@/lib/ai/types";
 import { demoApplications } from "@/data/demo/applications";
-import { demoPlacementActivity } from "@/data/demo/placement-activity";
+import { demoPlacementActivities } from "@/data/demo/placement-activity";
 import { demoStudents } from "@/data/demo/students";
 import type { DemoApplication, DemoStudent } from "@/data/demo/types";
 
@@ -38,12 +38,11 @@ export interface AtRiskRow extends AtRiskSource {
   prediction: PredictionState;
 }
 
-// The demo seed has one activity record today (ST104). Any extra records added
-// to web/data/demo later are picked up here without code changes.
-const activityRecords = [demoPlacementActivity];
-
+// Looks the student up in demoPlacementActivities. A student with no record
+// there gets null, which the screen shows as "No activity data" without calling
+// the service.
 function activityFor(studentId: string): PlacementActivity | null {
-  const record = activityRecords.find((a) => a.student_id === studentId);
+  const record = demoPlacementActivities.find((a) => a.student_id === studentId);
   if (!record) return null;
   const { drives_applied, shortlisted, interviews_attended, rejections } = record;
   return { drives_applied, shortlisted, interviews_attended, rejections };
