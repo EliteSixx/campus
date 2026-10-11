@@ -23,6 +23,7 @@ import {
   AlertTriangle,
   ArrowRight,
 } from "lucide-react";
+import { formatDate } from "@/lib/format-date";
 
 interface StudentOfferDetailProps {
   offer: OfferRecord;
@@ -299,12 +300,12 @@ export function StudentOfferDetail({
                     )}
                     {doc.verified_at && (
                       <span className="text-emerald-600 dark:text-emerald-400">
-                        · Verified on {new Date(doc.verified_at).toLocaleDateString()}
+                        · Verified on {formatDate(doc.verified_at)}
                       </span>
                     )}
                     {doc.submitted_at && !doc.verified_at && (
                       <span className="text-amber-600 dark:text-amber-400">
-                        · Submitted on {new Date(doc.submitted_at).toLocaleDateString()}
+                        · Submitted on {formatDate(doc.submitted_at)}
                       </span>
                     )}
                   </div>
