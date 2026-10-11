@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   FileText,
   Mic,
+  Sparkles,
 } from "lucide-react";
 import { useRole } from "@/context/role-context";
 import { useUserProfile } from "@/context/user-profile-context";
@@ -101,9 +102,9 @@ export default function ProfilePage() {
                   </Button>
                 </Link>
                 <Link href="/profile/interview">
-                  <Button variant="outline" size="sm" className="gap-1.5 border-border text-ink font-bold">
-                    <Mic className="h-3.5 w-3.5" />
-                    Mock Interview
+                  <Button size="sm" className="gap-1.5 bg-gradient-to-r from-accent to-purple-600 hover:opacity-95 text-white font-bold shadow-md">
+                    <Sparkles className="h-3.5 w-3.5" />
+                    AI Mock Interview
                   </Button>
                 </Link>
                 <Link href="/profile/skills">

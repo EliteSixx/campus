@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   BookOpen,
   Award,
+  Mic,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -83,7 +84,13 @@ export async function SkillIntelligenceView({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
+          <Link href="/profile/interview">
+            <Button size="sm" className="gap-1.5 bg-gradient-to-r from-accent to-purple-600 hover:opacity-95 text-white font-bold shadow-md">
+              <Sparkles className="h-3.5 w-3.5" />
+              AI Mock Interview
+            </Button>
+          </Link>
           <div className="flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-2 shadow-sm">
             <MatchScore value={data.careerReadiness} size="md" />
             <div>

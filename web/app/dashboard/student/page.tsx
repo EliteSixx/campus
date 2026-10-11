@@ -5,7 +5,8 @@ import { SkillProgress } from "@/components/shared/skill-progress";
 import { SkillGapCard } from "@/components/shared/skill-gap-card";
 import { OpportunityCard } from "@/components/shared/opportunity-card";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
-import { Gauge, Radar, IdCard, CheckCircle2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Gauge, Radar, IdCard, CheckCircle2, Sparkles, Mic, ArrowRight } from "lucide-react";
 import { getSkillTimeline } from "@/lib/api/students";
 import { getTopSkillGaps } from "@/lib/api/skills";
 import { getAllOpportunities, getOpportunityStatus } from "@/lib/api/opportunities";
@@ -88,6 +89,33 @@ export default async function StudentDashboardPage() {
         </Link>
         <ApplicationsMetric />
       </div>
+
+      {/* Dedicated AI Mock Interview Banner */}
+      <Card className="mt-6 overflow-hidden border border-accent/20 bg-gradient-to-r from-accent/10 via-purple-500/10 to-transparent p-5 shadow-sm">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-3.5">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-accent to-purple-600 text-white shadow-md">
+              <Sparkles className="h-5 w-5" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base font-bold text-ink">AI Mock Interview Practice</h3>
+                <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold text-accent">Interactive Voice &amp; AI</span>
+              </div>
+              <p className="mt-1 text-xs text-ink-muted">
+                Practice tailored interview questions matched to your skills, get instant feedback on STAR delivery and concepts, and boost your placement readiness.
+              </p>
+            </div>
+          </div>
+          <Link href="/profile/interview" className="shrink-0">
+            <Button className="gap-2 bg-gradient-to-r from-accent to-purple-600 hover:opacity-95 text-white font-bold shadow-md">
+              <Mic className="h-4 w-4" />
+              Start Mock Interview
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+      </Card>
 
       <div className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-5">
         <div className="lg:col-span-3">

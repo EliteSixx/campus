@@ -31,13 +31,23 @@ export function StudentGreeting() {
   const goal = currentProfile.careerGoal || currentStudent.careerGoal;
 
   return (
-    <div className="mb-6">
-      <h2 className="text-xl font-semibold text-ink">
-        {greeting}, {firstName}
-      </h2>
-      <p className="mt-0.5 text-sm text-ink-muted">
-        Here&apos;s where you stand against your goal of becoming a {goal}.
-      </p>
+    <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <div>
+        <h2 className="text-xl font-semibold text-ink">
+          {greeting}, {firstName}
+        </h2>
+        <p className="mt-0.5 text-sm text-ink-muted">
+          Here&apos;s where you stand against your goal of becoming a {goal}.
+        </p>
+      </div>
+      <Link
+        href="/profile/interview"
+        className="inline-flex items-center gap-2 self-start rounded-xl bg-gradient-to-r from-accent to-purple-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md hover:shadow-lg hover:opacity-95 transition-all shrink-0 sm:self-auto"
+      >
+        <Sparkles className="h-4 w-4" />
+        AI Mock Interview
+        <ArrowRight className="h-4 w-4" />
+      </Link>
     </div>
   );
 }

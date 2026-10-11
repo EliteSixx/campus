@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRole, Role } from "@/context/role-context";
 import { useUserProfile } from "@/context/user-profile-context";
 import {
@@ -232,6 +233,18 @@ export function StudentResumeBuilder() {
             <Printer className="h-3.5 w-3.5" />
             Download PDF
           </Button>
+
+          {/* AI Mock Interview */}
+          <Link href="/profile/interview">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs gap-1.5 font-bold border-accent/40 text-accent hover:bg-accent/10"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              Mock Interview
+            </Button>
+          </Link>
 
           {/* Save Resume */}
           <Button
