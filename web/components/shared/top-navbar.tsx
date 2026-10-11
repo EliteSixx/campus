@@ -8,45 +8,11 @@ import { useUserProfile } from "@/context/user-profile-context";
 import { useTheme } from "@/context/theme-context";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
-const mockNotifications = [
-  {
-    id: 1,
-    type: "mentorship",
-    title: "New mentorship request from Kavya Panda",
-    description: "Looking for guidance on backend architecture.",
-    time: "2h ago",
-    read: false,
-    color: "bg-accent",
-  },
-  {
-    id: 2,
-    type: "session",
-    title: "Upcoming session: API Design Patterns",
-    description: "With Siddharth Naik in 1 hour.",
-    time: "3h ago",
-    read: false,
-    color: "bg-warning",
-  },
-  {
-    id: 3,
-    type: "guidance",
-    title: "Priyanka Mohanty replied in Guidance Hub",
-    description: "Check out the response to your question.",
-    time: "1d ago",
-    read: true,
-    color: "bg-success",
-  },
-  {
-    id: 4,
-    type: "badge",
-    title: "You unlocked a new badge: Top Mentor",
-    description: "Congratulations on your active participation!",
-    time: "2d ago",
-    read: true,
-    color: "bg-accent",
-  },
-];
+import { useRouter } from "next/navigation";
+import { InAppNotifications } from "@/features/offers/components/in-app-notifications";
+import { DEMO_OFFERS } from "@/features/offers/data/demo-offers";
+import { generateNotifications } from "@/features/offers/notifications";
+import type { NotificationItem } from "@/features/offers/types";
 
 export function TopNavbar({
   title,
@@ -63,9 +29,11 @@ export function TopNavbar({
   const dark = mode === "dark";
   const { role } = useRole();
   const { currentProfile } = useUserProfile();
+  const router = useRouter();
   
   const [isAvatarOpen, setIsAvatarOpen] = useState(false);
   const [isBellOpen, setIsBellOpen] = useState(false);
+  const [readNotificationIds, setReadNotificationIds] = useState<Set<string>>(new Set());
   const avatarRef = useRef<HTMLDivElement>(null);
   const bellRef = useRef<HTMLDivElement>(null);
 
@@ -109,7 +77,21 @@ export function TopNavbar({
     return roleFallback[role] || "US";
   };
 
-  const unreadCount = mockNotifications.filter((n) => !n.read).length;
+  const notifications: NotificationItem[] = generateNotifications(DEMO_OFFERS, "2026-10-11T09:00:00Z").map((item) => ({
+    ...item,
+    read: item.read || readNotificationIds.has(item.id),
+  }));
+  const unreadCount = notifications.filter((notification) => !notification.read).length;
+  const markNotificationRead = (notificationId: string) => {
+    setReadNotificationIds((current) => new Set(current).add(notificationId));
+  };
+  const handleNotificationAction = (notification: NotificationItem) => {
+    markNotificationRead(notification.id);
+    setIsBellOpen(false);
+    router.push(role === "institution" && notification.category === "DOCUMENT"
+      ? "/offers/manage"
+      : `/offers/${encodeURIComponent(notification.offer_id)}`);
+  };
 
   return (
     <header className="glass-nav flex h-14 w-full items-center justify-between gap-3 px-4 border-b border-border/80 dark:border-white/10 select-none">
@@ -181,42 +163,15 @@ export function TopNavbar({
             )}
           </button>
 
-          {/* Notification Dropdown */}
+          {/* Lifecycle notification dropdown */}
           {isBellOpen && (
-            <div className="absolute right-0 top-full mt-2 w-80 sm:w-96 rounded-xl border border-border bg-surface shadow-lg overflow-hidden animate-in fade-in slide-in-from-top-2 duration-150 z-50">
-              <div className="flex items-center justify-between border-b border-border p-3">
-                <span className="text-xs font-bold text-ink">Notifications</span>
-                <button className="text-[10px] font-bold text-accent hover:opacity-80 transition-opacity">
-                  Mark all as read
-                </button>
-              </div>
-              <div className="max-h-[400px] overflow-y-auto scrollbar-thin">
-                {mockNotifications.map((notif) => (
-                  <div 
-                    key={notif.id} 
-                    className={cn(
-                      "flex items-start gap-3 border-b border-border/50 p-3 hover:bg-surface-raised transition-colors cursor-pointer",
-                      !notif.read && "bg-warning-soft/30 dark:bg-warning-soft/10"
-                    )}
-                  >
-                    <div className={cn("mt-1 h-2 w-2 shrink-0 rounded-full", notif.color)} />
-                    <div className="flex-1 space-y-0.5">
-                      <p className="text-xs font-bold text-ink line-clamp-1">{notif.title}</p>
-                      <p className="text-[10px] text-ink-muted line-clamp-1 font-medium">{notif.description}</p>
-                      <p className="text-[9px] text-ink-faint font-medium pt-0.5">{notif.time}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="border-t border-border p-2">
-                <Link 
-                  href="/notifications" 
-                  onClick={() => setIsBellOpen(false)}
-                  className="block w-full rounded-lg px-3 py-1.5 text-center text-xs font-bold text-ink-muted hover:bg-surface-raised hover:text-ink transition-colors"
-                >
-                  View all notifications
-                </Link>
-              </div>
+            <div className="absolute right-0 top-full mt-2 z-50 w-[min(92vw,36rem)] max-h-[80vh] overflow-y-auto rounded-xl border border-border bg-surface shadow-lg animate-in fade-in slide-in-from-top-2 duration-150">
+              <InAppNotifications
+                notifications={notifications}
+                onNotificationAction={handleNotificationAction}
+                onMarkAsRead={markNotificationRead}
+                onMarkAllAsRead={() => setReadNotificationIds(new Set(notifications.map((item) => item.id)))}
+              />
             </div>
           )}
         </div>
