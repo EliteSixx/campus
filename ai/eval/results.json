@@ -1,0 +1,2812 @@
+{
+  "metadata": {
+    "seed": 42,
+    "smoke_mode": false,
+    "data_source": "Synthetic CSV cohort generated with random seed 42.",
+    "matching_mode_for_pipeline_metrics": "embedding_plus_exact_and_alias",
+    "circularity_note": "Applications.csv shortlisting labels were partly generated from required-skill overlap and CGPA, which the matcher also uses, with about 17 percent of outcomes flipped. These matching metrics are partly circular.",
+    "embedding_load_error": null
+  },
+  "matching_vs_shortlisting": {
+    "pair_count": 4671,
+    "job_count": 60,
+    "precision_at_k_aggregation": "macro average of per-job precision values; each per-job value uses min(k, applications for that job)",
+    "overall": {
+      "matcher": {
+        "roc_auc": 0.528211,
+        "precision_at_5": 0.403333,
+        "precision_at_10": 0.375
+      },
+      "cgpa_only": {
+        "roc_auc": 0.518412,
+        "precision_at_5": 0.35,
+        "precision_at_10": 0.353333
+      },
+      "seeded_random": {
+        "roc_auc": 0.489759,
+        "precision_at_5": 0.336667,
+        "precision_at_10": 0.326667
+      }
+    },
+    "bootstrap_confidence_intervals": {
+      "method": "paired percentile bootstrap over application rows; same sampled indices for all methods",
+      "seed": 42,
+      "requested_resamples": 1000,
+      "valid_resamples": 1000,
+      "confidence_level": 0.95,
+      "roc_auc": {
+        "matcher": {
+          "lower_95": 0.510621,
+          "upper_95": 0.544984
+        },
+        "cgpa_only": {
+          "lower_95": 0.501275,
+          "upper_95": 0.536529
+        },
+        "seeded_random": {
+          "lower_95": 0.472293,
+          "upper_95": 0.507962
+        }
+      },
+      "paired_difference_matcher_minus_cgpa_only": {
+        "lower_95": -0.013968,
+        "upper_95": 0.033109
+      },
+      "difference_interval_contains_zero": true
+    },
+    "per_job_diagnostic": {
+      "minimum_application_count": 13,
+      "maximum_application_count": 212,
+      "matcher_auc_below_0_5_job_count": 21,
+      "job_count": 60
+    },
+    "per_job": {
+      "JOB001": {
+        "matcher": {
+          "roc_auc": 0.510774,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.524495,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.565488,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "application_count": 164
+      },
+      "JOB002": {
+        "matcher": {
+          "roc_auc": 0.418155,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1
+        },
+        "cgpa_only": {
+          "roc_auc": 0.508929,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.488095,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "application_count": 38
+      },
+      "JOB003": {
+        "matcher": {
+          "roc_auc": 0.575617,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.584877,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.506173,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.3
+        },
+        "application_count": 39
+      },
+      "JOB004": {
+        "matcher": {
+          "roc_auc": 0.397879,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.564174,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.506138,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.2
+        },
+        "application_count": 88
+      },
+      "JOB005": {
+        "matcher": {
+          "roc_auc": 0.463068,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.667614,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.6875,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "application_count": 30
+      },
+      "JOB006": {
+        "matcher": {
+          "roc_auc": 0.565934,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.362637,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.516484,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 20
+      },
+      "JOB007": {
+        "matcher": {
+          "roc_auc": 0.600709,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.6
+        },
+        "cgpa_only": {
+          "roc_auc": 0.607287,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.573381,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.6
+        },
+        "application_count": 90
+      },
+      "JOB008": {
+        "matcher": {
+          "roc_auc": 0.567494,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.491745,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.494034,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "application_count": 189
+      },
+      "JOB009": {
+        "matcher": {
+          "roc_auc": 0.510501,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.511009,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.482385,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "application_count": 118
+      },
+      "JOB010": {
+        "matcher": {
+          "roc_auc": 0.627467,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.532072,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.398026,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "application_count": 51
+      },
+      "JOB011": {
+        "matcher": {
+          "roc_auc": 0.386364,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.568182,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.515152,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "application_count": 17
+      },
+      "JOB012": {
+        "matcher": {
+          "roc_auc": 0.693182,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.611742,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.541667,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 62
+      },
+      "JOB013": {
+        "matcher": {
+          "roc_auc": 0.500074,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.6
+        },
+        "cgpa_only": {
+          "roc_auc": 0.516807,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.437417,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.2
+        },
+        "application_count": 176
+      },
+      "JOB014": {
+        "matcher": {
+          "roc_auc": 0.564444,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.545,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.515556,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "application_count": 65
+      },
+      "JOB015": {
+        "matcher": {
+          "roc_auc": 0.527449,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.6
+        },
+        "cgpa_only": {
+          "roc_auc": 0.513396,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.402679,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 128
+      },
+      "JOB016": {
+        "matcher": {
+          "roc_auc": 0.665,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.76,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.62,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "application_count": 25
+      },
+      "JOB017": {
+        "matcher": {
+          "roc_auc": 0.539583,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.507083,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.6
+        },
+        "seeded_random": {
+          "roc_auc": 0.5275,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4
+        },
+        "application_count": 73
+      },
+      "JOB018": {
+        "matcher": {
+          "roc_auc": 0.585986,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.515606,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.519223,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "application_count": 141
+      },
+      "JOB019": {
+        "matcher": {
+          "roc_auc": 0.480072,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.377717,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.509964,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "application_count": 71
+      },
+      "JOB020": {
+        "matcher": {
+          "roc_auc": 0.523234,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.485243,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.576766,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "application_count": 126
+      },
+      "JOB021": {
+        "matcher": {
+          "roc_auc": 0.381313,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.407828,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.343434,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "application_count": 47
+      },
+      "JOB022": {
+        "matcher": {
+          "roc_auc": 0.529101,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.285714,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "seeded_random": {
+          "roc_auc": 0.555556,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 30
+      },
+      "JOB023": {
+        "matcher": {
+          "roc_auc": 0.444488,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.438276,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.429348,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "application_count": 74
+      },
+      "JOB024": {
+        "matcher": {
+          "roc_auc": 0.448791,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.531294,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.482219,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "application_count": 56
+      },
+      "JOB025": {
+        "matcher": {
+          "roc_auc": 0.462491,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.368717,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.456114,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.4
+        },
+        "application_count": 74
+      },
+      "JOB026": {
+        "matcher": {
+          "roc_auc": 0.46,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.347692,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.676923,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.5
+        },
+        "application_count": 38
+      },
+      "JOB027": {
+        "matcher": {
+          "roc_auc": 0.493217,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.55793,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.519333,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.5
+        },
+        "application_count": 180
+      },
+      "JOB028": {
+        "matcher": {
+          "roc_auc": 0.531429,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.562857,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.342857,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "application_count": 39
+      },
+      "JOB029": {
+        "matcher": {
+          "roc_auc": 0.465,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.383333,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.466667,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.4
+        },
+        "application_count": 35
+      },
+      "JOB030": {
+        "matcher": {
+          "roc_auc": 0.541667,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.685185,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.6
+        },
+        "seeded_random": {
+          "roc_auc": 0.435185,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 21
+      },
+      "JOB031": {
+        "matcher": {
+          "roc_auc": 0.616133,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.6
+        },
+        "cgpa_only": {
+          "roc_auc": 0.535469,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.556445,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 107
+      },
+      "JOB032": {
+        "matcher": {
+          "roc_auc": 0.713534,
+          "precision_at_5": 1.0,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.417293,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.384962,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "application_count": 54
+      },
+      "JOB033": {
+        "matcher": {
+          "roc_auc": 0.532994,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.534031,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.529789,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "application_count": 154
+      },
+      "JOB034": {
+        "matcher": {
+          "roc_auc": 0.50974,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.55368,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.468511,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "application_count": 204
+      },
+      "JOB035": {
+        "matcher": {
+          "roc_auc": 0.482692,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.49359,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.539744,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "application_count": 59
+      },
+      "JOB036": {
+        "matcher": {
+          "roc_auc": 0.413043,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "cgpa_only": {
+          "roc_auc": 0.586957,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.530435,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1
+        },
+        "application_count": 28
+      },
+      "JOB037": {
+        "matcher": {
+          "roc_auc": 0.552285,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.461828,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.459677,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "application_count": 133
+      },
+      "JOB038": {
+        "matcher": {
+          "roc_auc": 0.521337,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.587359,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.571659,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "application_count": 73
+      },
+      "JOB039": {
+        "matcher": {
+          "roc_auc": 0.518333,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.343333,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.4,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.2
+        },
+        "application_count": 65
+      },
+      "JOB040": {
+        "matcher": {
+          "roc_auc": 0.502262,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.495475,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.357466,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "application_count": 30
+      },
+      "JOB041": {
+        "matcher": {
+          "roc_auc": 0.541185,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.7
+        },
+        "cgpa_only": {
+          "roc_auc": 0.516741,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.471704,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "application_count": 120
+      },
+      "JOB042": {
+        "matcher": {
+          "roc_auc": 0.550926,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.520503,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.52381,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "application_count": 57
+      },
+      "JOB043": {
+        "matcher": {
+          "roc_auc": 0.40652,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.534968,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.507941,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "application_count": 134
+      },
+      "JOB044": {
+        "matcher": {
+          "roc_auc": 0.777311,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.281513,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.2
+        },
+        "seeded_random": {
+          "roc_auc": 0.252101,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "application_count": 24
+      },
+      "JOB045": {
+        "matcher": {
+          "roc_auc": 0.51252,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.494992,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1
+        },
+        "seeded_random": {
+          "roc_auc": 0.510705,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "application_count": 212
+      },
+      "JOB046": {
+        "matcher": {
+          "roc_auc": 0.650568,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.630682,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.409091,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.1
+        },
+        "application_count": 30
+      },
+      "JOB047": {
+        "matcher": {
+          "roc_auc": 0.518048,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.451426,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "seeded_random": {
+          "roc_auc": 0.459002,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "application_count": 100
+      },
+      "JOB048": {
+        "matcher": {
+          "roc_auc": 0.607367,
+          "precision_at_5": 1.0,
+          "precision_at_10": 0.6
+        },
+        "cgpa_only": {
+          "roc_auc": 0.545455,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "seeded_random": {
+          "roc_auc": 0.609718,
+          "precision_at_5": 0.8,
+          "precision_at_10": 0.8
+        },
+        "application_count": 51
+      },
+      "JOB049": {
+        "matcher": {
+          "roc_auc": 0.659524,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.607143,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.6
+        },
+        "seeded_random": {
+          "roc_auc": 0.495238,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "application_count": 31
+      },
+      "JOB050": {
+        "matcher": {
+          "roc_auc": 0.428571,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "cgpa_only": {
+          "roc_auc": 0.543956,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.590659,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.5
+        },
+        "application_count": 40
+      },
+      "JOB051": {
+        "matcher": {
+          "roc_auc": 0.540249,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.612812,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.346939,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.0
+        },
+        "application_count": 63
+      },
+      "JOB052": {
+        "matcher": {
+          "roc_auc": 0.686869,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.7
+        },
+        "cgpa_only": {
+          "roc_auc": 0.434343,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.505051,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.5
+        },
+        "application_count": 20
+      },
+      "JOB053": {
+        "matcher": {
+          "roc_auc": 0.425401,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.575668,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.476471,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 89
+      },
+      "JOB054": {
+        "matcher": {
+          "roc_auc": 0.654762,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.410714,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.392857,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "application_count": 19
+      },
+      "JOB055": {
+        "matcher": {
+          "roc_auc": 0.532575,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.534144,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.443485,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.1
+        },
+        "application_count": 75
+      },
+      "JOB056": {
+        "matcher": {
+          "roc_auc": 0.488248,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.537313,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.510518,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.4
+        },
+        "application_count": 194
+      },
+      "JOB057": {
+        "matcher": {
+          "roc_auc": 0.549434,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.3
+        },
+        "cgpa_only": {
+          "roc_auc": 0.512075,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.3
+        },
+        "seeded_random": {
+          "roc_auc": 0.426415,
+          "precision_at_5": 0.2,
+          "precision_at_10": 0.3
+        },
+        "application_count": 78
+      },
+      "JOB058": {
+        "matcher": {
+          "roc_auc": 0.483173,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.2
+        },
+        "cgpa_only": {
+          "roc_auc": 0.697115,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.350962,
+          "precision_at_5": 0.0,
+          "precision_at_10": 0.0
+        },
+        "application_count": 34
+      },
+      "JOB059": {
+        "matcher": {
+          "roc_auc": 0.3875,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.5
+        },
+        "cgpa_only": {
+          "roc_auc": 0.35,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.6
+        },
+        "seeded_random": {
+          "roc_auc": 0.425,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.6
+        },
+        "application_count": 13
+      },
+      "JOB060": {
+        "matcher": {
+          "roc_auc": 0.465517,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "cgpa_only": {
+          "roc_auc": 0.597076,
+          "precision_at_5": 0.6,
+          "precision_at_10": 0.4
+        },
+        "seeded_random": {
+          "roc_auc": 0.358321,
+          "precision_at_5": 0.4,
+          "precision_at_10": 0.4
+        },
+        "application_count": 75
+      }
+    }
+  },
+  "generator_shortlist_signal_ceiling": {
+    "pair_count": 4671,
+    "formula": "base = 0.35 * required_skill_overlap + 0.025 * (cgpa - 7); noisy_signal = base + Gaussian(0, 0.32); preflip label = noisy_signal > 0.30; with probability 0.17 invert that label",
+    "source": "ai/data/generate_data.py:76-78 (formula line 76, threshold line 77, flip line 78)",
+    "replay_verified_against_all_csv_shortlist_labels": true,
+    "deterministic_base_signal_vs_observed_shortlisted_roc_auc": 0.546899,
+    "noisy_generator_signal_vs_observed_shortlisted_roc_auc": 0.784071,
+    "upper_bound_under_generator_noise_roc_auc": 0.784071,
+    "noisy_signal_vs_preflip_label_roc_auc_no_17_percent_flip": 1.0,
+    "matcher_auc": 0.528211,
+    "matcher_auc_chance_adjusted_share_of_deterministic_signal": 0.601527,
+    "matcher_auc_chance_adjusted_share_of_deterministic_signal_pct": 60.15,
+    "matcher_auc_share_of_oracle_signal_diagnostic_only": 0.673678,
+    "matcher_auc_share_of_oracle_signal_diagnostic_only_pct": 67.37,
+    "interpretation": "The realized noisy generator score is an oracle ceiling: it contains the exact Gaussian draw used to create each label. It is not an available feature for a real candidate."
+  },
+  "eligibility_gate_correctness": {
+    "population_size": 90000,
+    "sample_size": 5000,
+    "sampling": "seeded simple random sample without replacement from the full student x job Cartesian product",
+    "agreement_count": 5000,
+    "agreement_rate": 1.0,
+    "disagreements": []
+  },
+  "readiness_vs_outcomes": {
+    "placed_count": 400,
+    "unplaced_count": 1100,
+    "placed_rate": 0.266667,
+    "readiness_roc_auc_for_placed": 0.577611,
+    "mean_readiness_placed": 76.2075,
+    "mean_readiness_unplaced": 73.0782,
+    "monotonicity": {
+      "sample_size": 1500,
+      "cgpa_raise_checks": 1500,
+      "cgpa_never_lowers_score": true,
+      "cgpa_violations": [],
+      "backlog_increase_checks": 1500,
+      "backlog_never_raises_score": true,
+      "backlog_violations": []
+    }
+  },
+  "jd_parser_accuracy": {
+    "labelled_description_count": 20,
+    "field_accuracy": {
+      "role": {
+        "correct": 19,
+        "total": 20,
+        "accuracy": 0.95
+      },
+      "min_cgpa": {
+        "correct": 18,
+        "total": 20,
+        "accuracy": 0.9
+      },
+      "max_backlogs": {
+        "correct": 20,
+        "total": 20,
+        "accuracy": 1.0
+      },
+      "eligible_branches": {
+        "correct": 20,
+        "total": 20,
+        "accuracy": 1.0
+      },
+      "required_skills": {
+        "correct": 19,
+        "total": 20,
+        "accuracy": 0.95
+      },
+      "preferred_skills": {
+        "correct": 19,
+        "total": 20,
+        "accuracy": 0.95
+      }
+    },
+    "overall_field_accuracy": 0.958333,
+    "skill_level_precision_recall_f1": {
+      "expected_count": 94,
+      "predicted_count": 91,
+      "true_positive": 91,
+      "precision": 1.0,
+      "recall": 0.968085,
+      "f1": 0.983784
+    },
+    "skill_scoring_unit": "canonical skill occurrence per labelled JD; required/preferred distinction is also checked in field accuracy",
+    "incorrect_cases": [
+      {
+        "id": "JD07",
+        "field_correct": {
+          "role": false,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "DevOps Engineer\n- Branches: CSE, IT\n- Min CGPA: 7.0\n- Maximum 1 backlog\n- Required skills: Linux, Docker, Kubernetes, Git\n- Terraform preferred",
+          "min_cgpa": 7.0,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Docker",
+            "Git",
+            "Kubernetes",
+            "Linux"
+          ],
+          "preferred_skills": [
+            "Terraform"
+          ]
+        },
+        "expected": {
+          "role": "DevOps Engineer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Docker",
+            "Git",
+            "Kubernetes",
+            "Linux"
+          ],
+          "preferred_skills": [
+            "Terraform"
+          ]
+        }
+      },
+      {
+        "id": "JD13",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": false,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Database Engineer",
+          "min_cgpa": null,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "MongoDB",
+            "PostgreSQL",
+            "Redis",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Apache Kafka"
+          ]
+        },
+        "expected": {
+          "role": "Database Engineer",
+          "min_cgpa": 7.1,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "MongoDB",
+            "PostgreSQL",
+            "Redis",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Apache Kafka"
+          ]
+        }
+      },
+      {
+        "id": "JD18",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": false,
+          "preferred_skills": false
+        },
+        "actual": {
+          "role": "Civil Design Engineer",
+          "min_cgpa": 6.5,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CE"
+          ],
+          "required_skills": [
+            "AutoCAD"
+          ],
+          "preferred_skills": []
+        },
+        "expected": {
+          "role": "Civil Design Engineer",
+          "min_cgpa": 6.5,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CE"
+          ],
+          "required_skills": [
+            "AutoCAD",
+            "Revit",
+            "Structural Analysis"
+          ],
+          "preferred_skills": [
+            "STAAD.Pro"
+          ]
+        }
+      },
+      {
+        "id": "JD20",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": false,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Data Scientist",
+          "min_cgpa": null,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Data Visualization",
+            "Python",
+            "Scikit-learn",
+            "Statistics"
+          ],
+          "preferred_skills": [
+            "Generative AI",
+            "Natural Language Processing"
+          ]
+        },
+        "expected": {
+          "role": "Data Scientist",
+          "min_cgpa": 7.0,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Data Visualization",
+            "Python",
+            "Scikit-learn",
+            "Statistics"
+          ],
+          "preferred_skills": [
+            "Generative AI",
+            "Natural Language Processing"
+          ]
+        }
+      }
+    ],
+    "per_case": [
+      {
+        "id": "JD01",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Backend Developer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Docker",
+            "Python",
+            "REST APIs",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "AWS"
+          ]
+        },
+        "expected": {
+          "role": "Backend Developer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Docker",
+            "Python",
+            "REST APIs",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "AWS"
+          ]
+        }
+      },
+      {
+        "id": "JD02",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Data Analyst",
+          "min_cgpa": 7.5,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Data Visualization",
+            "Excel",
+            "Python",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Tableau"
+          ]
+        },
+        "expected": {
+          "role": "Data Analyst",
+          "min_cgpa": 7.5,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Data Visualization",
+            "Excel",
+            "Python",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Tableau"
+          ]
+        }
+      },
+      {
+        "id": "JD03",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Frontend Engineer",
+          "min_cgpa": 6.5,
+          "max_backlogs": 0,
+          "eligible_branches": [],
+          "required_skills": [
+            "CSS",
+            "HTML",
+            "JavaScript",
+            "React"
+          ],
+          "preferred_skills": [
+            "TypeScript"
+          ]
+        },
+        "expected": {
+          "role": "Frontend Engineer",
+          "min_cgpa": 6.5,
+          "max_backlogs": 0,
+          "eligible_branches": [],
+          "required_skills": [
+            "CSS",
+            "HTML",
+            "JavaScript",
+            "React"
+          ],
+          "preferred_skills": [
+            "TypeScript"
+          ]
+        }
+      },
+      {
+        "id": "JD04",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "QA Automation Engineer",
+          "min_cgpa": 6.8,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Git",
+            "Java",
+            "Selenium"
+          ],
+          "preferred_skills": [
+            "Docker",
+            "Jenkins"
+          ]
+        },
+        "expected": {
+          "role": "QA Automation Engineer",
+          "min_cgpa": 6.8,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Git",
+            "Java",
+            "Selenium"
+          ],
+          "preferred_skills": [
+            "Docker",
+            "Jenkins"
+          ]
+        }
+      },
+      {
+        "id": "JD05",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Cloud Support Associate",
+          "min_cgpa": 6.5,
+          "max_backlogs": 1,
+          "eligible_branches": [],
+          "required_skills": [
+            "AWS",
+            "Linux",
+            "Networking"
+          ],
+          "preferred_skills": [
+            "Docker"
+          ]
+        },
+        "expected": {
+          "role": "Cloud Support Associate",
+          "min_cgpa": 6.5,
+          "max_backlogs": 1,
+          "eligible_branches": [],
+          "required_skills": [
+            "AWS",
+            "Linux",
+            "Networking"
+          ],
+          "preferred_skills": [
+            "Docker"
+          ]
+        }
+      },
+      {
+        "id": "JD06",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Embedded Systems Engineer",
+          "min_cgpa": 7.2,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "ECE",
+            "EEE"
+          ],
+          "required_skills": [
+            "C",
+            "Embedded Systems",
+            "Verilog"
+          ],
+          "preferred_skills": [
+            "Arduino"
+          ]
+        },
+        "expected": {
+          "role": "Embedded Systems Engineer",
+          "min_cgpa": 7.2,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "ECE",
+            "EEE"
+          ],
+          "required_skills": [
+            "C",
+            "Embedded Systems",
+            "Verilog"
+          ],
+          "preferred_skills": [
+            "Arduino"
+          ]
+        }
+      },
+      {
+        "id": "JD07",
+        "field_correct": {
+          "role": false,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "DevOps Engineer\n- Branches: CSE, IT\n- Min CGPA: 7.0\n- Maximum 1 backlog\n- Required skills: Linux, Docker, Kubernetes, Git\n- Terraform preferred",
+          "min_cgpa": 7.0,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Docker",
+            "Git",
+            "Kubernetes",
+            "Linux"
+          ],
+          "preferred_skills": [
+            "Terraform"
+          ]
+        },
+        "expected": {
+          "role": "DevOps Engineer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Docker",
+            "Git",
+            "Kubernetes",
+            "Linux"
+          ],
+          "preferred_skills": [
+            "Terraform"
+          ]
+        }
+      },
+      {
+        "id": "JD08",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "We are hiring a Java Developer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Java",
+            "REST APIs",
+            "SQL",
+            "Spring Boot"
+          ],
+          "preferred_skills": [
+            "AWS"
+          ]
+        },
+        "expected": {
+          "role": "We are hiring a Java Developer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Java",
+            "REST APIs",
+            "SQL",
+            "Spring Boot"
+          ],
+          "preferred_skills": [
+            "AWS"
+          ]
+        }
+      },
+      {
+        "id": "JD09",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Product Intern",
+          "min_cgpa": 6.0,
+          "max_backlogs": null,
+          "eligible_branches": [],
+          "required_skills": [
+            "Communication",
+            "Data Analysis",
+            "Excel"
+          ],
+          "preferred_skills": [
+            "Power BI"
+          ]
+        },
+        "expected": {
+          "role": "Product Intern",
+          "min_cgpa": 6.0,
+          "max_backlogs": null,
+          "eligible_branches": [],
+          "required_skills": [
+            "Communication",
+            "Data Analysis",
+            "Excel"
+          ],
+          "preferred_skills": [
+            "Power BI"
+          ]
+        }
+      },
+      {
+        "id": "JD10",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Machine Learning Engineer",
+          "min_cgpa": 7.8,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Machine Learning",
+            "Pandas",
+            "PyTorch",
+            "Python"
+          ],
+          "preferred_skills": [
+            "TensorFlow"
+          ]
+        },
+        "expected": {
+          "role": "Machine Learning Engineer",
+          "min_cgpa": 7.8,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "Machine Learning",
+            "Pandas",
+            "PyTorch",
+            "Python"
+          ],
+          "preferred_skills": [
+            "TensorFlow"
+          ]
+        }
+      },
+      {
+        "id": "JD11",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Cybersecurity Analyst",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Cybersecurity",
+            "Linux",
+            "Networking",
+            "Python"
+          ],
+          "preferred_skills": [
+            "Cloudflare"
+          ]
+        },
+        "expected": {
+          "role": "Cybersecurity Analyst",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Cybersecurity",
+            "Linux",
+            "Networking",
+            "Python"
+          ],
+          "preferred_skills": [
+            "Cloudflare"
+          ]
+        }
+      },
+      {
+        "id": "JD12",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Junior UX Designer",
+          "min_cgpa": null,
+          "max_backlogs": null,
+          "eligible_branches": [],
+          "required_skills": [
+            "Figma",
+            "User Experience Design",
+            "User Interface Design"
+          ],
+          "preferred_skills": [
+            "HTML"
+          ]
+        },
+        "expected": {
+          "role": "Junior UX Designer",
+          "min_cgpa": null,
+          "max_backlogs": null,
+          "eligible_branches": [],
+          "required_skills": [
+            "Figma",
+            "User Experience Design",
+            "User Interface Design"
+          ],
+          "preferred_skills": [
+            "HTML"
+          ]
+        }
+      },
+      {
+        "id": "JD13",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": false,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Database Engineer",
+          "min_cgpa": null,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "MongoDB",
+            "PostgreSQL",
+            "Redis",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Apache Kafka"
+          ]
+        },
+        "expected": {
+          "role": "Database Engineer",
+          "min_cgpa": 7.1,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "MongoDB",
+            "PostgreSQL",
+            "Redis",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Apache Kafka"
+          ]
+        }
+      },
+      {
+        "id": "JD14",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Business Intelligence Analyst",
+          "min_cgpa": 6.0,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CE",
+            "CSE",
+            "IT",
+            "ME"
+          ],
+          "required_skills": [
+            "Excel",
+            "SQL",
+            "Tableau"
+          ],
+          "preferred_skills": [
+            "Power BI"
+          ]
+        },
+        "expected": {
+          "role": "Business Intelligence Analyst",
+          "min_cgpa": 6.0,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CE",
+            "CSE",
+            "IT",
+            "ME"
+          ],
+          "required_skills": [
+            "Excel",
+            "SQL",
+            "Tableau"
+          ],
+          "preferred_skills": [
+            "Power BI"
+          ]
+        }
+      },
+      {
+        "id": "JD15",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Mobile Application Developer",
+          "min_cgpa": 6.7,
+          "max_backlogs": 0,
+          "eligible_branches": [],
+          "required_skills": [
+            "Git",
+            "Kotlin"
+          ],
+          "preferred_skills": [
+            "Firebase",
+            "REST APIs"
+          ]
+        },
+        "expected": {
+          "role": "Mobile Application Developer",
+          "min_cgpa": 6.7,
+          "max_backlogs": 0,
+          "eligible_branches": [],
+          "required_skills": [
+            "Git",
+            "Kotlin"
+          ],
+          "preferred_skills": [
+            "Firebase",
+            "REST APIs"
+          ]
+        }
+      },
+      {
+        "id": "JD16",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Junior Data Engineer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Apache Airflow",
+            "Apache Spark",
+            "ETL",
+            "Python",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Snowflake"
+          ]
+        },
+        "expected": {
+          "role": "Junior Data Engineer",
+          "min_cgpa": 7.0,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Apache Airflow",
+            "Apache Spark",
+            "ETL",
+            "Python",
+            "SQL"
+          ],
+          "preferred_skills": [
+            "Snowflake"
+          ]
+        }
+      },
+      {
+        "id": "JD17",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Platform Engineer",
+          "min_cgpa": 7.3,
+          "max_backlogs": 1,
+          "eligible_branches": [],
+          "required_skills": [
+            "Docker",
+            "Kubernetes",
+            "Terraform"
+          ],
+          "preferred_skills": [
+            "Helm"
+          ]
+        },
+        "expected": {
+          "role": "Platform Engineer",
+          "min_cgpa": 7.3,
+          "max_backlogs": 1,
+          "eligible_branches": [],
+          "required_skills": [
+            "Docker",
+            "Kubernetes",
+            "Terraform"
+          ],
+          "preferred_skills": [
+            "Helm"
+          ]
+        }
+      },
+      {
+        "id": "JD18",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": false,
+          "preferred_skills": false
+        },
+        "actual": {
+          "role": "Civil Design Engineer",
+          "min_cgpa": 6.5,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CE"
+          ],
+          "required_skills": [
+            "AutoCAD"
+          ],
+          "preferred_skills": []
+        },
+        "expected": {
+          "role": "Civil Design Engineer",
+          "min_cgpa": 6.5,
+          "max_backlogs": 2,
+          "eligible_branches": [
+            "CE"
+          ],
+          "required_skills": [
+            "AutoCAD",
+            "Revit",
+            "Structural Analysis"
+          ],
+          "preferred_skills": [
+            "STAAD.Pro"
+          ]
+        }
+      },
+      {
+        "id": "JD19",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": true,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Frontend Developer (React)",
+          "min_cgpa": 6.9,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "CSS",
+            "HTML",
+            "JavaScript",
+            "React"
+          ],
+          "preferred_skills": [
+            "Next.js"
+          ]
+        },
+        "expected": {
+          "role": "Frontend Developer (React)",
+          "min_cgpa": 6.9,
+          "max_backlogs": 0,
+          "eligible_branches": [
+            "CSE",
+            "IT"
+          ],
+          "required_skills": [
+            "CSS",
+            "HTML",
+            "JavaScript",
+            "React"
+          ],
+          "preferred_skills": [
+            "Next.js"
+          ]
+        }
+      },
+      {
+        "id": "JD20",
+        "field_correct": {
+          "role": true,
+          "min_cgpa": false,
+          "max_backlogs": true,
+          "eligible_branches": true,
+          "required_skills": true,
+          "preferred_skills": true
+        },
+        "actual": {
+          "role": "Data Scientist",
+          "min_cgpa": null,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Data Visualization",
+            "Python",
+            "Scikit-learn",
+            "Statistics"
+          ],
+          "preferred_skills": [
+            "Generative AI",
+            "Natural Language Processing"
+          ]
+        },
+        "expected": {
+          "role": "Data Scientist",
+          "min_cgpa": 7.0,
+          "max_backlogs": 1,
+          "eligible_branches": [
+            "CSE",
+            "ECE",
+            "IT"
+          ],
+          "required_skills": [
+            "Data Visualization",
+            "Python",
+            "Scikit-learn",
+            "Statistics"
+          ],
+          "preferred_skills": [
+            "Generative AI",
+            "Natural Language Processing"
+          ]
+        }
+      }
+    ]
+  },
+  "skill_matching": {
+    "pair_count": 30,
+    "class_counts": {
+      "same_or_alias": 10,
+      "related": 10,
+      "different": 10
+    },
+    "exact_plus_alias": {
+      "accuracy": 0.666667,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.666667,
+      "correct": 20,
+      "total": 30
+    },
+    "category_exact_alias_accuracy": {
+      "same_or_alias": 1.0,
+      "related": 0.0,
+      "different": 1.0
+    },
+    "embedding_loaded": true,
+    "embedding_threshold": 0.75,
+    "pair_results": [
+      {
+        "candidate": "Python 3",
+        "required": "Python",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "RESTful",
+        "required": "REST APIs",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "NodeJS",
+        "required": "Node.js",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "Amazon Web Services",
+        "required": "AWS",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "K8s",
+        "required": "Kubernetes",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "React.js",
+        "required": "React",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "CPP",
+        "required": "C++",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "Postgres",
+        "required": "PostgreSQL",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "sklearn",
+        "required": "Scikit-learn",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "Golang",
+        "required": "Go",
+        "category": "same_or_alias",
+        "expected_match": true,
+        "exact_alias_match": true,
+        "embedding_similarity": null,
+        "embedding_match": true
+      },
+      {
+        "candidate": "React",
+        "required": "Vue.js",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.37517,
+        "embedding_match": false
+      },
+      {
+        "candidate": "PyTorch",
+        "required": "TensorFlow",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.48642,
+        "embedding_match": false
+      },
+      {
+        "candidate": "AWS",
+        "required": "Azure",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.439589,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Docker",
+        "required": "Kubernetes",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.315074,
+        "embedding_match": false
+      },
+      {
+        "candidate": "FastAPI",
+        "required": "Flask",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.22999,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Java",
+        "required": "Kotlin",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.281789,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Pandas",
+        "required": "NumPy",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.447599,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Terraform",
+        "required": "Ansible",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.338961,
+        "embedding_match": false
+      },
+      {
+        "candidate": "MySQL",
+        "required": "PostgreSQL",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.546877,
+        "embedding_match": false
+      },
+      {
+        "candidate": "HTML",
+        "required": "CSS",
+        "category": "related",
+        "expected_match": true,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.604739,
+        "embedding_match": false
+      },
+      {
+        "candidate": "AutoCAD",
+        "required": "Natural Language Processing",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.122876,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Salesforce",
+        "required": "Embedded Systems",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.284303,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Ruby",
+        "required": "Power BI",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.360225,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Oracle Database",
+        "required": "Figma",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.123605,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Verilog",
+        "required": "Tableau",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.09061,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Jira",
+        "required": "Computer Vision",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.234426,
+        "embedding_match": false
+      },
+      {
+        "candidate": "MATLAB",
+        "required": "DynamoDB",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.044811,
+        "embedding_match": false
+      },
+      {
+        "candidate": "SolidWorks",
+        "required": "Cybersecurity",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.277262,
+        "embedding_match": false
+      },
+      {
+        "candidate": "PHP",
+        "required": "Thermodynamics",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.186023,
+        "embedding_match": false
+      },
+      {
+        "candidate": "Git",
+        "required": "Natural Language Processing",
+        "category": "different",
+        "expected_match": false,
+        "exact_alias_match": false,
+        "embedding_similarity": 0.136981,
+        "embedding_match": false
+      }
+    ],
+    "related_threshold_sweep": [
+      {
+        "threshold": 0.4,
+        "precision": 1.0,
+        "recall": 0.5,
+        "true_positive": 5,
+        "false_positive": 0,
+        "false_negative": 5,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.45,
+        "precision": 1.0,
+        "recall": 0.3,
+        "true_positive": 3,
+        "false_positive": 0,
+        "false_negative": 7,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.5,
+        "precision": 1.0,
+        "recall": 0.2,
+        "true_positive": 2,
+        "false_positive": 0,
+        "false_negative": 8,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.55,
+        "precision": 1.0,
+        "recall": 0.1,
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 9,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.6,
+        "precision": 1.0,
+        "recall": 0.1,
+        "true_positive": 1,
+        "false_positive": 0,
+        "false_negative": 9,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.65,
+        "precision": 0.0,
+        "recall": 0.0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 10,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.7,
+        "precision": 0.0,
+        "recall": 0.0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 10,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.75,
+        "precision": 0.0,
+        "recall": 0.0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 10,
+        "evaluated_pair_count": 20
+      },
+      {
+        "threshold": 0.8,
+        "precision": 0.0,
+        "recall": 0.0,
+        "true_positive": 0,
+        "false_positive": 0,
+        "false_negative": 10,
+        "evaluated_pair_count": 20
+      }
+    ],
+    "related_pair_similarities": [
+      {
+        "candidate": "React",
+        "required": "Vue.js",
+        "cosine_similarity": 0.37517
+      },
+      {
+        "candidate": "PyTorch",
+        "required": "TensorFlow",
+        "cosine_similarity": 0.48642
+      },
+      {
+        "candidate": "AWS",
+        "required": "Azure",
+        "cosine_similarity": 0.439589
+      },
+      {
+        "candidate": "Docker",
+        "required": "Kubernetes",
+        "cosine_similarity": 0.315074
+      },
+      {
+        "candidate": "FastAPI",
+        "required": "Flask",
+        "cosine_similarity": 0.22999
+      },
+      {
+        "candidate": "Java",
+        "required": "Kotlin",
+        "cosine_similarity": 0.281789
+      },
+      {
+        "candidate": "Pandas",
+        "required": "NumPy",
+        "cosine_similarity": 0.447599
+      },
+      {
+        "candidate": "Terraform",
+        "required": "Ansible",
+        "cosine_similarity": 0.338961
+      },
+      {
+        "candidate": "MySQL",
+        "required": "PostgreSQL",
+        "cosine_similarity": 0.546877
+      },
+      {
+        "candidate": "HTML",
+        "required": "CSS",
+        "cosine_similarity": 0.604739
+      }
+    ],
+    "embedding_plus_alias": {
+      "accuracy": 0.666667,
+      "precision": 1.0,
+      "recall": 0.5,
+      "f1": 0.666667,
+      "correct": 20,
+      "total": 30
+    },
+    "embedding_category_accuracy": {
+      "same_or_alias": 1.0,
+      "related": 0.0,
+      "different": 1.0
+    }
+  },
+  "risk_model": {
+    "selected_model": "gradient_boosting",
+    "rows": 1500,
+    "unplaced_rate": 0.7333,
+    "accuracy": 0.7733,
+    "precision": 0.8193,
+    "recall": 0.8864,
+    "f1": 0.8515,
+    "roc_auc": 0.8568,
+    "confusion_matrix": [
+      [
+        37,
+        43
+      ],
+      [
+        25,
+        195
+      ]
+    ],
+    "test_size": 300,
+    "note": "Evaluation uses a stratified 80/20 split with random_state=42; label 1 means no accepted offer.",
+    "always_unplaced_accuracy_baseline": 0.7333,
+    "caveats": [
+      "About 73 percent of this cohort is unplaced, so accuracy near 0.77 is close to the always-unplaced baseline of 0.73.",
+      "Features such as interviews attended come from the same placement funnel that produces the target label.",
+      "These are synthetic holdout metrics and are not real-world accuracy estimates."
+    ]
+  },
+  "latency": {
+    "machine_description": "Developer laptop; Windows-11-10.0.26300-SP0; processor: Intel64 Family 6 Model 151 Stepping 2, GenuineIntel; Python 3.14.3.",
+    "match_one_pair": {
+      "pair": {
+        "student_id": "ST0001",
+        "job_id": "JOB001"
+      },
+      "median_ms": 1.2321,
+      "calls_after_warmup": 50
+    },
+    "rank_100_students": {
+      "requested_count": 100,
+      "actual_count": 100,
+      "median_ms": 65.9128,
+      "repetitions_after_warmup": 3
+    },
+    "rank_500_students": {
+      "requested_count": 500,
+      "actual_count": 500,
+      "median_ms": 434.7046,
+      "repetitions_after_warmup": 3
+    }
+  }
+}
