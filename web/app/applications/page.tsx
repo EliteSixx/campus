@@ -1,67 +1,39 @@
+import Link from "next/link";
 import { DashboardShell } from "@/components/shared/dashboard-shell";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MatchScore } from "@/components/shared/match-score";
 import { getAllOpportunities } from "@/lib/api/opportunities";
 import { getCompanyById } from "@/data/companies";
-import { EmptyState } from "@/components/shared/state";
-import { ClipboardList } from "lucide-react";
-
-const applicationStatuses = [
-  { status: "Under Review", tone: "warning" as const },
-  { status: "Shortlisted", tone: "success" as const },
-  { status: "Applied", tone: "neutral" as const },
-];
+import { computeSkillMatch } from "@/features/samir/data/current-student";
+import { ApplicationsTracker, TrackerOpportunity } from "@/features/samir/components/applications-tracker";
 
 export default async function ApplicationsPage() {
   const opportunities = await getAllOpportunities();
-  // Simulate Rudy's 6 applications by taking a deterministic slice.
-  const applied = opportunities.slice(0, 6).map((o, i) => ({
-    ...o,
-    status: applicationStatuses[i % applicationStatuses.length],
-    appliedOn: `2026-0${(i % 6) + 3}-${10 + i}`,
-    matchScore: 55 + ((i * 7) % 40),
-  }));
+
+  // Match scores come from the same function the Opportunities pages use.
+  const tracked: TrackerOpportunity[] = opportunities.map((o) => {
+    const company = getCompanyById(o.companyId);
+    return {
+      id: o.id,
+      title: o.title,
+      companyName: company?.name ?? "Company",
+      companyInitials: company?.initials ?? "--",
+      location: o.location,
+      type: o.type,
+      matchScore: computeSkillMatch(o.requiredSkills).matchScore,
+    };
+  });
 
   return (
-    <DashboardShell title="Applications">
-      <div className="mb-5">
-        <h2 className="text-xl font-semibold text-ink">Your applications</h2>
-        <p className="mt-0.5 text-sm text-ink-muted">Track the status of every role you&apos;ve applied to.</p>
-      </div>
-
-      {applied.length === 0 ? (
-        <EmptyState
-          icon={ClipboardList}
-          title="No applications yet"
-          description="Opportunities you apply to will show up here."
-        />
-      ) : (
-        <div className="space-y-3">
-          {applied.map((a) => {
-            const company = getCompanyById(a.companyId);
-            return (
-              <Card key={a.id} className="flex flex-col items-start gap-4 p-4 sm:flex-row sm:items-center sm:justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-surface-raised text-xs font-semibold text-ink-muted">
-                    {company?.initials}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-ink">{a.title}</p>
-                    <p className="text-xs text-ink-muted">
-                      {company?.name} · Applied {a.appliedOn}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4">
-                  <MatchScore value={a.matchScore} size="sm" />
-                  <Badge tone={a.status.tone}>{a.status.status}</Badge>
-                </div>
-              </Card>
-            );
-          })}
+    <DashboardShell title="My Applications">
+      <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <h2 className="text-xl font-semibold text-ink">My applications</h2>
+          <p className="mt-0.5 text-sm text-ink-muted">Track every role you&apos;ve applied to, from submission to offer.</p>
         </div>
-      )}
+        <Link href="/opportunities" className="text-xs font-medium text-accent hover:underline">
+          Find more opportunities
+        </Link>
+      </div>
+      <ApplicationsTracker opportunities={tracked} />
     </DashboardShell>
   );
 }

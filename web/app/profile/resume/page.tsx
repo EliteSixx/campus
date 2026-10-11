@@ -5,7 +5,7 @@ import { StudentResumeBuilder } from "@/components/resume/resume-builder";
 
 export default function ResumePage() {
   return (
-    <DashboardShell title="Student Resume Builder">
+    <DashboardShell title="Resume">
       <StudentResumeBuilder />
     </DashboardShell>
   );
