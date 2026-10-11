@@ -70,6 +70,7 @@ export function LifecycleTimeline({
                 day: "numeric",
                 hour: "2-digit",
                 minute: "2-digit",
+                timeZone: "Asia/Kolkata",
               })}
             </span>
           </div>
@@ -152,6 +153,7 @@ export function LifecycleTimeline({
                     {new Date(stepHistory.timestamp).toLocaleDateString("en-IN", {
                       month: "short",
                       day: "numeric",
+                      timeZone: "Asia/Kolkata",
                     })}
                   </span>
                 )}
