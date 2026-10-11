@@ -21,6 +21,7 @@ import {
   Bell,
   PlusSquare,
   Users2,
+  Handshake,
   LucideIcon,
 } from "lucide-react";
 import { useRole } from "@/context/role-context";
@@ -251,6 +252,11 @@ export function Sidebar({
             href: "/applications",
             icon: ClipboardList,
           },
+          { label: "Offers", href: "/offers", icon: Handshake },
+        ];
+      case "institution":
+        return [
+          { label: "Offers and joining", href: "/offers/manage", icon: Handshake },
         ];
       case "industry":
         return [
