@@ -255,7 +255,7 @@ export function Sidebar({
       case "industry":
         return [
           { label: "Colleagues", href: "/dashboard/industry/colleagues", icon: Users2 },
-          { label: "Post Job", href: "/dashboard/industry/post-job", icon: PlusSquare },
+          { label: "Add Jobs", href: "/dashboard/industry/post-job", icon: PlusSquare },
         ];
       default:
         return [];
