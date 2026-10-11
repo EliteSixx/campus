@@ -30,6 +30,7 @@ export function OpportunitiesClient({ opportunities }: { opportunities: OppWithM
   const [skill, setSkill] = useState("all");
   const [statusFilter, setStatusFilter] = useState("active");
   const [minMatch, setMinMatch] = useState("0");
+  const [sortBy, setSortBy] = useState<"match" | "deadline">("match");
 
   const filtered = useMemo(() => {
     return opportunities.filter((o) => {
@@ -50,8 +51,15 @@ export function OpportunitiesClient({ opportunities }: { opportunities: OppWithM
             : (o.deadline ? getOpportunityStatus(o.deadline) === statusFilter : true);
 
       return matchesQuery && matchesType && matchesMode && matchesSkill && matchesMinMatch && matchesStatus;
-    });
-  }, [opportunities, query, type, mode, skill, minMatch, statusFilter]);
+    }).sort((a, b) =>
+      sortBy === "deadline"
+        ? (a.deadline ?? "9999").localeCompare(b.deadline ?? "9999")
+        : b.matchScore - a.matchScore
+    );
+  }, [opportunities, query, type, mode, skill, minMatch, statusFilter, sortBy]);
+
+  const noOpenRoles =
+    statusFilter === "active" && filtered.length === 0 && opportunities.length > 0;
 
   return (
     <div>
@@ -99,9 +107,31 @@ export function OpportunitiesClient({ opportunities }: { opportunities: OppWithM
         </Select>
       </div>
 
-      <p className="mb-3 text-xs text-ink-muted">{filtered.length} opportunities found</p>
+      <div className="mb-3 flex items-center justify-between gap-3">
+        <p className="text-xs text-ink-muted">{filtered.length} opportunities found</p>
+        <label className="flex items-center gap-2 text-xs text-ink-muted">
+          Sort by
+          <Select value={sortBy} onChange={(e) => setSortBy(e.target.value as "match" | "deadline")}>
+            <option value="match">Best match</option>
+            <option value="deadline">Deadline (soonest)</option>
+          </Select>
+        </label>
+      </div>
 
-      {filtered.length === 0 ? (
+      {noOpenRoles ? (
+        <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed border-border py-16 text-center">
+          <p className="text-sm font-medium text-ink">No roles are open right now</p>
+          <p className="max-w-sm text-xs text-ink-muted">
+            New opportunities are added as recruiters post them. You can still browse past roles to see what skills they asked for.
+          </p>
+          <button
+            onClick={() => setStatusFilter("all")}
+            className="text-xs font-semibold text-accent hover:underline"
+          >
+            Show all opportunities
+          </button>
+        </div>
+      ) : filtered.length === 0 ? (
         <EmptyState
           title="No opportunities match your filters"
           description="Try widening your search or selecting 'All statuses' to view historical opportunities."

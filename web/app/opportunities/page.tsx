@@ -1,17 +1,12 @@
 import { DashboardShell } from "@/components/shared/dashboard-shell";
 import { getAllOpportunities } from "@/lib/api/opportunities";
-import { getStudentProfile } from "@/lib/api/students";
+import { computeSkillMatch } from "@/features/samir/data/current-student";
 import { OpportunitiesClient } from "./opportunities-client";
 
 export default async function OpportunitiesPage() {
   const opportunities = await getAllOpportunities();
-  const student = await getStudentProfile("s1");
-  const studentSkillIds = new Set(student.skills.filter((s) => s.score >= 50).map((s) => s.skillId));
-
   const withMatch = opportunities.map((o) => {
-    const matchingSkills = o.requiredSkills.filter((id) => studentSkillIds.has(id));
-    const missingSkills = o.requiredSkills.filter((id) => !studentSkillIds.has(id));
-    const matchScore = Math.round((matchingSkills.length / o.requiredSkills.length) * 100);
+    const { matchScore, matchingSkills, missingSkills } = computeSkillMatch(o.requiredSkills);
     return {
       id: o.id,
       title: o.title,

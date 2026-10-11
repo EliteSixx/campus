@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRole, Role } from "@/context/role-context";
 import { useUserProfile } from "@/context/user-profile-context";
 import {
@@ -16,6 +17,7 @@ import { ResumeForm } from "./resume-form";
 import { ResumePreview } from "./resume-preview";
 import { CandidateResumeViewer } from "./candidate-resume-viewer";
 import { AccessRestricted } from "./access-restricted";
+import { ResumeAtsCheck } from "./resume-ats-check";
 import {
   Save,
   CheckCircle2,
@@ -25,6 +27,8 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+
+const SHOW_DEV_TOOLS = process.env.NEXT_PUBLIC_SHOW_DEV_TOOLS === "true";
 
 export function StudentResumeBuilder() {
   const { role } = useRole();
@@ -117,7 +121,7 @@ export function StudentResumeBuilder() {
       <div className="flex min-h-[400px] items-center justify-center">
         <div className="flex items-center gap-3 text-ink-muted text-xs">
           <div className="h-4 w-4 animate-spin rounded-full border-2 border-accent border-t-transparent" />
-          Loading structured resume telemetry...
+          Loading your resume...
         </div>
       </div>
     );
@@ -170,12 +174,9 @@ export function StudentResumeBuilder() {
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <h1 className="text-lg font-bold tracking-tight text-ink flex items-center gap-2">
-              Structured Resume Builder
+              Resume Builder
               <Sparkles className="h-4 w-4 text-accent" />
             </h1>
-            <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[11px] font-bold text-accent border border-accent/30">
-              Student Profile
-            </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 text-xs text-ink-muted">
@@ -233,6 +234,18 @@ export function StudentResumeBuilder() {
             Download PDF
           </Button>
 
+          {/* AI Mock Interview */}
+          <Link href="/profile/interview">
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 text-xs gap-1.5 font-bold border-accent/40 text-accent hover:bg-accent/10"
+            >
+              <Sparkles className="h-3.5 w-3.5 text-accent" />
+              Mock Interview
+            </Button>
+          </Link>
+
           {/* Save Resume */}
           <Button
             onClick={handleSave}
@@ -248,7 +261,7 @@ export function StudentResumeBuilder() {
             {savedSuccess ? (
               <>
                 <CheckCircle2 className="h-3.5 w-3.5" />
-                Saved & Telemetry Updated!
+                Saved
               </>
             ) : (
               <>
@@ -258,7 +271,8 @@ export function StudentResumeBuilder() {
             )}
           </Button>
 
-          {/* Security Test Toggle */}
+          {/* Privacy test toggle: developer-only, hidden from students */}
+          {SHOW_DEV_TOOLS && (
           <button
             onClick={() => setSimulatedStudentB(!simulatedStudentB)}
             className="text-[11px] text-ink-muted hover:text-danger underline transition-colors ml-1 font-medium"
@@ -266,8 +280,11 @@ export function StudentResumeBuilder() {
           >
             Test Privacy Guard
           </button>
+          )}
         </div>
       </div>
+
+      <ResumeAtsCheck resume={resume} />
 
       {/* Mobile Toggle Tabs */}
       <div className="flex lg:hidden rounded-lg border border-border bg-surface p-1 text-xs print:hidden">
@@ -278,7 +295,7 @@ export function StudentResumeBuilder() {
             mobileTab === "edit" ? "bg-accent text-white" : "text-ink-muted"
           )}
         >
-          Edit Resume Form
+          Edit
         </button>
         <button
           onClick={() => setMobileTab("preview")}
@@ -287,7 +304,7 @@ export function StudentResumeBuilder() {
             mobileTab === "preview" ? "bg-accent text-white" : "text-ink-muted"
           )}
         >
-          Live A4 Preview
+          Preview
         </button>
       </div>
 

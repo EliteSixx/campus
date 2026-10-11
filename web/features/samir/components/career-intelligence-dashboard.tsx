@@ -105,6 +105,37 @@ export function CareerIntelligenceDashboard({ studentId = "s1" }: { studentId?: 
   // Active roadmap tab inside roadmaps section
   const [activeRoadmapDuration, setActiveRoadmapDuration] = useState<"3-Month" | "6-Month" | "12-Month">("6-Month");
 
+  // Open a specific tab from the URL, e.g. /career-intelligence?tab=roadmaps
+  useEffect(() => {
+    const tab = new URLSearchParams(window.location.search).get("tab");
+    const valid: ActiveTab[] = ["directory", "comparison", "analyzer", "skillmap", "roadmaps", "live-opportunities"];
+    if (tab && valid.includes(tab as ActiveTab)) setActiveTab(tab as ActiveTab);
+  }, []);
+
+  // Roadmap progress: each learning goal can be ticked off and is remembered per student.
+  const roadmapStorageKey = `campuslink-roadmap-progress-${studentId}`;
+  const [roadmapDone, setRoadmapDone] = useState<Record<string, boolean>>({});
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(roadmapStorageKey);
+      if (raw) setRoadmapDone(JSON.parse(raw));
+    } catch {
+      // progress simply starts empty
+    }
+  }, [roadmapStorageKey]);
+  const toggleRoadmapGoal = (key: string) => {
+    setRoadmapDone((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      try {
+        localStorage.setItem(roadmapStorageKey, JSON.stringify(next));
+      } catch {
+        // keep in-memory progress if storage is unavailable
+      }
+      return next;
+    });
+  };
+  const goalKey = (duration: string, phase: number, goal: number) => `${duration}|${phase}|${goal}`;
+
   // Run analysis dynamically
   const analysisResult: SkillGapAnalysisResult = useMemo(() => {
     return analyzeSkillGap(selectedSkills);
@@ -998,10 +1029,32 @@ export function CareerIntelligenceDashboard({ studentId = "s1" }: { studentId?: 
           </div>
 
           {/* Render Active Roadmap */}
-          {PREPARATION_ROADMAPS.filter((r) => r.duration === activeRoadmapDuration).map((roadmap) => (
+          {PREPARATION_ROADMAPS.filter((r) => r.duration === activeRoadmapDuration).map((roadmap) => {
+            const totalGoals = roadmap.milestones.reduce((n, ms) => n + ms.goals.length, 0);
+            const doneGoals = roadmap.milestones.reduce(
+              (n, ms, pi) => n + ms.goals.filter((_, gi) => roadmapDone[goalKey(roadmap.duration, pi, gi)]).length,
+              0
+            );
+            const pct = totalGoals ? Math.round((doneGoals / totalGoals) * 100) : 0;
+            return (
             <div key={roadmap.duration} className="space-y-4">
               <div className="rounded-xl border border-accent/20 bg-accent/5 p-4 text-xs font-medium text-accent">
-                <span className="font-bold">Timeline Objective:</span> {roadmap.focus}
+                <span className="font-bold">Goal:</span> {roadmap.focus}
+              </div>
+
+              <div className="rounded-xl border border-border bg-surface p-4 shadow-sm">
+                <div className="mb-2 flex items-center justify-between text-xs">
+                  <span className="font-semibold text-ink">Your progress</span>
+                  <span className="font-mono font-semibold text-ink">
+                    {doneGoals}/{totalGoals} goals · {pct}%
+                  </span>
+                </div>
+                <div className="h-2 overflow-hidden rounded-full bg-surface-raised">
+                  <div className="h-full rounded-full bg-accent transition-all" style={{ width: `${pct}%` }} />
+                </div>
+                <p className="mt-2 text-[11px] text-ink-muted">
+                  Tick off goals as you finish them. Your progress is saved on this device.
+                </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -1024,22 +1077,33 @@ export function CareerIntelligenceDashboard({ studentId = "s1" }: { studentId?: 
 
                       <div className="mt-3 space-y-2">
                         <p className="text-[10px] font-bold uppercase tracking-wider text-ink-muted">
-                          Key Learning Goals:
+                          Learning goals ({ms.goals.filter((_, gi) => roadmapDone[goalKey(roadmap.duration, index, gi)]).length}/{ms.goals.length})
                         </p>
                         <ul className="space-y-1.5 text-xs text-ink">
-                          {ms.goals.map((g, i) => (
-                            <li key={i} className="flex items-start gap-1.5">
-                              <span className="text-accent mt-0.5">•</span>
-                              <span>{g}</span>
-                            </li>
-                          ))}
+                          {ms.goals.map((g, i) => {
+                            const key = goalKey(roadmap.duration, index, i);
+                            const checked = Boolean(roadmapDone[key]);
+                            return (
+                              <li key={i}>
+                                <label className="flex cursor-pointer items-start gap-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={checked}
+                                    onChange={() => toggleRoadmapGoal(key)}
+                                    className="mt-0.5 h-3.5 w-3.5 shrink-0 accent-[rgb(var(--accent))]"
+                                  />
+                                  <span className={cn(checked && "text-ink-muted line-through")}>{g}</span>
+                                </label>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     </div>
 
                     <div className="pt-3 border-t border-border">
                       <p className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1">
-                        Verified Deliverables:
+                        Deliverables
                       </p>
                       <ul className="space-y-1 text-[11px] text-ink-muted">
                         {ms.deliverables.map((d, i) => (
@@ -1054,7 +1118,8 @@ export function CareerIntelligenceDashboard({ studentId = "s1" }: { studentId?: 
                 ))}
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
 

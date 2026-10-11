@@ -244,7 +244,6 @@ export function Sidebar({
         return [
           { label: "Skill Profile", href: "/profile/skills", icon: Radar },
           { label: "Resume", href: "/profile/resume", icon: FileText },
-          { label: "Skill Analysis", href: "/skill-analysis", icon: Target },
           { label: "Career Intelligence", href: "/career-intelligence", icon: Sparkles },
           { label: "Opportunities", href: "/opportunities", icon: Briefcase },
           {

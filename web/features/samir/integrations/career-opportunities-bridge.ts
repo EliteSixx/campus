@@ -9,6 +9,7 @@ import { companies as rawCompanies } from "@/data/companies";
 import { TECH_COMPANIES } from "../data/career-intelligence";
 import { rudy, getStudentById } from "@/data/students";
 import { getSkillById } from "@/data/skills";
+import { computeSkillMatch } from "../data/current-student";
 import { getOpportunityStatus, OpportunityStatus } from "@/lib/api/opportunities";
 
 export interface EnrichedOpportunity extends Opportunity {
@@ -102,27 +103,14 @@ export class CareerOpportunitiesBridge {
    * Enrich opportunities with match scores, status, and skill gap roadmaps
    */
   public getEnrichedOpportunities(studentId: string = "s1"): EnrichedOpportunity[] {
-    const studentSkills = this.getStudentSkills(studentId);
+    const student = getStudentById(studentId) ?? rudy;
 
     return rawOpportunities.map((opp) => {
       const companyMeta = this.resolveCompanyMeta(opp.companyId);
       const status = getOpportunityStatus(opp.deadline);
 
-      const matchingSkills: string[] = [];
-      const missingSkills: string[] = [];
-
-      opp.requiredSkills.forEach((reqSkill) => {
-        const key = reqSkill.toLowerCase();
-        const score = studentSkills.get(key) || 0;
-        if (score >= 50) {
-          matchingSkills.push(reqSkill);
-        } else {
-          missingSkills.push(reqSkill);
-        }
-      });
-
-      const totalReq = opp.requiredSkills.length || 1;
-      const matchScore = Math.round((matchingSkills.length / totalReq) * 100);
+      // Same formula as the Opportunities pages so a role never shows two different scores.
+      const { matchScore, matchingSkills, missingSkills } = computeSkillMatch(opp.requiredSkills, student.skills);
 
       const readinessCategory: EnrichedOpportunity["readinessCategory"] =
         matchScore >= 75 ? "High Fit" : matchScore >= 45 ? "Moderate Fit" : "Developing Fit";
