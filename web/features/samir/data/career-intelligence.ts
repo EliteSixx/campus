@@ -991,7 +991,7 @@ export const PREPARATION_ROADMAPS: PreparationRoadmap[] = [
         goals: [
           "Specialize in AI/ML (PyTorch/RAG), Systems (C++/CUDA), or Cloud/Distributed Systems",
           "Participate in 1–2 national hackathons or open source repositories",
-          "Complete 10+ mock technical interviews with senior alumni"
+          "Complete 10+ mock technical interviews with experienced mentors"
         ],
         deliverables: [
           "Specialized domain project with documented production trade-offs",
@@ -1047,7 +1047,7 @@ export const PREPARATION_ROADMAPS: PreparationRoadmap[] = [
         phase: "Quarter 4 (Months 10–12): High-Bar Technical & Behavioral Mastery",
         weeks: "Weeks 37–48",
         goals: [
-          "Conduct 15+ peer and alumni mock interviews with FAANG/Tier-1 engineers",
+          "Conduct 15+ peer and mentor mock interviews with experienced engineers",
           "Master system design scalability trade-offs (CAP theorem, Paxos/Raft, cache invalidation)",
           "Company-specific interview research (Googleyness, Amazon LPs, Meta speed, Apple privacy)"
         ],

@@ -363,7 +363,7 @@ export async function canViewResume(
     return { allowed: false, reason: "The student has restricted industry recruiter access to this resume." };
   }
 
-  if (viewerRole === "institution" || viewerRole === "alumni") {
+  if (viewerRole === "institution") {
     if (visibility.faculty || visibility.industry) return { allowed: true };
     return { allowed: false, reason: "Access restricted by student privacy settings." };
   }

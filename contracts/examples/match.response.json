@@ -1,7 +1,7 @@
 {
   "student_id": "ST001",
   "job_id": "JOB001",
-  "match_score": 91,
+  "match_score": 86,
   "eligible": true,
   "matched_skills": [
     "Python",
@@ -19,7 +19,7 @@
     },
     {
       "type": "PASS",
-      "text": "No active backlogs"
+      "text": "0 active backlogs meet the maximum of 0"
     },
     {
       "type": "PASS",
@@ -30,38 +30,48 @@
       "text": "Matches 4 of 4 required skills"
     },
     {
-      "type": "PASS",
-      "text": "Relevant backend project: Library API"
-    },
-    {
       "type": "WARN",
       "text": "Missing preferred skill: AWS"
+    },
+    {
+      "type": "PASS",
+      "text": "Project technology overlaps 75% with required skills"
+    },
+    {
+      "type": "PASS",
+      "text": "Placement readiness score is 74"
+    },
+    {
+      "type": "PASS",
+      "text": "Assessment average from 2 completed assessments is 68.5"
     }
   ],
   "breakdown": [
     {
       "name": "skills",
-      "score": 96,
+      "score": 98.0,
       "weight": 0.5
     },
     {
       "name": "projects",
-      "score": 92,
+      "score": 75.0,
       "weight": 0.2
     },
     {
       "name": "readiness",
-      "score": 82,
+      "score": 74.0,
       "weight": 0.2
     },
     {
       "name": "assessments",
-      "score": 85,
+      "score": 68.5,
       "weight": 0.1
     }
   ],
+  "fit_level": "HIGHLY_EMPLOYABLE",
+  "summary": "Highly employable: CGPA 8.2 meets the 7.0 minimum and 4 of 4 required skills match, and 0 active backlogs meet the maximum of 0, and CSE is an eligible branch, but the largest gap is the preferred skill AWS.",
   "meta": {
-    "engine_version": "0.1.0-stub",
-    "stub": true
+    "engine_version": "0.2.0",
+    "stub": false
   }
 }

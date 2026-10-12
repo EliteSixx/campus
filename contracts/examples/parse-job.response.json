@@ -21,13 +21,15 @@
     "experience_years": null,
     "ctc_lpa": null
   },
-  "confidence": 0.93,
+  "confidence": 0.56,
   "warnings": [
+    "Company not specified",
     "Maximum backlogs not specified",
+    "Experience requirement not specified",
     "CTC not specified"
   ],
   "meta": {
-    "engine_version": "0.1.0-stub",
-    "stub": true
+    "engine_version": "0.2.0",
+    "stub": false
   }
 }

@@ -3,10 +3,11 @@ import Link from "next/link";
 import { MapPin, Calendar, GraduationCap, Wallet, Check, Minus, X, ArrowLeft } from "lucide-react";
 import { DashboardShell } from "@/components/shared/dashboard-shell";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MatchScore } from "@/components/shared/match-score";
-import { getOpportunity, getOpportunityMatch } from "@/lib/api/opportunities";
+import { getOpportunity, getOpportunityStatus } from "@/lib/api/opportunities";
+import { computeSkillMatch, skillName } from "@/features/samir/data/current-student";
+import { ApplyButton } from "@/features/samir/components/apply-button";
 import { getCompanyById } from "@/data/companies";
 import { getSkillById } from "@/data/skills";
 
@@ -15,14 +16,25 @@ export default async function OpportunityDetailsPage({ params }: { params: Promi
   const opp = await getOpportunity(id);
   if (!opp) notFound();
 
-  const match = await getOpportunityMatch(opp.id, "s1");
+  const ids = computeSkillMatch(opp.requiredSkills);
+  const match = {
+    matchScore: ids.matchScore,
+    strong: ids.strong.map(skillName),
+    partial: ids.partial.map(skillName),
+    missing: ids.missing.map(skillName),
+  };
   const company = getCompanyById(opp.companyId);
+  const status = getOpportunityStatus(opp.deadline);
 
-  const improvementSteps = [
-    `Complete ${match?.missing[0] ?? "the missing skill"} fundamentals`,
-    "Build a small project that applies it end-to-end",
-    "Add it to your portfolio and link it on your profile",
+  // Steps are specific to this role: close missing skills first, then strengthen partial ones.
+  const improvementSteps: string[] = [
+    ...match.missing.slice(0, 2).map((s) => `Learn ${s} fundamentals and build one small project that uses it`),
+    ...match.partial.slice(0, 2).map((s) => `Strengthen ${s} with a verified project or assessment on your Skill Profile`),
   ];
+  if (improvementSteps.length === 0) {
+    improvementSteps.push("You meet every required skill. Tailor your resume summary to this role and apply.");
+  }
+  improvementSteps.push("Update your resume so recruiters can see the new evidence");
 
   return (
     <DashboardShell title="Opportunity Details">
@@ -51,6 +63,17 @@ export default async function OpportunityDetailsPage({ params }: { params: Promi
                   </span>
                   <span className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" /> Apply by {opp.deadline}
+                    <span
+                      className={
+                        status === "Closed"
+                          ? "font-semibold text-ink-faint"
+                          : status === "Closing Soon"
+                          ? "font-semibold text-warning"
+                          : "font-semibold text-success"
+                      }
+                    >
+                      ({status})
+                    </span>
                   </span>
                 </div>
               </div>
@@ -93,26 +116,26 @@ export default async function OpportunityDetailsPage({ params }: { params: Promi
           <Card className="p-5">
             <p className="mb-3 text-xs font-medium uppercase tracking-wide text-ink-muted">Your match</p>
             <div className="flex items-center gap-4">
-              <MatchScore value={match?.matchScore ?? 0} size="lg" />
+              <MatchScore value={match.matchScore} size="lg" />
               <div className="space-y-2 text-xs">
                 <p className="flex items-center gap-1.5 text-success">
-                  <Check className="h-3.5 w-3.5" /> {match?.strong.length ?? 0} strong matches
+                  <Check className="h-3.5 w-3.5" /> {match.strong.length} strong matches
                 </p>
                 <p className="flex items-center gap-1.5 text-warning">
-                  <Minus className="h-3.5 w-3.5" /> {match?.partial.length ?? 0} partial matches
+                  <Minus className="h-3.5 w-3.5" /> {match.partial.length} partial matches
                 </p>
                 <p className="flex items-center gap-1.5 text-danger">
-                  <X className="h-3.5 w-3.5" /> {match?.missing.length ?? 0} missing
+                  <X className="h-3.5 w-3.5" /> {match.missing.length} missing
                 </p>
               </div>
             </div>
 
             <div className="mt-4 space-y-3 border-t border-border pt-4">
-              {(match?.strong.length ?? 0) > 0 && (
+              {match.strong.length > 0 && (
                 <div>
                   <p className="mb-1.5 text-xs font-medium text-ink-muted">Strong matches</p>
                   <div className="flex flex-wrap gap-1.5">
-                    {match?.strong.map((s) => (
+                    {match.strong.map((s) => (
                       <Badge key={s} tone="success">
                         <Check className="h-3 w-3" /> {s}
                       </Badge>
@@ -120,11 +143,11 @@ export default async function OpportunityDetailsPage({ params }: { params: Promi
                   </div>
                 </div>
               )}
-              {(match?.partial.length ?? 0) > 0 && (
+              {match.partial.length > 0 && (
                 <div>
                   <p className="mb-1.5 text-xs font-medium text-ink-muted">Partial matches</p>
                   <div className="flex flex-wrap gap-1.5">
-                    {match?.partial.map((s) => (
+                    {match.partial.map((s) => (
                       <Badge key={s} tone="warning">
                         ~ {s}
                       </Badge>
@@ -132,11 +155,11 @@ export default async function OpportunityDetailsPage({ params }: { params: Promi
                   </div>
                 </div>
               )}
-              {(match?.missing.length ?? 0) > 0 && (
+              {match.missing.length > 0 && (
                 <div>
                   <p className="mb-1.5 text-xs font-medium text-ink-muted">Missing</p>
                   <div className="flex flex-wrap gap-1.5">
-                    {match?.missing.map((s) => (
+                    {match.missing.map((s) => (
                       <Badge key={s} tone="danger">
                         <X className="h-3 w-3" /> {s}
                       </Badge>
@@ -159,7 +182,13 @@ export default async function OpportunityDetailsPage({ params }: { params: Promi
                 </li>
               ))}
             </ol>
-            <Button className="mt-5 w-full">Apply now</Button>
+            <ApplyButton opportunityId={opp.id} closed={status === "Closed"} />
+            <Link
+              href={`/profile/resume?target=${opp.id}`}
+              className="mt-2 block text-center text-xs font-medium text-accent hover:underline"
+            >
+              Tailor your resume for this role
+            </Link>
           </Card>
         </div>
       </div>

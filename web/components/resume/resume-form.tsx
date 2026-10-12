@@ -515,7 +515,7 @@ export function ResumeForm({ resume, onChange }: ResumeFormProps) {
               <Wrench className="h-4 w-4 text-accent" />
               Technical Skills (Skill Intelligence System)
             </h3>
-            <span className="text-[11px] text-ink-muted font-medium">Uses ThePlug Shared Skill Model</span>
+            <span className="text-[11px] text-ink-muted font-medium">Uses CampusLink Shared Skill Model</span>
           </div>
 
           <div className="space-y-2">
@@ -1017,7 +1017,7 @@ export function ResumeForm({ resume, onChange }: ResumeFormProps) {
                 Resume Visibility & Privacy Controls
               </h3>
               <p className="text-xs text-ink-muted mt-0.5 font-medium">
-                Control exactly which authorized stakeholders on ThePlug can access your resume.
+                Control exactly which authorized stakeholders on CampusLink can access your resume.
               </p>
             </div>
             <span className="inline-flex items-center gap-1 rounded-full bg-success-soft px-2.5 py-1 text-[11px] font-bold text-success border border-success/30">
@@ -1113,7 +1113,7 @@ export function ResumeForm({ resume, onChange }: ResumeFormProps) {
               </div>
             </div>
             <p className="text-[11px] text-ink-muted pt-1 italic font-medium">
-              * Your resume is not publicly searchable. Other students on ThePlug cannot view your resume.
+              * Your resume is not publicly searchable. Other students on CampusLink cannot view your resume.
             </p>
           </div>
         </div>

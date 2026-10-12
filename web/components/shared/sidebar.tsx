@@ -10,30 +10,18 @@ import {
   Target,
   Briefcase,
   ClipboardList,
-  GraduationCap,
   Sparkles,
-  MessageSquare,
-  Share2,
   Layers,
   X,
   ChevronLeft,
   ChevronRight,
   ChevronDown,
   FileText,
-  Users,
-  CalendarDays,
-  HelpCircle,
-  BookOpen,
-  ShieldCheck,
-  HeartHandshake,
-  Trophy,
-  GitBranch,
-  Network,
-  Award,
   Link2,
   Bell,
   PlusSquare,
   Users2,
+  Handshake,
   LucideIcon,
 } from "lucide-react";
 import { useRole } from "@/context/role-context";
@@ -256,7 +244,6 @@ export function Sidebar({
         return [
           { label: "Skill Profile", href: "/profile/skills", icon: Radar },
           { label: "Resume", href: "/profile/resume", icon: FileText },
-          { label: "Skill Analysis", href: "/skill-analysis", icon: Target },
           { label: "Career Intelligence", href: "/career-intelligence", icon: Sparkles },
           { label: "Opportunities", href: "/opportunities", icon: Briefcase },
           {
@@ -264,11 +251,16 @@ export function Sidebar({
             href: "/applications",
             icon: ClipboardList,
           },
+          { label: "Offers", href: "/offers", icon: Handshake },
+        ];
+      case "institution":
+        return [
+          { label: "Offers and joining", href: "/offers/manage", icon: Handshake },
         ];
       case "industry":
         return [
           { label: "Colleagues", href: "/dashboard/industry/colleagues", icon: Users2 },
-          { label: "Post Job", href: "/dashboard/industry/post-job", icon: PlusSquare },
+          { label: "Add Jobs", href: "/dashboard/industry/post-job", icon: PlusSquare },
         ];
       default:
         return [];
@@ -277,86 +269,6 @@ export function Sidebar({
 
   // Collapsible groups
   const groups: NavGroup[] = [];
-
-  if (role === "alumni") {
-    groups.push({
-      label: "Alumni Console",
-      icon: HeartHandshake,
-      storageKey: "sidebar-alumni-console",
-      items: [
-        {
-          label: "Mentorship Inbox",
-          href: "/alumni/mentorship",
-          icon: MessageSquare,
-        },
-        { label: "My Mentees", href: "/alumni/mentees", icon: Users },
-        { label: "Sessions", href: "/alumni/sessions", icon: CalendarDays },
-        { label: "Guidance Hub", href: "/alumni/guidance", icon: HelpCircle },
-        { label: "Resources", href: "/alumni/resources", icon: BookOpen },
-        { label: "Referrals", href: "/alumni/referrals", icon: Share2 },
-        {
-          label: "Student Proofs",
-          href: "/alumni/proofs",
-          icon: ShieldCheck,
-        },
-      ],
-    });
-    groups.push({
-      label: "Growth Tools",
-      icon: Trophy,
-      storageKey: "sidebar-growth-tools",
-      badge: "New",
-      items: [
-        {
-          label: "Impact & Leaderboard",
-          href: "/alumni/impact",
-          icon: Trophy,
-        },
-        {
-          label: "Referral Pipeline",
-          href: "/alumni/referrals-pipeline",
-          icon: GitBranch,
-        },
-        {
-          label: "Network Graph",
-          href: "/alumni/network-graph",
-          icon: Network,
-        },
-        { label: "Badge Wall", href: "/alumni/badges", icon: Award },
-      ],
-    });
-  }
-
-  if (role === "student") {
-    groups.push({
-      label: "My College Alumni",
-      icon: GraduationCap,
-      storageKey: "sidebar-student-alumni",
-      items: [
-        {
-          label: "Alumni Directory",
-          href: "/alumni",
-          icon: GraduationCap,
-        },
-        {
-          label: "Mentorship",
-          href: "/alumni/mentorship",
-          icon: MessageSquare,
-        },
-        {
-          label: "Alumni Referrals",
-          href: "/alumni/referrals",
-          icon: Share2,
-        },
-        {
-          label: "Guidance Hub",
-          href: "/alumni/guidance",
-          icon: HelpCircle,
-        },
-        { label: "Resources", href: "/alumni/resources", icon: BookOpen },
-      ],
-    });
-  }
 
   // Common Settings Group
   groups.push({
@@ -425,11 +337,11 @@ export function Sidebar({
             </div>
             <div className="flex flex-col">
               <span className="text-sm font-bold tracking-tight text-ink flex items-center gap-1">
-                The Plug
+                CampusLink
                 <Sparkles className="h-3 w-3 text-accent" />
               </span>
               <span className="text-[10px] text-ink-muted uppercase tracking-widest font-bold">
-                Alumni Intelligence
+                Placement Intelligence
               </span>
             </div>
           </Link>
@@ -478,7 +390,7 @@ export function Sidebar({
             <div className="rounded-xl bg-surface-raised p-3 text-xs border border-border">
               <div className="flex items-center gap-1.5 font-bold text-ink">
                 <Layers className="h-3.5 w-3.5 text-accent" />
-                The Plug Platform
+                CampusLink Platform
               </div>
               <p className="mt-1 text-[11px] text-ink-muted leading-snug font-medium">
                 Academia × Industry verified intelligence & collaboration.

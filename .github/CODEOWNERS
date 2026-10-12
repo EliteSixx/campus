@@ -1,0 +1,47 @@
+
+# Shared files are Rudy-only.
+/web/app/layout.tsx          @rudythetechy
+/web/app/globals.css         @rudythetechy
+/web/app/login/**            @rudythetechy
+/web/app/register/**         @rudythetechy
+/web/context/**              @rudythetechy
+/web/components/shared/**    @rudythetechy
+/web/components/ui/**        @rudythetechy
+/web/lib/**                  @rudythetechy
+/web/package.json            @rudythetechy
+
+# AI service and generated API contracts.
+/ai/**                       @rudythetechy
+/contracts/**                @rudythetechy
+
+# Student.
+/web/app/dashboard/student/** @sammy1607 @rudythetechy
+/web/app/applications/**      @sammy1607 @rudythetechy
+/web/app/career-intelligence/** @sammy1607 @rudythetechy
+/web/app/opportunities/**     @sammy1607 @rudythetechy
+/web/app/profile/**           @sammy1607 @rudythetechy
+/web/app/skill-analysis/**    @sammy1607 @rudythetechy
+/web/features/samir/**        @sammy1607 @rudythetechy
+/web/components/resume/**     @sammy1607 @rudythetechy
+
+# Recruiter (formerly Industry).
+/web/app/dashboard/industry/** @ishaanshukla0317-prog @rudythetechy
+
+# Placement Cell (formerly Institution).
+/web/app/dashboard/institution/** @subhamsinu @rudythetechy
+/web/components/institution/** @subhamsinu @rudythetechy
+/web/data/institution/**      @subhamsinu @rudythetechy
+/web/lib/api/institution.ts   @subhamsinu @rudythetechy
+
+# Mentor (formerly Faculty).
+/web/app/dashboard/faculty/** @Shiba-UI @rudythetechy
+/web/app/faculty/**           @Shiba-UI @rudythetechy
+/web/components/faculty/**    @Shiba-UI @rudythetechy
+/web/data/faculty-*.ts        @Shiba-UI @rudythetechy
+/web/lib/api/faculty-*.ts     @Shiba-UI @rudythetechy
+/web/lib/api/lecture-planner*.ts @Shiba-UI @rudythetechy
+/web/lib/api/timetable.ts     @Shiba-UI @rudythetechy
+
+# Offers, documents, joining and notifications (new feature area).
+/web/features/offers/**       @brajeshpanigrahi7-byte @rudythetechy
+

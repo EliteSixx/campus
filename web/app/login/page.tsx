@@ -89,11 +89,11 @@ export default function LoginPage() {
             <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-white">
               <Layers className="h-4 w-4" />
             </div>
-            <span className="text-base font-semibold tracking-tight text-ink">The Plug</span>
+            <span className="text-base font-semibold tracking-tight text-ink">CampusLink</span>
           </Link>
 
           <div className="auth-card rounded-2xl border p-6 shadow-card">
-            <h1 className="text-lg font-semibold text-ink">Sign in to The Plug</h1>
+            <h1 className="text-lg font-semibold text-ink">Sign in to CampusLink</h1>
             <p className="mt-1 text-xs text-ink-muted">Enter your credentials or authorize with Google.</p>
 
             <div className="mt-4">
@@ -127,11 +127,11 @@ export default function LoginPage() {
               </div>
               <div>
                 <label className="mb-1 block text-xs font-medium text-ink-muted">
-                  {role === "alumni" ? "Email Address" : "Institutional Email"}
+                  Institutional Email
                 </label>
                 <Input
                   type="email"
-                  placeholder={role === "alumni" ? "you@email.com" : "you@institution.edu"}
+                  placeholder="you@institution.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -140,10 +140,9 @@ export default function LoginPage() {
                 <label className="mb-1 block text-xs font-medium text-ink-muted">Sign in as</label>
                 <Select value={role} onChange={(e) => setLocalRole(e.target.value as Role)}>
                   <option value="student">Student</option>
-                  <option value="alumni">Alumni</option>
-                  <option value="industry">Industry Recruiter</option>
-                  <option value="institution">Institution Admin</option>
-                  <option value="faculty">Faculty Member</option>
+                  <option value="industry">Recruiter</option>
+                  <option value="institution">Placement Cell</option>
+                  <option value="faculty">Mentor</option>
                 </Select>
               </div>
               <Button type="submit" className="w-full mt-2">
@@ -194,7 +193,7 @@ export default function LoginPage() {
             ) : (
               <div className="mt-4 space-y-4">
                 <p className="text-xs text-ink-muted">
-                  Choose a demo Google profile to sign in to The Plug:
+                  Choose a demo Google profile to sign in to CampusLink:
                 </p>
                 <div className="space-y-2">
                   <button
@@ -245,21 +244,6 @@ export default function LoginPage() {
                     <ShieldCheck className="h-4 w-4 text-accent" />
                   </button>
 
-                  <button
-                    onClick={() => confirmGoogleSignIn("priya.mohanty@gmail.com", "Priya Mohanty")}
-                    className="w-full flex items-center justify-between rounded-lg border border-border p-3 text-left transition hover:border-accent/50 hover:bg-surface-raised"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-100 text-amber-700 font-semibold text-xs">
-                        PM
-                      </div>
-                      <div>
-                        <div className="text-xs font-semibold text-ink">Priya Mohanty</div>
-                        <div className="text-[11px] text-ink-muted">priya.mohanty@gmail.com · Alumni</div>
-                      </div>
-                    </div>
-                    <ShieldCheck className="h-4 w-4 text-accent" />
-                  </button>
                 </div>
               </div>
             )}

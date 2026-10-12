@@ -45,16 +45,14 @@ export default function ObjectivesSettingsPage() {
               <h3 className="text-sm font-bold text-ink">
                 {role === "student"
                   ? "Target Career Goal"
-                  : role === "alumni"
-                  ? "Mentorship & Referral Objectives"
                   : role === "faculty"
-                  ? "Academic & Research Focus"
+                  ? "Mentor Focus"
                   : role === "institution"
                   ? "Institutional Objective"
                   : "Hiring Focus & Talent Pipeline"}
               </h3>
               <p className="text-xs text-ink-muted font-medium">
-                What The Plug is optimizing your account telemetry toward.
+                What CampusLink is optimizing your account telemetry toward.
               </p>
               
               <div className="pt-4 flex items-center gap-3">

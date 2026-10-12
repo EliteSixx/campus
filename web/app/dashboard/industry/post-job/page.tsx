@@ -1,10 +1,10 @@
 import { DashboardShell } from "@/components/shared/dashboard-shell";
-import { IndustryPostJobClient } from "@/components/shared/industry-post-job";
+import { AddJobsWorkspace } from "../add-jobs-workspace";
 
 export default function IndustryPostJobPage() {
   return (
-    <DashboardShell title="Industry Post Job">
-      <IndustryPostJobClient />
+    <DashboardShell title="Add Jobs">
+      <AddJobsWorkspace />
     </DashboardShell>
   );
 }

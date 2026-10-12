@@ -7,7 +7,6 @@ import {
   Radar,
   Target,
   GraduationCap,
-  Users2,
   Building2,
   Landmark,
   BookOpen,
@@ -51,7 +50,7 @@ const howItWorksSteps = [
     icon: Target,
     coords: "X:710 · Y:340",
     description:
-      "Every detected deficit initiates a measured, targeted program with alumni mentorship and industry challenges — not an unverified generic catalog.",
+      "Every detected deficit initiates measured mentor guidance and recruiter challenges — not an unverified generic catalog.",
   },
 ];
 
@@ -70,22 +69,9 @@ const stakeholders = [
     ],
   },
   {
-    id: "alumni",
-    num: "02",
-    role: "ALUMNI",
-    color: "#c084fc", // violet
-    icon: Users2,
-    tagline: "The active bridge between academic learning and industry careers.",
-    points: [
-      "Verified candidate referral pipeline",
-      "1-on-1 mentorship session dispatch",
-      "Direct student proof review & validation",
-    ],
-  },
-  {
     id: "industry",
-    num: "03",
-    role: "INDUSTRY",
+    num: "02",
+    role: "RECRUITER",
     color: "#818cf8", // indigo
     icon: Building2,
     tagline: "Recruit talent by proven capability, not keyword-stuffed resumes.",
@@ -97,8 +83,8 @@ const stakeholders = [
   },
   {
     id: "institutions",
-    num: "04",
-    role: "INSTITUTIONS",
+    num: "03",
+    role: "PLACEMENT CELL",
     color: "#34d399", // emerald
     icon: Landmark,
     tagline: "Quantify cohort strengths and pinpoint structural curriculum weaknesses.",
@@ -110,8 +96,8 @@ const stakeholders = [
   },
   {
     id: "faculty",
-    num: "05",
-    role: "FACULTY",
+    num: "04",
+    role: "MENTOR",
     color: "#fbbf24", // amber
     icon: BookOpen,
     tagline: "Identify competency shortfalls before students reach hiring drives.",
@@ -252,7 +238,7 @@ export function IntegratedProductSections() {
       </div>
 
       {/* ========================================================================= */}
-      {/* SECTION 02: STAKEHOLDERS (5 CANONICAL THE PLUG ROLES)                    */}
+      {/* SECTION 02: STAKEHOLDERS (CAMPUSLINK ROLES)                              */}
       {/* ========================================================================= */}
       <div id="stakeholders" className="relative mx-auto max-w-6xl px-4 pt-20 pb-20 sm:px-6 lg:px-8">
         <Reveal className="mb-14">
@@ -363,7 +349,7 @@ export function IntegratedProductSections() {
             Ready to See Your Own Skill Gaps?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-400 font-light max-w-lg mx-auto leading-relaxed">
-            Explore live student, alumni, industry, institution, or faculty dashboards in prototype mode.
+            Explore the student, recruiter, placement cell, and Mentor experiences in prototype mode.
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -390,7 +376,7 @@ export function IntegratedProductSections() {
         <div className="mx-auto flex max-w-6xl flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px] text-slate-500">
           <div className="flex items-center gap-2">
             <Layers className="h-3.5 w-3.5 text-indigo-400" />
-            <span className="text-slate-400">THE PLUG</span>
+            <span className="text-slate-400">CAMPUSLINK</span>
             <span>{"//"} CLOSED-LOOP SKILL INTELLIGENCE ENGINE</span>
           </div>
           <div className="flex items-center gap-4 text-slate-500">

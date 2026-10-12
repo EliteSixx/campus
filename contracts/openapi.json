@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "CampusLink AI Service",
-    "description": "Readiness, skill-gap, JD parsing, matching and placement-risk APIs. Responses carry meta.stub = true while an endpoint still returns hardcoded data.",
+    "description": "Readiness, skill-gap, JD parsing, matching and placement-risk APIs. Responses carry meta.stub = true for endpoints that still return hardcoded data.",
     "version": "0.1.0"
   },
   "paths": {
@@ -18,7 +18,9 @@
             "description": "Successful Response",
             "content": {
               "application/json": {
-                "schema": {}
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
               }
             }
           }
@@ -529,10 +531,240 @@
           }
         }
       }
+    },
+    "/ai/analytics/summary": {
+      "get": {
+        "tags": [
+          "Placement Cell"
+        ],
+        "summary": "Analytics Summary",
+        "operationId": "analytics_summary_ai_analytics_summary_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalyticsSummary"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Synthetic analytics data unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AnalyticsFunnel": {
+        "properties": {
+          "applied": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Applied"
+          },
+          "shortlisted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Shortlisted"
+          },
+          "interviewed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Interviewed"
+          },
+          "offered": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offered"
+          },
+          "accepted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Accepted"
+          }
+        },
+        "type": "object",
+        "required": [
+          "applied",
+          "shortlisted",
+          "interviewed",
+          "offered",
+          "accepted"
+        ],
+        "title": "AnalyticsFunnel"
+      },
+      "AnalyticsSummary": {
+        "properties": {
+          "totals": {
+            "$ref": "#/components/schemas/AnalyticsTotals"
+          },
+          "branch_conversion": {
+            "items": {
+              "$ref": "#/components/schemas/BranchConversion"
+            },
+            "type": "array",
+            "title": "Branch Conversion"
+          },
+          "skill_conversion": {
+            "items": {
+              "$ref": "#/components/schemas/SkillConversion"
+            },
+            "type": "array",
+            "title": "Skill Conversion"
+          },
+          "package_trends": {
+            "$ref": "#/components/schemas/PackageTrends"
+          },
+          "recruiter_pipeline": {
+            "items": {
+              "$ref": "#/components/schemas/RecruiterPipeline"
+            },
+            "type": "array",
+            "title": "Recruiter Pipeline"
+          },
+          "funnel": {
+            "$ref": "#/components/schemas/AnalyticsFunnel"
+          },
+          "at_risk": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AtRiskCounts"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "data_source": {
+            "type": "string",
+            "title": "Data Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "totals",
+          "branch_conversion",
+          "skill_conversion",
+          "package_trends",
+          "recruiter_pipeline",
+          "funnel",
+          "data_source"
+        ],
+        "title": "AnalyticsSummary"
+      },
+      "AnalyticsTotals": {
+        "properties": {
+          "students": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Students"
+          },
+          "placement_ready": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Placement Ready"
+          },
+          "jobs_with_applications": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Jobs With Applications",
+            "description": "Distinct jobs that received at least one application."
+          },
+          "applications": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Applications"
+          },
+          "shortlisted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Shortlisted"
+          },
+          "interviewed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Interviewed"
+          },
+          "offers_made": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offers Made"
+          },
+          "offers_accepted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offers Accepted"
+          },
+          "offers_not_accepted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offers Not Accepted",
+            "description": "Offers recorded as not accepted; the synthetic data has no pending state."
+          },
+          "placed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Placed"
+          },
+          "unplaced": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Unplaced"
+          }
+        },
+        "type": "object",
+        "required": [
+          "students",
+          "placement_ready",
+          "jobs_with_applications",
+          "applications",
+          "shortlisted",
+          "interviewed",
+          "offers_made",
+          "offers_accepted",
+          "offers_not_accepted",
+          "placed",
+          "unplaced"
+        ],
+        "title": "AnalyticsTotals"
+      },
+      "AtRiskCounts": {
+        "properties": {
+          "low": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Low"
+          },
+          "medium": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Medium"
+          },
+          "high": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "High"
+          }
+        },
+        "type": "object",
+        "required": [
+          "low",
+          "medium",
+          "high"
+        ],
+        "title": "AtRiskCounts"
+      },
       "Branch": {
         "type": "string",
         "enum": [
@@ -545,6 +777,37 @@
           "OTHER"
         ],
         "title": "Branch"
+      },
+      "BranchConversion": {
+        "properties": {
+          "branch": {
+            "$ref": "#/components/schemas/Branch"
+          },
+          "students": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Students"
+          },
+          "placed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Placed"
+          },
+          "conversion_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Conversion Pct"
+          }
+        },
+        "type": "object",
+        "required": [
+          "branch",
+          "students",
+          "placed",
+          "conversion_pct"
+        ],
+        "title": "BranchConversion"
       },
       "ErrorBody": {
         "properties": {
@@ -588,6 +851,51 @@
           "error"
         ],
         "title": "ErrorResponse"
+      },
+      "HealthResponse": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "engine_version": {
+            "type": "string",
+            "title": "Engine Version"
+          },
+          "stub": {
+            "type": "boolean",
+            "title": "Stub"
+          },
+          "risk_model_loaded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Risk Model Loaded"
+          },
+          "embedding_model_loaded": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Embedding Model Loaded"
+          }
+        },
+        "type": "object",
+        "required": [
+          "status",
+          "engine_version",
+          "stub"
+        ],
+        "title": "HealthResponse"
       },
       "Job": {
         "properties": {
@@ -763,6 +1071,27 @@
             "type": "array",
             "title": "Breakdown"
           },
+          "fit_level": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReadinessLevel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
           "meta": {
             "$ref": "#/components/schemas/Meta"
           }
@@ -816,6 +1145,109 @@
           "priority"
         ],
         "title": "MissingSkill"
+      },
+      "PackageBranchTrend": {
+        "properties": {
+          "branch": {
+            "$ref": "#/components/schemas/Branch"
+          },
+          "average_ctc_lpa": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Average Ctc Lpa"
+          },
+          "highest_ctc_lpa": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Highest Ctc Lpa"
+          }
+        },
+        "type": "object",
+        "required": [
+          "branch",
+          "average_ctc_lpa",
+          "highest_ctc_lpa"
+        ],
+        "title": "PackageBranchTrend"
+      },
+      "PackageCompanyTrend": {
+        "properties": {
+          "company": {
+            "type": "string",
+            "title": "Company"
+          },
+          "average_ctc_lpa": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Average Ctc Lpa"
+          },
+          "offers": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offers"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company",
+          "average_ctc_lpa",
+          "offers"
+        ],
+        "title": "PackageCompanyTrend"
+      },
+      "PackageOverallTrend": {
+        "properties": {
+          "average_ctc_lpa": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Average Ctc Lpa"
+          },
+          "median_ctc_lpa": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Median Ctc Lpa"
+          },
+          "highest_ctc_lpa": {
+            "type": "number",
+            "minimum": 0.0,
+            "title": "Highest Ctc Lpa"
+          }
+        },
+        "type": "object",
+        "required": [
+          "average_ctc_lpa",
+          "median_ctc_lpa",
+          "highest_ctc_lpa"
+        ],
+        "title": "PackageOverallTrend"
+      },
+      "PackageTrends": {
+        "properties": {
+          "overall": {
+            "$ref": "#/components/schemas/PackageOverallTrend"
+          },
+          "per_branch": {
+            "items": {
+              "$ref": "#/components/schemas/PackageBranchTrend"
+            },
+            "type": "array",
+            "title": "Per Branch"
+          },
+          "per_company": {
+            "items": {
+              "$ref": "#/components/schemas/PackageCompanyTrend"
+            },
+            "type": "array",
+            "title": "Per Company"
+          }
+        },
+        "type": "object",
+        "required": [
+          "overall",
+          "per_branch",
+          "per_company"
+        ],
+        "title": "PackageTrends"
       },
       "ParseJobRequest": {
         "properties": {
@@ -1102,6 +1534,27 @@
             "type": "array",
             "title": "Breakdown"
           },
+          "fit_level": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReadinessLevel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "summary": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Summary"
+          },
           "rank": {
             "type": "integer",
             "minimum": 1.0,
@@ -1230,6 +1683,67 @@
         ],
         "title": "ReasonType"
       },
+      "RecruiterPipeline": {
+        "properties": {
+          "company": {
+            "type": "string",
+            "title": "Company"
+          },
+          "jobs": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Jobs"
+          },
+          "applications": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Applications"
+          },
+          "shortlisted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Shortlisted"
+          },
+          "interviewed": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Interviewed"
+          },
+          "offers": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Offers"
+          },
+          "accepted": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Accepted"
+          },
+          "repeat_hiring": {
+            "type": "boolean",
+            "title": "Repeat Hiring"
+          },
+          "conversion_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Conversion Pct"
+          }
+        },
+        "type": "object",
+        "required": [
+          "company",
+          "jobs",
+          "applications",
+          "shortlisted",
+          "interviewed",
+          "offers",
+          "accepted",
+          "repeat_hiring",
+          "conversion_pct"
+        ],
+        "title": "RecruiterPipeline"
+      },
       "RiskLevel": {
         "type": "string",
         "enum": [
@@ -1267,6 +1781,44 @@
         ],
         "title": "ScoreComponent",
         "description": "One weighted part of a score, for explainability (charts, 'why this score')."
+      },
+      "SkillConversion": {
+        "properties": {
+          "skill": {
+            "type": "string",
+            "title": "Skill"
+          },
+          "students_with_skill": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Students With Skill"
+          },
+          "placed_with_skill": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Placed With Skill"
+          },
+          "conversion_pct": {
+            "type": "number",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Conversion Pct"
+          },
+          "demand_in_jobs": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Demand In Jobs"
+          }
+        },
+        "type": "object",
+        "required": [
+          "skill",
+          "students_with_skill",
+          "placed_with_skill",
+          "conversion_pct",
+          "demand_in_jobs"
+        ],
+        "title": "SkillConversion"
       },
       "SkillGapRequest": {
         "properties": {

@@ -183,7 +183,7 @@ export function StudentProfileDrawer({ student, onClose }: StudentProfileDrawerP
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
-                <span>Alumni mentorship match available in: {student.careerGoal}.</span>
+                <span>Mentor match available in: {student.careerGoal}.</span>
               </li>
             </ul>
           </div>

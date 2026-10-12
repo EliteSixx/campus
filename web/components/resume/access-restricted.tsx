@@ -29,10 +29,10 @@ export function AccessRestricted({
       <div className="mt-6 max-w-sm rounded-xl border border-border bg-surface-raised p-4 text-left text-xs shadow-md">
         <div className="flex items-center gap-2 font-bold text-ink mb-2">
           <Lock className="h-4 w-4 text-accent" />
-          ThePlug Resume Privacy Guarantee
+          CampusLink Resume Privacy Guarantee
         </div>
         <ul className="space-y-1.5 text-ink-muted text-[11px] font-medium list-disc list-inside">
-          <li>Resumes on ThePlug are private to authorized stakeholders.</li>
+          <li>Resumes on CampusLink are private to authorized stakeholders.</li>
           <li>Student resumes are never publicly indexed or accessible to other students.</li>
           <li>Access requires authenticated context and explicit authorization.</li>
         </ul>

@@ -1,10 +1,6 @@
-"""CampusLink AI service: stub API.
-
-Every endpoint returns a hardcoded but correctly shaped response (see examples.py),
-so frontend teams can build against it today. Real logic replaces the return
-statements later; the request/response models in schemas.py do not change.
-"""
+"""CampusLink AI service API, with contracts defined in ``schemas.py``."""
 import os
+from contextlib import asynccontextmanager
 
 from fastapi import Body, FastAPI
 from fastapi.exceptions import RequestValidationError
@@ -12,8 +8,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
 from app import examples as ex
+from app.services.jd_service import parse_job as parse_job_text
+from app.services.analytics_service import (
+    AnalyticsDataUnavailable,
+    compute_analytics_summary,
+    warm_analytics_summary,
+)
+from app.services.matching_service import match as match_job
+from app.services.matching_service import rank as rank_students
+from app.services.readiness_service import compute_readiness
+from app.services.risk_service import predict_placement as compute_placement_risk
+from app.services.skill_service import skill_gap as compute_skill_gap
+from app.services import risk_service, skill_service
 from app.schemas import (
+    AnalyticsSummary,
     ErrorResponse,
+    HealthResponse,
     MatchRequest,
     MatchResponse,
     ParseJobRequest,
@@ -28,11 +38,24 @@ from app.schemas import (
     SkillGapResponse,
 )
 
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    risk_bundle = risk_service.load_model()
+    skill_service.load_model()
+    try:
+        warm_analytics_summary(risk_bundle)
+    except AnalyticsDataUnavailable:
+        # Keep the service available so the endpoint can return its standard 503.
+        pass
+    yield
+
+
 app = FastAPI(
     title="CampusLink AI Service",
     version="0.1.0",
+    lifespan=lifespan,
     description="Readiness, skill-gap, JD parsing, matching and placement-risk APIs. "
-    "Responses carry meta.stub = true while an endpoint still returns hardcoded data.",
+    "Responses carry meta.stub = true for endpoints that still return hardcoded data.",
 )
 
 origins = os.getenv("CAMPUSLINK_CORS_ORIGINS", "http://localhost:3000").split(",")
@@ -58,34 +81,48 @@ async def validation_error_handler(request, exc: RequestValidationError):
     )
 
 
-@app.get("/health", tags=["System"])
+@app.get("/health", response_model=HealthResponse, tags=["System"])
 def health():
-    return {"status": "ok", "engine_version": ex.META["engine_version"], "stub": ex.META["stub"]}
+    return {
+        "status": "ok",
+        "engine_version": "0.2.0",
+        "stub": False,
+        "risk_model_loaded": risk_service.model_loaded(),
+        "embedding_model_loaded": skill_service.model_loaded(),
+    }
 
 
 @app.post("/ai/readiness", response_model=ReadinessResponse, responses=ERRORS, tags=["Student"])
 def readiness(req: ReadinessRequest = example_body("readiness.request")):
-    return {**ex.READINESS_RESPONSE, "student_id": req.student.student_id}
+    return compute_readiness(req.student)
 
 
 @app.post("/ai/skill-gap", response_model=SkillGapResponse, responses=ERRORS, tags=["Student"])
 def skill_gap(req: SkillGapRequest = example_body("skill-gap.request")):
-    return {**ex.SKILL_GAP_RESPONSE, "student_id": req.student.student_id, "role": req.target.role}
+    return compute_skill_gap(req.student, req.target).model_dump(mode="json")
 
 
 @app.post("/ai/parse-job", response_model=ParseJobResponse, responses=ERRORS, tags=["Recruiter"])
 def parse_job(req: ParseJobRequest = example_body("parse-job.request")):
-    return ex.PARSE_JOB_RESPONSE
+    return parse_job_text(req.text)
 
 
 @app.post("/ai/match", response_model=MatchResponse, responses=ERRORS, tags=["Recruiter"])
 def match(req: MatchRequest = example_body("match.request")):
-    return {**ex.MATCH_RESPONSE, "student_id": req.student.student_id, "job_id": req.job.job_id}
+    result = match_job(req.student, req.job)
+    return {
+        **result.model_dump(mode="json"),
+        "meta": {"engine_version": "0.2.0", "stub": False},
+    }
 
 
 @app.post("/ai/rank", response_model=RankResponse, responses=ERRORS, tags=["Recruiter"])
 def rank(req: RankRequest = example_body("rank.request")):
-    return {**ex.RANK_RESPONSE, "job_id": req.job.job_id}
+    return {
+        "job_id": req.job.job_id,
+        "ranked": [item.model_dump(mode="json") for item in rank_students(req.job, req.students)],
+        "meta": {"engine_version": "0.2.0", "stub": False},
+    }
 
 
 @app.post(
@@ -95,4 +132,27 @@ def rank(req: RankRequest = example_body("rank.request")):
     tags=["Placement Cell"],
 )
 def predict_placement(req: PredictPlacementRequest = example_body("predict-placement.request")):
-    return {**ex.PREDICT_PLACEMENT_RESPONSE, "student_id": req.student.student_id}
+    return compute_placement_risk(req.student, req.activity)
+
+
+@app.get(
+    "/ai/analytics/summary",
+    response_model=AnalyticsSummary,
+    response_model_exclude_none=True,
+    responses={503: {"model": ErrorResponse, "description": "Synthetic analytics data unavailable"}},
+    tags=["Placement Cell"],
+)
+def analytics_summary():
+    try:
+        return compute_analytics_summary()
+    except AnalyticsDataUnavailable as exc:
+        return JSONResponse(
+            status_code=503,
+            content={
+                "error": {
+                    "code": "ANALYTICS_DATA_UNAVAILABLE",
+                    "message": str(exc),
+                    "field": None,
+                }
+            },
+        )

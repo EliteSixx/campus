@@ -5,6 +5,8 @@ import { DepartmentTable } from "@/components/institution/department-table";
 import { GapAnalysisBar } from "@/components/institution/gap-analysis-bar";
 import { PipelineFunnel } from "@/components/institution/pipeline-funnel";
 import { ExecutiveInsights } from "@/components/institution/executive-insights";
+import { PlacementCommandCenter } from "@/components/institution/placement-command-center";
+import { SchedulerView } from "@/components/institution/scheduler/scheduler-view";
 import { InterventionSimulator } from "./intervention-simulator";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -23,11 +25,11 @@ export default async function InstitutionDashboardPage() {
   const findTrend = (metric: string) => overview.trends.find((t) => t.metric === metric);
 
   return (
-    <DashboardShell title="Institution Dashboard">
+    <DashboardShell title="Placement Cell Dashboard">
       {/* Header */}
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-xl font-bold text-ink">Institution Command Center</h2>
+          <h2 className="text-xl font-bold text-ink">Placement Cell Command Center</h2>
           <p className="mt-0.5 text-sm text-ink-muted">
             Comprehensive intelligence across departments, skills, placements, and industry partnerships.
           </p>
@@ -88,6 +90,16 @@ export default async function InstitutionDashboardPage() {
 
       {/* Executive Intelligence & Outlier Callouts Banner */}
       <ExecutiveInsights />
+
+      {/* Placement Command Center: 7 Live Operational Metrics */}
+      <div className="mb-6">
+        <PlacementCommandCenter />
+      </div>
+
+      {/* Conflict-Aware Placement Drive Scheduler Section */}
+      <div className="mb-8 rounded-2xl border border-border bg-surface p-5 shadow-xs">
+        <SchedulerView />
+      </div>
 
       {/* KPI Row — each card links to its detail page */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3 xl:grid-cols-6">

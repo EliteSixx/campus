@@ -1,4 +1,5 @@
 import copy
+from pathlib import Path
 
 import pytest
 from fastapi.testclient import TestClient
@@ -19,14 +20,25 @@ ENDPOINTS = {
 
 
 def test_health():
-    assert client.get("/health").json()["status"] == "ok"
+    response = client.get("/health")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["status"] == "ok"
+    assert body["engine_version"] == "0.2.0"
+    assert body["stub"] is False
+    assert isinstance(body["risk_model_loaded"], bool)
+    assert isinstance(body["embedding_model_loaded"], bool)
 
 
 @pytest.mark.parametrize("path,name", ENDPOINTS.items())
 def test_example_request_returns_valid_stub_response(path, name):
     r = client.post(path, json=ex.EXAMPLES[f"{name}.request"])
     assert r.status_code == 200, r.text
-    assert r.json()["meta"]["stub"] is True
+    if path == "/ai/predict-placement":
+        expected_stub = not (Path(__file__).resolve().parents[1] / "app" / "models" / "risk_model.joblib").exists()
+    else:
+        expected_stub = False
+    assert r.json()["meta"]["stub"] is expected_stub
 
 
 def test_ids_are_echoed():

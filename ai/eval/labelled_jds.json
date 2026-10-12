@@ -1,0 +1,102 @@
+[
+  {
+    "id": "JD01",
+    "text": "Backend Developer. CSE/IT. Minimum CGPA 7.0; no backlogs. Python, SQL, REST APIs and Docker are required. AWS is preferred.",
+    "expected": {"role": "Backend Developer", "min_cgpa": 7.0, "max_backlogs": 0, "eligible_branches": ["CSE", "IT"], "required_skills": ["Python", "SQL", "REST APIs", "Docker"], "preferred_skills": ["AWS"]}
+  },
+  {
+    "id": "JD02",
+    "text": "Position: Data Analyst\nCompany: Northstar Analytics\nCSE, IT or ECE applicants; 7.5 CGPA. Up to 1 backlog. Required: Excel, SQL, Python, and Data Visualization. Tableau is good to have.",
+    "expected": {"role": "Data Analyst", "min_cgpa": 7.5, "max_backlogs": 1, "eligible_branches": ["CSE", "IT", "ECE"], "required_skills": ["Excel", "SQL", "Python", "Data Visualization"], "preferred_skills": ["Tableau"]}
+  },
+  {
+    "id": "JD03",
+    "text": "Frontend Engineer. All branches welcome. Candidates need at least 65% and no backlogs. JavaScript, React, HTML and CSS required; TypeScript is a plus.",
+    "expected": {"role": "Frontend Engineer", "min_cgpa": 6.5, "max_backlogs": 0, "eligible_branches": [], "required_skills": ["JavaScript", "React", "HTML", "CSS"], "preferred_skills": ["TypeScript"]}
+  },
+  {
+    "id": "JD04",
+    "text": "Role: QA Automation Engineer\nMinimum 6.8 CGPA. CSE/IT. Maximum 2 backlogs. Selenium, Java and Git are mandatory. Nice to have: Docker and Jenkins.",
+    "expected": {"role": "QA Automation Engineer", "min_cgpa": 6.8, "max_backlogs": 2, "eligible_branches": ["CSE", "IT"], "required_skills": ["Selenium", "Java", "Git"], "preferred_skills": ["Docker", "Jenkins"]}
+  },
+  {
+    "id": "JD05",
+    "text": "Cloud Support Associate. Open to all branches. CGPA 6.5+. Up to 1 backlog. Linux and AWS required, with networking knowledge. Docker is nice to have.",
+    "expected": {"role": "Cloud Support Associate", "min_cgpa": 6.5, "max_backlogs": 1, "eligible_branches": [], "required_skills": ["Linux", "AWS", "Networking"], "preferred_skills": ["Docker"]}
+  },
+  {
+    "id": "JD06",
+    "text": "Embedded Systems Engineer. ECE/EEE. 7.2 CGPA and no active backlogs. Required skills include C, Embedded Systems, and Verilog. Arduino is preferred.",
+    "expected": {"role": "Embedded Systems Engineer", "min_cgpa": 7.2, "max_backlogs": 0, "eligible_branches": ["ECE", "EEE"], "required_skills": ["C", "Embedded Systems", "Verilog"], "preferred_skills": ["Arduino"]}
+  },
+  {
+    "id": "JD07",
+    "text": "DevOps Engineer\n- Branches: CSE, IT\n- Min CGPA: 7.0\n- Maximum 1 backlog\n- Required skills: Linux, Docker, Kubernetes, Git\n- Terraform preferred",
+    "expected": {"role": "DevOps Engineer", "min_cgpa": 7.0, "max_backlogs": 1, "eligible_branches": ["CSE", "IT"], "required_skills": ["Linux", "Docker", "Kubernetes", "Git"], "preferred_skills": ["Terraform"]}
+  },
+  {
+    "id": "JD08",
+    "text": "We are hiring a Java Developer. Computer Science and Information Technology graduates only. Minimum CGPA of 7.0; candidates must have no backlogs. Java, Spring Boot, SQL and REST APIs are required. AWS is preferred.",
+    "expected": {"role": "We are hiring a Java Developer", "min_cgpa": 7.0, "max_backlogs": 0, "eligible_branches": ["CSE", "IT"], "required_skills": ["Java", "Spring Boot", "SQL", "REST APIs"], "preferred_skills": ["AWS"]}
+  },
+  {
+    "id": "JD09",
+    "text": "Position: Product Intern\nAny branch may apply. 60% minimum. Excel, Communication and Data Analysis required. Power BI is a plus.",
+    "expected": {"role": "Product Intern", "min_cgpa": 6.0, "max_backlogs": null, "eligible_branches": [], "required_skills": ["Excel", "Communication", "Data Analysis"], "preferred_skills": ["Power BI"]}
+  },
+  {
+    "id": "JD10",
+    "text": "Machine Learning Engineer. CSE/IT. CGPA 7.8 or above. Up to 1 backlog. Python, Machine Learning, PyTorch and Pandas required; TensorFlow plus.",
+    "expected": {"role": "Machine Learning Engineer", "min_cgpa": 7.8, "max_backlogs": 1, "eligible_branches": ["CSE", "IT"], "required_skills": ["Python", "Machine Learning", "PyTorch", "Pandas"], "preferred_skills": ["TensorFlow"]}
+  },
+  {
+    "id": "JD11",
+    "text": "Role: Cybersecurity Analyst\nEligibility: CSE, IT, ECE; 7.0 CGPA; no backlogs. Cybersecurity, Linux, Networking and Python mandatory. Cloudflare good to have.",
+    "expected": {"role": "Cybersecurity Analyst", "min_cgpa": 7.0, "max_backlogs": 0, "eligible_branches": ["CSE", "IT", "ECE"], "required_skills": ["Cybersecurity", "Linux", "Networking", "Python"], "preferred_skills": ["Cloudflare"]}
+  },
+  {
+    "id": "JD12",
+    "text": "Junior UX Designer. Portfolio review required. Figma, User Experience Design and User Interface Design are required; HTML is preferred.",
+    "expected": {"role": "Junior UX Designer", "min_cgpa": null, "max_backlogs": null, "eligible_branches": [], "required_skills": ["Figma", "User Experience Design", "User Interface Design"], "preferred_skills": ["HTML"]}
+  },
+  {
+    "id": "JD13",
+    "text": "Role: Database Engineer\nBranches: CSE / IT\nCGPA must be at least 7.1\nBacklogs: 0\nPostgreSQL, SQL, MongoDB and Redis required\nApache Kafka nice to have",
+    "expected": {"role": "Database Engineer", "min_cgpa": 7.1, "max_backlogs": 0, "eligible_branches": ["CSE", "IT"], "required_skills": ["PostgreSQL", "SQL", "MongoDB", "Redis"], "preferred_skills": ["Apache Kafka"]}
+  },
+  {
+    "id": "JD14",
+    "text": "Business Intelligence Analyst. ME, CE, CSE, IT. Minimum 6.0 CGPA and maximum 2 backlogs. Excel, SQL, Tableau required. Power BI is preferred.",
+    "expected": {"role": "Business Intelligence Analyst", "min_cgpa": 6.0, "max_backlogs": 2, "eligible_branches": ["CSE", "IT", "ME", "CE"], "required_skills": ["Excel", "SQL", "Tableau"], "preferred_skills": ["Power BI"]}
+  },
+  {
+    "id": "JD15",
+    "text": "Position: Mobile Application Developer\nAll branches eligible; minimum CGPA 6.7; no active backlogs. Kotlin and Git are required. Firebase and RESTful services are good to have.",
+    "expected": {"role": "Mobile Application Developer", "min_cgpa": 6.7, "max_backlogs": 0, "eligible_branches": [], "required_skills": ["Kotlin", "Git"], "preferred_skills": ["Firebase", "REST APIs"]}
+  },
+  {
+    "id": "JD16",
+    "text": "Junior Data Engineer. CSE/IT/ECE. CGPA 7.0+. No backlogs. Python, SQL, Apache Spark, ETL and Apache Airflow required. Snowflake preferred.",
+    "expected": {"role": "Junior Data Engineer", "min_cgpa": 7.0, "max_backlogs": 0, "eligible_branches": ["CSE", "IT", "ECE"], "required_skills": ["Python", "SQL", "Apache Spark", "ETL", "Apache Airflow"], "preferred_skills": ["Snowflake"]}
+  },
+  {
+    "id": "JD17",
+    "text": "Role: Platform Engineer\nOpen to all branches. CGPA 7.3. Backlogs: 1. Need Docker, Kubernetes and Terraform. Helm is a plus.",
+    "expected": {"role": "Platform Engineer", "min_cgpa": 7.3, "max_backlogs": 1, "eligible_branches": [], "required_skills": ["Docker", "Kubernetes", "Terraform"], "preferred_skills": ["Helm"]}
+  },
+  {
+    "id": "JD18",
+    "text": "Civil Design Engineer. Civil Engineering applicants with 6.5 CGPA or more; up to 2 backlogs accepted. AutoCAD, Structural Analysis and Revit required. STAAD.Pro preferred.",
+    "expected": {"role": "Civil Design Engineer", "min_cgpa": 6.5, "max_backlogs": 2, "eligible_branches": ["CE"], "required_skills": ["AutoCAD", "Structural Analysis", "Revit"], "preferred_skills": ["STAAD.Pro"]}
+  },
+  {
+    "id": "JD19",
+    "text": "Frontend Developer (React). CSE / IT only; 6.9 CGPA; no backlogs. Must have JavaScript, React, HTML, CSS. NextJS preferred. Hiring immediately.",
+    "expected": {"role": "Frontend Developer (React)", "min_cgpa": 6.9, "max_backlogs": 0, "eligible_branches": ["CSE", "IT"], "required_skills": ["JavaScript", "React", "HTML", "CSS"], "preferred_skills": ["Next.js"]}
+  },
+  {
+    "id": "JD20",
+    "text": "Data Scientist. ECE, CSE, IT. 70 percent minimum marks. Backlogs: 1. Statistics, Python, Scikit-learn and Data Visualization required. NLP and Generative AI are nice to have.",
+    "expected": {"role": "Data Scientist", "min_cgpa": 7.0, "max_backlogs": 1, "eligible_branches": ["CSE", "IT", "ECE"], "required_skills": ["Statistics", "Python", "Scikit-learn", "Data Visualization"], "preferred_skills": ["Natural Language Processing", "Generative AI"]}
+  }
+]
