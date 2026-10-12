@@ -5,6 +5,7 @@ from collections import Counter, defaultdict
 from functools import lru_cache
 from pathlib import Path
 from statistics import mean, median
+from threading import RLock
 
 import numpy as np
 
@@ -20,6 +21,9 @@ from app.services import risk_service
 DATA_DIR = Path(__file__).resolve().parents[2] / "data"
 SKILLS_PATH = Path(__file__).resolve().parents[1] / "data" / "skills.json"
 CSV_FILES = ("students.csv", "jobs.csv", "applications.csv", "interviews.csv", "offers.csv")
+_summary_lock = RLock()
+_summary_cache: AnalyticsSummary | None = None
+_UNSET = object()
 
 
 class AnalyticsDataUnavailable(Exception):
@@ -88,6 +92,22 @@ def _pct(numerator: int, denominator: int) -> float:
 
 
 def compute_analytics_summary() -> AnalyticsSummary:
+    """Return the process-wide summary, computing it once after the first request."""
+    global _summary_cache
+    with _summary_lock:
+        if _summary_cache is None:
+            _summary_cache = _compute_analytics_summary()
+        return _summary_cache
+
+
+def clear_summary_cache() -> None:
+    """Clear the derived summary cache (also useful when replacing data in tests)."""
+    global _summary_cache
+    with _summary_lock:
+        _summary_cache = None
+
+
+def _compute_analytics_summary(risk_bundle_override=_UNSET) -> AnalyticsSummary:
     data = load_csvs()
     students = [_student_from_row(row) for row in data["students"]]
     jobs = data["jobs"]
@@ -241,9 +261,10 @@ def compute_analytics_summary() -> AnalyticsSummary:
         )
 
     at_risk: AtRiskCounts | None = None
-    risk_bundle = risk_service._load_model()
+    risk_bundle = risk_service._load_model() if risk_bundle_override is _UNSET else risk_bundle_override
     if students and risk_bundle:
         counts = {"low": 0, "medium": 0, "high": 0}
+        model_rows = []
         for student in students:
             activity_apps = apps_by_student[student.student_id]
             applied_count = len(activity_apps)
@@ -255,10 +276,9 @@ def compute_analytics_summary() -> AnalyticsSummary:
                 rejections=max(0, applied_count - shortlisted_count),
             )
             features = risk_service.features_for_student(student, activity)
-            model_row = np.asarray(
-                [[features[name] for name in risk_bundle["feature_names"]]], dtype=object
-            )
-            probability = float(risk_bundle["pipeline"].predict_proba(model_row)[0][1])
+            model_rows.append([features[name] for name in risk_bundle["feature_names"]])
+        probabilities = risk_bundle["pipeline"].predict_proba(np.asarray(model_rows, dtype=object))[:, 1]
+        for probability in probabilities:
             risk_level = "LOW" if probability < 0.35 else "MEDIUM" if probability <= 0.65 else "HIGH"
             counts[risk_level.casefold()] += 1
         at_risk = AtRiskCounts(**counts)
@@ -300,3 +320,11 @@ def compute_analytics_summary() -> AnalyticsSummary:
             "offers_accepted counts offers while placed counts unique students, and a student can accept more than one offer."
         ),
     )
+
+
+def warm_analytics_summary(risk_bundle=_UNSET) -> None:
+    """Compute the summary during application startup so requests hit memory cache."""
+    global _summary_cache
+    with _summary_lock:
+        if _summary_cache is None:
+            _summary_cache = _compute_analytics_summary(risk_bundle)

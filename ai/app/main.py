@@ -9,7 +9,11 @@ from fastapi.responses import JSONResponse
 
 from app import examples as ex
 from app.services.jd_service import parse_job as parse_job_text
-from app.services.analytics_service import AnalyticsDataUnavailable, compute_analytics_summary
+from app.services.analytics_service import (
+    AnalyticsDataUnavailable,
+    compute_analytics_summary,
+    warm_analytics_summary,
+)
 from app.services.matching_service import match as match_job
 from app.services.matching_service import rank as rank_students
 from app.services.readiness_service import compute_readiness
@@ -36,8 +40,13 @@ from app.schemas import (
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    risk_service.load_model()
+    risk_bundle = risk_service.load_model()
     skill_service.load_model()
+    try:
+        warm_analytics_summary(risk_bundle)
+    except AnalyticsDataUnavailable:
+        # Keep the service available so the endpoint can return its standard 503.
+        pass
     yield
 
 
