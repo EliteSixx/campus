@@ -90,17 +90,52 @@ def _extract_min_cgpa(text: str) -> tuple[float | None, bool]:
 
 
 def _extract_backlogs(text: str) -> int | None:
-    if re.search(r"\bno\s+(?:active\s+)?backlogs?\b", text, re.IGNORECASE):
+    if re.search(r"\b(?:no\s+(?:active\s+)?backlogs?|zero\s+backlogs?)\b", text, re.IGNORECASE):
         return 0
-    match = re.search(
-        r"\b(?:up\s+to|maximum(?:\s+of)?|max(?:imum)?\.?|at\s+most)\s+(\d+)\s+backlogs?\b",
+
+    # First interpret the value attached to an explicit backlog-limit label.
+    label = re.search(
+        r"\b(?:maximum|max(?:imum)?\.?)\s+backlogs?\s*(?:allowed\s*)?[:=]?\s*([^.;\n]+)",
+        text,
+        re.IGNORECASE,
+    ) or re.search(r"\bbacklogs?\s*(?:allowed\s*)?[:=]\s*([^.;\n]+)", text, re.IGNORECASE)
+    if label:
+        value_text = label.group(1).strip()
+        if re.match(r"(?:nil|zero|no\s+backlogs?)\b", value_text, re.IGNORECASE):
+            return 0
+        less_than = re.search(r"\b(?:less|fewer)\s+than\s+(\d+)\b|\bunder\s+(\d+)\b", value_text, re.IGNORECASE)
+        if less_than:
+            return max(0, int(next(group for group in less_than.groups() if group is not None)) - 1)
+        bounded = re.search(
+            r"\b(?:at\s+most|up\s+to|max(?:imum)?\.?(?:\s+of)?)\s+(\d+)\b|\b(\d+)\s+or\s+fewer\b",
+            value_text,
+            re.IGNORECASE,
+        )
+        if bounded:
+            return int(next(group for group in bounded.groups() if group is not None))
+        number = re.match(r"\s*(\d+)\b", value_text)
+        if number:
+            return int(number.group(1))
+
+    # Also accept complete backlog phrases without a leading field label.
+    if re.search(r"\bnil\s+backlogs?\b", text, re.IGNORECASE):
+        return 0
+    less_than = re.search(
+        r"\b(?:less|fewer)\s+than\s+(\d+)\s+backlogs?\b|\bunder\s+(\d+)\s+backlogs?\b",
         text,
         re.IGNORECASE,
     )
-    if match:
-        return int(match.group(1))
-    match = re.search(r"\bbacklogs?\s*[:=]\s*(\d+)\b", text, re.IGNORECASE)
-    return int(match.group(1)) if match else None
+    if less_than:
+        return max(0, int(next(group for group in less_than.groups() if group is not None)) - 1)
+    bounded = re.search(
+        r"\b(?:at\s+most|up\s+to|max(?:imum)?\.?(?:\s+of)?)\s+(\d+)\s+backlogs?\b|\b(\d+)\s+or\s+fewer\s+backlogs?\b",
+        text,
+        re.IGNORECASE,
+    )
+    if bounded:
+        return int(next(group for group in bounded.groups() if group is not None))
+    standalone_max = re.search(r"\bmax(?:imum)?\.?\s*:?\s*(\d+)\b", text, re.IGNORECASE)
+    return int(standalone_max.group(1)) if standalone_max else None
 
 
 def _extract_branches(text: str) -> tuple[list[str], bool]:
@@ -144,6 +179,8 @@ def _extract_skills(text: str) -> tuple[list[str], list[str]]:
                     destination.append(canonical)
                     seen.add(canonical.casefold())
 
+    required_names = {skill.casefold() for skill in required}
+    preferred = [skill for skill in preferred if skill.casefold() not in required_names]
     return required, preferred
 
 

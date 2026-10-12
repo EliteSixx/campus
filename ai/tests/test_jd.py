@@ -39,6 +39,45 @@ def test_position_company_backlogs_experience_and_ctc_are_extracted():
     assert job["preferred_skills"] == ["Tableau"]
 
 
+@pytest.mark.parametrize(
+    ("backlog_text", "expected"),
+    [
+        ("Maximum Backlogs : Less than 2", 1),
+        ("Maximum Backlogs Allowed: Less than 2", 1),
+        ("Maximum backlogs allowed less than 2", 1),
+        ("Fewer than 3 backlogs", 2),
+        ("Under 2 backlogs", 1),
+        ("At most 2 backlogs", 2),
+        ("Up to 3 backlogs", 3),
+        ("Max 2 backlogs", 2),
+        ("Max 2", 2),
+        ("Maximum 4 backlogs", 4),
+        ("4 or fewer backlogs", 4),
+        ("No backlogs", 0),
+        ("Zero backlogs", 0),
+        ("Maximum Backlogs Allowed: nil", 0),
+        ("Maximum Backlogs Allowed: zero", 0),
+    ],
+)
+def test_backlog_limit_phrasings(backlog_text, expected):
+    result = parse_job(f"Backend Developer. {backlog_text}. Python required.")
+    assert result["job"]["max_backlogs"] == expected
+
+
+def test_full_sample_jd_extracts_less_than_backlog_limit():
+    result = parse_job(
+        "Backend Developer. CSE/IT. CGPA 7+. Maximum Backlogs Allowed: Less than 2. "
+        "Python, SQL, REST APIs and Docker required. AWS preferred."
+    )
+    assert result["job"]["max_backlogs"] == 1
+
+
+def test_skill_in_required_and_preferred_stays_required_only():
+    result = parse_job("Backend Developer. Python required; Python preferred.")
+    assert result["job"]["required_skills"] == ["Python"]
+    assert result["job"]["preferred_skills"] == []
+
+
 def test_percentage_cgpa_and_all_branches_are_handled():
     result = parse_job(
         "Role: QA Engineer. Minimum 60% required. Open to all branches. Java and Selenium required."
