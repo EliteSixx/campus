@@ -6,12 +6,13 @@
 
 ## Why
 
-The mock interview at `/profile/interview` already uses the AI service for the student analysis:
+The mock interview at `/profile/interview` uses the local AI service for student analysis and risk planning:
 
-- `POST /ai/readiness`: score, level, communication component
-- `POST /ai/skill-gap`: matched skills and missing skills with priority
+- `POST /ai/readiness`: multi-factor readiness score, level badge, communication component
+- `POST /ai/skill-gap`: matched skills and high-priority skill gaps
+- `POST /ai/predict-placement`: gradient-boosting placement risk model (accuracy 0.773, ROC-AUC 0.857) identifying key interventions
 
-It also writes the result back as `mock_interview_score`, which `/ai/readiness` already weights.
+It also writes the resulting score back as `mock_interview_score`, which `/ai/readiness` dynamically includes with a 10% weight.
 
 Three parts still run in the browser because the service has no endpoints for them:
 
