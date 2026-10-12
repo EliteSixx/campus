@@ -99,11 +99,11 @@ export default async function StudentDashboardPage() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="text-base font-bold text-ink">AI Mock Interview Practice</h3>
-                <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold text-accent">Interactive Voice &amp; AI</span>
+                <h3 className="text-base font-bold text-ink">AI-Assisted Mock Interview</h3>
+                <span className="rounded-full bg-accent/15 px-2 py-0.5 text-[10px] font-semibold text-accent">Question Bank &amp; Rule-Based Scoring</span>
               </div>
               <p className="mt-1 text-xs text-ink-muted">
-                Practice tailored interview questions matched to your skills, get instant feedback on STAR delivery and concepts, and boost your placement readiness.
+                Practice with an AI-assisted mock interview using a curated question bank and rule-based scoring, tailored to your readiness and skill gaps.
               </p>
             </div>
           </div>

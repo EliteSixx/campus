@@ -5,7 +5,7 @@ import { AlertOctagon, Bot, Briefcase, CheckCircle2, Clock, History, Loader2, Pl
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { readiness, skillGap } from "@/lib/ai/client";
+import { predictPlacement, readiness, skillGap } from "@/lib/ai/client";
 import { demoJobs } from "@/data/demo/jobs";
 import { cn } from "@/lib/utils";
 import { currentStudent } from "../../data/current-student";
@@ -75,14 +75,18 @@ export function MockInterview() {
     const job = demoJobs.find((j) => j.role === role) ?? demoJobs[0];
     try {
       // The local AI service analyses the student; its output drives the plan.
-      const [r, g] = await Promise.all([
+      const [r, g, p] = await Promise.all([
         readiness({ student }),
         skillGap({
           student,
           target: { role: job.role, required_skills: job.required_skills ?? [], preferred_skills: job.preferred_skills ?? [] },
         }),
+        predictPlacement({ student }).catch((err) => {
+          console.warn("Placement risk call skipped/failed", err);
+          return null;
+        }),
       ]);
-      setPlan(buildInterviewPlan({ student, role: job.role, readiness: r, skillGap: g }));
+      setPlan(buildInterviewPlan({ student, role: job.role, readiness: r, skillGap: g, placementRisk: p }));
       setStage("plan");
     } catch (e) {
       console.error("Mock interview analysis failed", e);
@@ -142,9 +146,9 @@ export function MockInterview() {
             <Bot className="h-5 w-5" />
           </span>
           <div>
-            <h2 className="text-xl font-semibold text-ink">Mock Interview</h2>
+            <h2 className="text-xl font-semibold text-ink">AI-Assisted Mock Interview</h2>
             <p className="text-sm text-ink-muted">
-              A spoken practice interview planned around your profile, with feedback on every answer.
+              Spoken practice interview using a curated question bank and rule-based scoring, planned from your AI readiness and skill gaps.
             </p>
           </div>
         </div>
@@ -187,7 +191,7 @@ export function MockInterview() {
                 <div>
                   <CardTitle>Which role are you preparing for?</CardTitle>
                   <CardDescription>
-                    The AI analyses your profile against this role, then plans questions around your strengths and gaps.
+                    The AI service analyses your profile against this role to select questions from our question bank matching your strengths and gaps.
                   </CardDescription>
                 </div>
               </div>

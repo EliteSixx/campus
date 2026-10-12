@@ -7,7 +7,7 @@
  * the input/output shapes match features/samir/MOCK_INTERVIEW_AI_SPEC.md so
  * `buildInterviewPlan` and `evaluateAnswer` can be swapped for API calls.
  */
-import type { ReadinessResponse, SkillGapResponse } from "@/lib/ai/client";
+import type { PredictPlacementResponse, ReadinessResponse, SkillGapResponse } from "@/lib/ai/client";
 import type { AiStudent } from "./current-student";
 import {
   BankQuestion,
@@ -37,6 +37,7 @@ export interface InterviewPlan {
   readinessLevel: ReadinessResponse["level"];
   matchedSkills: string[];
   missingSkills: SkillGapResponse["missing_skills"];
+  placementRisk?: PredictPlacementResponse | null;
   estimatedMinutes: number;
   questions: PlannedQuestion[];
 }
@@ -59,8 +60,9 @@ export function buildInterviewPlan(input: {
   role: string;
   readiness: ReadinessResponse;
   skillGap: SkillGapResponse;
+  placementRisk?: PredictPlacementResponse | null;
 }): InterviewPlan {
-  const { student, role, readiness, skillGap } = input;
+  const { student, role, readiness, skillGap, placementRisk } = input;
   const used = new Set<string>();
   const questions: PlannedQuestion[] = [];
   const add = (q: BankQuestion | undefined, section: InterviewSection, reason: string) => {
@@ -128,6 +130,7 @@ export function buildInterviewPlan(input: {
     readinessLevel: readiness.level,
     matchedSkills: skillGap.matched_skills,
     missingSkills: skillGap.missing_skills,
+    placementRisk,
     estimatedMinutes: questions.length * 2,
     questions,
   };

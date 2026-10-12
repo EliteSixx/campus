@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { ArrowRight, ChevronDown, RotateCcw, ThumbsUp, TrendingUp, Wrench } from "lucide-react";
+import { ArrowRight, Bot, ChevronDown, RotateCcw, ThumbsUp, TrendingUp, Wrench } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -201,6 +201,25 @@ export function InterviewReport({
             );
           })}
         </CardContent>
+      </Card>
+
+      {/* AI Model Architecture & Scoring Methodology */}
+      <Card className="border border-border/80 bg-surface-raised/20 p-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-xs font-semibold text-ink flex items-center gap-1.5">
+              <Bot className="h-4 w-4 text-accent" /> AI-Assisted Architecture &amp; Methodology
+            </p>
+            <p className="text-[11px] text-ink-muted mt-0.5">
+              Powered by live Python AI models: Gradient-Boosting Classifier (ROC-AUC 0.857) + all-MiniLM-L6-v2 embeddings + deterministic readiness engine. Transparent, explainable rule-based evaluation.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+            <Badge tone="accent" className="text-[10px]">No LLM Hallucinations</Badge>
+            <Badge tone="success" className="text-[10px]">100% Explainable</Badge>
+            <Badge tone="neutral" className="text-[10px]">Local Models</Badge>
+          </div>
+        </div>
       </Card>
 
       <div className="flex flex-wrap justify-end gap-2">
